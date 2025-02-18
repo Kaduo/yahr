@@ -134,6 +134,8 @@ void Ping(int fd) {
 }
 
 void SetSignal(int fd, Signal signal) {
+    print("lowlevel\n");
+    PrintSignal(signal);
     ClearSignal(fd);
     AddSignal(fd, signal);
     PlayCurrentSignal(fd, 1);
