@@ -14,10 +14,7 @@ Rods *OnlyHapticStacked(const StandardRodFactory *rodFactory) {
             .amplitude = 255,
             .period = PERIODS[i%4],
             .signalShape = SignalShape_SINE,
-            0,
         }));
-
-        printf("%d\n", PERIODS[i%4]);
     }
     return rods;
 }

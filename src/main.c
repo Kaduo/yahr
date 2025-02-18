@@ -24,12 +24,12 @@ int main(int argc, char *argv[]) {
     //     .clearSignal = MockHapticDriver_clearSignal,
     //     .setSignal = MockHapticDriver_setSignal
     // };
-    // HapticDriver hapticDriver = {
-    //     .clearSignal = MockHapticDriver_clearSignal,
-    //     .setSignal = MockHapticDriver_setSignal
-    // };
+    HapticDriver hapticDriver = {
+        .clearSignal = MockHapticDriver_clearSignal,
+        .setSignal = MockHapticDriver_setSignal
+    };
 
-    PhysicalHapticDriver hapticDriver = NewPhysicalHapticDriver();
+    // PhysicalHapticDriver hapticDriver = NewPhysicalHapticDriver();
     HapticService hapticService = NewHapticService((HapticDriver*)&hapticDriver);
     StandardRodFactory rodFactory = {.inputService = (InputService*)&inputService, .hapticService = &hapticService, .rodUnitHeight = 30};
 

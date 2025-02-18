@@ -452,10 +452,10 @@ const Signal COLLISION_SIGNAL = {
 void RodHapticComponent_collidedOrNotCallback(CollisionObserver *_me, bool collided) {
     RodHapticComponent *me = (RodHapticComponent*)_me;
 
-    if (!collided) {
+    if (!collided && me->colliding) {
         HapticService_playSignal(me->hapticService, me->signal);
         me->colliding = false;
-    } else if (!me->colliding)  {
+    } else if (collided && !me->colliding)  {
         me->colliding = true;
         HapticService_clearAndPauseQueue(me->hapticService);
         HapticService_addSignalToQueue(me->hapticService, IMPULSE_SIGNAL);
@@ -510,6 +510,8 @@ Rod *NewRod(Rectangle rect, Color color, InputService *inputService, Iterator *w
     rod->rodMoveComponent = rodMoveComponent;
     void *temp2 = &rod->rodMoveComponent->super;
     PushVec(&rodCollisionComponent->inner.observers, &temp2);
+
+    PrintSignal(signal);
 
     RodHapticComponent *rodHapticComponent = malloc(sizeof(RodHapticComponent));
     *rodHapticComponent = NewRodHapticComponent(hapticService, signal);
