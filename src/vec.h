@@ -43,7 +43,7 @@ void PushVec(Vec *Vec, void *elem);
 void *IndexVec(const Vec *Vec, int index);
 void ClearVec(Vec *Vec);
 void PopVec(Vec *vec);
-void *Vec_replace(Vec *vec, int index, void *item);
+void Vec_replace(Vec *vec, int index, void *item);
 void Vec_remove(Vec *me, int index);
 
 #endif

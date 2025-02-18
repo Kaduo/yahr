@@ -53,7 +53,7 @@ void *IndexVec(const Vec *vec, int index) {
     }
 }
 
-void *Vec_replace(Vec *vec, int index, void *item) {
+void Vec_replace(Vec *vec, int index, void *item) {
     void *ptr = IndexVec(vec, index);
     if (ptr != NULL) {
         memcpy(ptr, item, vec->sizeOfContent);

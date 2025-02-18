@@ -403,7 +403,7 @@ void RodGraphicsComponent_construct(RodGraphicsComponent *me) {
 }
 
 RodGraphicsComponent NewRodGraphicsComponent(const Vector2 *position, float height, float width, Color color) {
-    GraphicsComponent super;
+    GraphicsComponent super = {0};
     RodGraphicsComponent rodGraphicsComponent = {
         .super = super,
         .position = position,
@@ -493,7 +493,6 @@ Rod *NewRod(Rectangle rect, Color color, InputService *inputService, Iterator *w
     rod->position = GetTopLeft(rect);
     rod->world = world;
 
-    ("but what!! %p\n", hapticService->driver);
 
     RelativeSelectionInputComponent *rodInputComponent = malloc(sizeof(RelativeSelectionInputComponent));
     *rodInputComponent = NewRelativeSelectionInputComponent(inputService, &rod->position, rod->height, rod->width);
@@ -512,34 +511,22 @@ Rod *NewRod(Rectangle rect, Color color, InputService *inputService, Iterator *w
     void *temp2 = &rod->rodMoveComponent->super;
     PushVec(&rodCollisionComponent->inner.observers, &temp2);
 
-    ("ok idk what's going on with mock %p\n", hapticService->driver);
     RodHapticComponent *rodHapticComponent = malloc(sizeof(RodHapticComponent));
-    ("ok idk what's going on with mock %p\n", hapticService->driver);
     *rodHapticComponent = NewRodHapticComponent(hapticService, signal);
-    ("ok idk what's going on with mock %p\n", hapticService->driver);
 
     void *temp3 = &rodHapticComponent->collisionObserver;
 
-    ("really mock now %p\n", hapticService->driver);
-    ("mockuh???? %p\n", rodHapticComponent->hapticService->driver);
-
     PushVec(&rodCollisionComponent->inner.observers, &temp3);
-
-    ("mockuhAginsd???? %p\n", rodHapticComponent->hapticService->driver);
 
 
     void *temp4 = &rodHapticComponent->selectionObserver;
     PushVec(&rodInputComponent->super.observers, &temp4);
     rod->rodHapticComponent = rodHapticComponent;
 
-    ("mock mock???? %p\n", rod->rodHapticComponent->hapticService->driver);
 
     RodGraphicsComponent *rodGraphicsComponent = malloc(sizeof(RodGraphicsComponent));
     *rodGraphicsComponent = NewRodGraphicsComponent(&rod->position, rod->height ,rod->width, color);
     rod->graphicsComponent = (GraphicsComponent*)rodGraphicsComponent;
-
-    ("still me ? %p %p\n", rod->rodHapticComponent->hapticService, hapticService);
-    ("still mock???? %p\n", rod->rodHapticComponent->hapticService->driver);
 
     return rod;
 }
@@ -570,7 +557,7 @@ void ZoneGraphicsComponent_Construct(ZoneGraphicsComponent *me) {
 }
 
 ZoneGraphicsComponent NewZoneGraphicsComponent(Rectangle *rect, Color color) {
-    GraphicsComponent super;
+    GraphicsComponent super = {0};
     ZoneGraphicsComponent zoneGraphicsComponent = {
         .super = super,
         .rect = rect,

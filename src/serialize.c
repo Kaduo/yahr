@@ -57,7 +57,7 @@ Signal ReadSignal(FILE *file) {
         } else if (strcmp(string, "pulses") == 0) {
             fscanf(file, "%" SCNu8"\n", &signal.pulses);
         } else if (strcmp(string, "signalShape") == 0) {
-            fscanf(file, "%" SCNu8"\n", &signal.signalShape);
+            fscanf(file, "%" SCNu8"\n", (uint8_t*)&signal.signalShape);
         } else if (strcmp(string, "endsig") == 0) {
             break;
         } else {

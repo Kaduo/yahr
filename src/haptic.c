@@ -25,7 +25,7 @@ int SetDriverAttributes(int fd, int speed)
     struct termios tty;
 
     if (tcgetattr(fd, &tty) < 0) {
-         ("Error from tcgetattr: %s\n", strerror(errno));
+         printf("Error from tcgetattr: %s\n", strerror(errno));
         return -1;
     }
 
@@ -49,7 +49,7 @@ int SetDriverAttributes(int fd, int speed)
     tty.c_cc[VTIME] = 1;
 
     if (tcsetattr(fd, TCSANOW, &tty) != 0) {
-         ("Error from tcsetattr: %s\n", strerror(errno));
+         printf("Error from tcsetattr: %s\n", strerror(errno));
         return -1;
     }
     return 0;
@@ -60,7 +60,7 @@ void SetMincount(int fd, int mcount)
     struct termios tty;
 
     if (tcgetattr(fd, &tty) < 0) {
-         ("Error tcgetattr: %s\n", strerror(errno));
+         printf("Error tcgetattr: %s\n", strerror(errno));
         return;
     }
 
@@ -68,7 +68,7 @@ void SetMincount(int fd, int mcount)
     tty.c_cc[VTIME] = 5;        /* half second timer */
 
     if (tcsetattr(fd, TCSANOW, &tty) < 0)
-         ("Error tcsetattr: %s\n", strerror(errno));
+         printf("Error tcsetattr: %s\n", strerror(errno));
 }
 
 int ConnectToTTY() {
@@ -77,7 +77,7 @@ int ConnectToTTY() {
     int fd;
     fd = open(portname, O_RDWR | O_NOCTTY | O_SYNC);
     if (fd < 0) {
-         ("Error opening %s: %s\n", portname, strerror(errno));
+         printf("Error opening %s: %s\n", portname, strerror(errno));
         return -1;
     }
     /*baudrate 1000000, 8 bits, no parity, 1 stop bit */
@@ -89,7 +89,7 @@ int ConnectToTTY() {
 void write_to_tty(int fd, unsigned char *buffer, int buffer_len) {
     int wlen = write(fd, buffer, buffer_len);
     if (wlen != buffer_len) {
-         ("Error from write: %d, %d\n", wlen, errno);
+         printf("Error from write: %d, %d\n", wlen, errno);
     }
     tcdrain(fd);    /* delay for output */
 }
@@ -146,7 +146,7 @@ void SetDirection(int fd, int8_t angle, int16_t speed) {
 }
 
 void PrintSignal(Signal sig) {
-     ("signal shape : %d, amplitude : %d, offset : %d, duty : %d, period: %d, phase: %d\n", sig.signalShape, sig.amplitude, sig.offset, sig.duty, sig.period, sig.phase);
+     printf("signal shape : %d, amplitude : %d, offset : %d, duty : %d, period: %d, phase: %d\n", sig.signalShape, sig.amplitude, sig.offset, sig.duty, sig.period, sig.phase);
 }
 
 

@@ -2,6 +2,7 @@
 #include "stdbool.h"
 #include "stdlib.h"
 #include "input.h"
+#include "stdio.h"
 
 
 // TODO : add HistoryInputService
@@ -22,6 +23,9 @@ ButtonStatus GetButtonStatus(InputService *me, MouseButton button) {
     if (me->isMouseButtonUp(me, button)) {
         return UP;
     }
+
+    fprintf(stderr, "WHY ???");
+    return UP;
 }
 
 // void PhysicalInputService_poll(InputService *me) {
