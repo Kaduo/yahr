@@ -35,7 +35,7 @@ void WriteSignal(FILE *file, Signal signal) {
 
 Signal ReadSignal(FILE *file) {
     Signal signal = {0};
-    char string[MAXCN] = {};
+    char string[MAXCN] = {0};
     ReadStringTillSpace(file, string);
     while (strlen(string) > 0) {
 

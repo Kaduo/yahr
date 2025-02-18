@@ -5,6 +5,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "string.h"
+#include "raylib.h"
 
 typedef struct Session {
     InputService *inputService;
