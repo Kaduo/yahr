@@ -14,6 +14,8 @@ Rods *OnlyHapticStacked(const StandardRodFactory *rodFactory) {
             .amplitude = 255,
             .period = PERIODS[i%4],
             .signalShape = SignalShape_SINE,
+            .pulses = -1,
+            .angle = -1,
         }));
     }
     return rods;
