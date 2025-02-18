@@ -40,6 +40,7 @@ typedef struct PhysicalHapticDriver {
     int fd;
 } PhysicalHapticDriver;
 
+PhysicalHapticDriver NewPhysicalHapticDriver();
 
 typedef struct HapticService HapticService;
 

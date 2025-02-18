@@ -6,3 +6,7 @@ update:
 
 run:
     ./haptic_rods
+
+push:
+    git commit -am "This message wasn't typed by a human."
+    git push
