@@ -210,6 +210,7 @@ void HapticService_addSignalToQueue(HapticService *me, Signal signal) {
 }
 
 void HapticService_playSignal(HapticService *me, Signal signal) {
+    printf("hi!\n");
     PrintSignal(signal);
     HapticService_clearAndPauseQueue(me);
     HapticService_addSignalToQueue(me, signal);

@@ -511,7 +511,6 @@ Rod *NewRod(Rectangle rect, Color color, InputService *inputService, Iterator *w
     void *temp2 = &rod->rodMoveComponent->super;
     PushVec(&rodCollisionComponent->inner.observers, &temp2);
 
-    PrintSignal(signal);
 
     RodHapticComponent *rodHapticComponent = malloc(sizeof(RodHapticComponent));
     *rodHapticComponent = NewRodHapticComponent(hapticService, signal);
