@@ -165,6 +165,7 @@ HapticDriver NullHapticDriver() {
 }
 
 void PhysicalHapticDriver_setSignal(HapticDriver *_me, Signal signal) {
+    printf("uh!\n");
     PhysicalHapticDriver *me = (PhysicalHapticDriver*)_me;
     SetSignal(me->fd, signal);
 }
@@ -221,8 +222,7 @@ void HapticService_addSignalToQueue(HapticService *me, Signal signal) {
 }
 
 void HapticService_playSignal(HapticService *me, Signal signal) {
-    printf("hi!\n");
-    PrintSignal(signal);
+    // PrintSignal(signal);
     HapticService_clearAndPauseQueue(me);
     HapticService_addSignalToQueue(me, signal);
     HapticService_playQueue(me);
