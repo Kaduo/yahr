@@ -1,11 +1,16 @@
+CC := "zig cc"
+CC_ARGS := "-I/usr/include/libsocket src/lib/*.c -Isrc/external -lraylib -lsocket -lGL -lm -lpthread -ldl -lrt -lX11 -Wall"
+BUILD_DIR := "build"
+
+
 build:
-    gcc -I/usr/include/libsocket src/*.c -lraylib -lsocket -lGL -lm -lpthread -ldl -lrt -lX11  -o haptic_rods -Wall
+    {{CC}} {{CC_ARGS}} src/main.c -o {{BUILD_DIR}}/haptic_rods
 
 pull:
     git pull
 
 run:
-    ./haptic_rods
+    {{BUILD_DIR}}/haptic_rods
 
 push:
     git commit -am "This message wasn't typed by a human."
@@ -14,4 +19,4 @@ push:
 pbr: pull build run
 
 build-gui:
-    zig cc -I/usr/include/libsocket -Isrc/external src/hapticgui.c src/lib/*.c -lraylib -lsocket -lGL -lm -lpthread -ldl -lrt -lX11  -o build/haptic_gui -Wall
+    {{CC}} {{CC_ARGS}} src/hapticgui.c -o {{BUILD_DIR}}/haptic_gui

@@ -1,14 +1,14 @@
 #include "raylib.h"
-#include "gameobject.h"
+#include "lib/gameobject.h"
 #include "stdio.h"
-#include "rodfactory.h"
-#include "haptic.h"
-#include "serialize.h"
-#include "network.h"
+#include "lib/rodfactory.h"
+#include "lib/haptic.h"
+#include "lib/serialize.h"
+#include "lib/network.h"
 #include "string.h"
 #include "unistd.h"
 #include "arpa/inet.h"
-#include "pretest.h"
+#include "lib/pretest.h"
 
 const int TABLET_WIDTH = 1000;
 const int TABLET_HEIGHT = 600;
