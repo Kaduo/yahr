@@ -141,7 +141,7 @@ void SetSignal(int fd, Signal signal) {
     PlayCurrentSignal(fd, 1);
 }
 
-void SetDirection(int fd, int8_t angle, int16_t speed) {
+void SetDirection(int fd, uint8_t angle, uint16_t speed) {
     #define DIR_BUFFER_LEN 4
     unsigned char buffer[DIR_BUFFER_LEN] = {HapticCommand_SET_DIR, angle, speed, speed >> 8};
     write_to_tty(fd, buffer, DIR_BUFFER_LEN);

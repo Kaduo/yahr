@@ -21,7 +21,7 @@ typedef struct Signal {
     uint8_t duty;
     uint8_t offset;
     uint16_t phase;
-    int8_t angle;
+    uint8_t angle;
     uint8_t pulses;
     float duration;
 } Signal;
