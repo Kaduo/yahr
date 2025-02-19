@@ -118,13 +118,13 @@ int main()
                     // raygui: controls drawing
             //----------------------------------------------------------------------------------
             GuiSlider((Rectangle){ anchor.x, anchor.y + 0*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "amplitude", amplitudeValueDisplay, &amplitudeSliderValue, 0, 255);
-            GuiSlider((Rectangle){ anchor.x, anchor.y + 1*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "period", periodValueDisplay, &periodSliderValue, 0, 1000); // TODO FIXME ?
+            GuiSlider((Rectangle){ anchor.x, anchor.y + 1*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "period", periodValueDisplay, &periodSliderValue, 0, 400); // TODO FIXME ?
             GuiSlider((Rectangle){ anchor.x, anchor.y + 2*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "duty", dutyValueDisplay, &dutySliderValue, 0, 255);
             GuiSlider((Rectangle){ anchor.x, anchor.y + 3*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "offset", offsetValueDisplay, &offsetSliderValue, 0, 255);
             GuiSlider((Rectangle){ anchor.x, anchor.y + 4*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "phase", phaseValueDisplay, &phaseSliderValue, 0, 65535);
             GuiSlider((Rectangle){ anchor.x, anchor.y + 5*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "angle", angleValueDisplay, &angleSliderValue, 0, 128);
             GuiSlider((Rectangle){ anchor.x, anchor.y + 6*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "pulses", pulsesValueDisplay, &pulsesSliderValue, 0, 128);
-            GuiSlider((Rectangle){ anchor.x, anchor.y + 7*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "global speed", globalSpeedValueDisplay, &globalSpeedSliderValue, 0, 400); // TODO FIXME ?
+            GuiSlider((Rectangle){ anchor.x, anchor.y + 7*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "global speed", globalSpeedValueDisplay, &globalSpeedSliderValue, 0, 1000); // TODO FIXME ?
             GuiSlider((Rectangle){ anchor.x, anchor.y + 8*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "global angle", globalAngleValueDisplay, &globalAngleSliderValue, 0, 128); // Loops around after 128
             //----------------------------------------------------------------------------------
 
