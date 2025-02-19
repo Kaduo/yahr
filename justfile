@@ -10,3 +10,5 @@ run:
 push:
     git commit -am "This message wasn't typed by a human."
     git push
+
+pbr: pull build run

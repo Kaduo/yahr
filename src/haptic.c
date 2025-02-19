@@ -180,12 +180,14 @@ void PhysicalHapticDriver_Construct(PhysicalHapticDriver *me) {
 
 PhysicalHapticDriver NewPhysicalHapticDriver() {
     int fd = ConnectToTTY();
-    HapticDriver super = NullHapticDriver();
+    HapticDriver super = {NULL};
     PhysicalHapticDriver physicalHapticDriver = {
         .super = super,
         .fd = fd
     };
     PhysicalHapticDriver_Construct(&physicalHapticDriver);
+
+    SetDirection(fd, -1, 100);
     return physicalHapticDriver;
 }
 
