@@ -48,8 +48,8 @@ int main()
     PhysicalHapticDriver hapticDriver = NewPhysicalHapticDriver();
     HapticService hapticService = NewHapticService((HapticDriver*)&hapticDriver);
 
-    int8_t globalAngle = -1;
-    int16_t globalSpeed = 100;
+    uint8_t globalAngle = 0;
+    uint16_t globalSpeed = 100;
     hapticDriver.super.setDirection(&hapticDriver.super, globalAngle, globalSpeed);
 
     float amplitudeSliderValue = 0.0f;

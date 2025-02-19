@@ -175,7 +175,7 @@ void PhysicalHapticDriver_clearSignal(HapticDriver *_me) {
     ClearSignal(me->fd);
 }
 
-void PhysicalHapticDriver_setDirection(HapticDriver *_me, int8_t angle, int16_t speed) {
+void PhysicalHapticDriver_setDirection(HapticDriver *_me, uint8_t angle, uint16_t speed) {
     PhysicalHapticDriver *me = (PhysicalHapticDriver*)_me;
     SetDirection(me->fd, angle, speed);
 }
