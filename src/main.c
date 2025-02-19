@@ -88,6 +88,7 @@ int main(int argc, char *argv[]) {
     float zoneHeight = (TABLET_HEIGHT/2 - margin*2);
 
 
+
     Vec zones = EmptyVec(4, sizeof(Zone*));
     for (int i =0; i < nbZones; i ++) {
         Zone *zone = NewZone((Rectangle){.x = margin + i*(zoneWidth+margin), .y = TABLET_HEIGHT/2 + margin,  .height = zoneHeight, .width = zoneWidth}, BLACK);
@@ -96,6 +97,8 @@ int main(int argc, char *argv[]) {
 
     SetTraceLogLevel(LOG_ERROR);
     InitWindow(TABLET_WIDTH, TABLET_HEIGHT, "Haptic Rods");
+
+    ToggleFullscreen();
 
     while (!WindowShouldClose()) {
         HapticService_update(rodFactory.hapticService, GetFrameTime());
