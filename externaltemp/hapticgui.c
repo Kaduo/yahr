@@ -88,6 +88,7 @@ int main()
     SetTargetFPS(60);
     //--------------------------------------------------------------------------------------
 
+    ToggleFullscreen();
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
