@@ -43,7 +43,7 @@ int main()
     //----------------------------------------------------------------------------------
     Vector2 anchor = { 200, 50 };
 
-    Signal sig = (Signal){0};
+    Signal sig = (Signal){.signalShape = SignalShape_SINE};
 
     PhysicalHapticDriver hapticDriver = NewPhysicalHapticDriver();
     HapticService hapticService = NewHapticService((HapticDriver*)&hapticDriver);
