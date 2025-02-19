@@ -53,7 +53,6 @@ int main()
 
     uint8_t globalAngle = 0;
     uint16_t globalSpeed = 100;
-    printf("teheheth\n");
     hapticDriver.super.setDirection(&hapticDriver.super, globalAngle, globalSpeed);
 
     float amplitudeSliderValue = 0.0f;
@@ -92,13 +91,10 @@ int main()
     SetTargetFPS(60);
     //--------------------------------------------------------------------------------------
 
-    printf("uhuhu\n");
     ToggleFullscreen();
-    printf("wououou\n");
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
-        printf("ksdmflskdflms\n");
         // Update
         //----------------------------------------------------------------------------------
         // TODO: Implement required update logic
@@ -113,7 +109,6 @@ int main()
 
             ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR))); 
             if (GetFrameTime() > 0) {
-                printf("hu hello?\n");
                 float floatSpeed = Vector2Length(GetMouseDelta())/GetFrameTime();
                 if (floatSpeed > 65535) {
                     globalSpeed = 65535;
