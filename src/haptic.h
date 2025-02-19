@@ -32,6 +32,7 @@ typedef struct HapticDriver HapticDriver;
 struct HapticDriver {
     void (*setSignal)(HapticDriver *me, Signal signal);
     void (*clearSignal)(HapticDriver *me);
+    void (*setDirection)(HapticDriver *me, int8_t angle, int16_t speed);
 };
 
 

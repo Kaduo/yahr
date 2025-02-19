@@ -12,3 +12,6 @@ push:
     git push
 
 pbr: pull build run
+
+build-gui:
+    gcc -Iexternaltemp -I/usr/include/libsocket -Isrc externaltemp/*.c src/*.c -lraylib -lsocket -lGL -lm -lpthread -ldl -lrt -lX11  -o haptic_gui -Wall

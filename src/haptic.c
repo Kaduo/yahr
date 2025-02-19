@@ -160,6 +160,7 @@ HapticDriver NullHapticDriver() {
     return (HapticDriver){
         .clearSignal = NULL,
         .setSignal = NULL,
+        .setDirection = NULL,
     };
 }
 
@@ -173,9 +174,15 @@ void PhysicalHapticDriver_clearSignal(HapticDriver *_me) {
     ClearSignal(me->fd);
 }
 
+void PhysicalHapticDriver_setDirection(HapticDriver *_me, int8_t angle, int16_t speed) {
+    PhysicalHapticDriver *me = (PhysicalHapticDriver*)_me;
+    SetDirection(me->fd, angle, speed);
+}
+
 void PhysicalHapticDriver_Construct(PhysicalHapticDriver *me) {
     me->super.setSignal = PhysicalHapticDriver_setSignal;
     me->super.clearSignal = PhysicalHapticDriver_clearSignal;
+    me->super.setDirection = PhysicalHapticDriver_setDirection;
 }
 
 PhysicalHapticDriver NewPhysicalHapticDriver() {
