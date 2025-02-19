@@ -13,6 +13,7 @@
 **********************************************************************************************/
 
 #include "raylib.h"
+#include "raymath.h"
 
 #define RAYGUI_IMPLEMENTATION
 #include "raygui.h"
@@ -34,8 +35,8 @@ int main()
     int screenHeight = 600;
 
 
+    SetTraceLogLevel(LOG_ERROR);
     InitWindow(screenWidth, screenHeight, "layout_name");
-
     GuiSetStyle(DEFAULT, TEXT_SIZE, 30);
 
 
@@ -45,11 +46,14 @@ int main()
 
     Signal sig = (Signal){.signalShape = SignalShape_SINE};
 
-    PhysicalHapticDriver hapticDriver = NewPhysicalHapticDriver();
+    InputService inputService = NewPhysicalInputService();
+
+    PhysicalHapticDriver hapticDriver = NewPhysicalHapticDriver(&inputService);
     HapticService hapticService = NewHapticService((HapticDriver*)&hapticDriver);
 
     uint8_t globalAngle = 0;
     uint16_t globalSpeed = 100;
+    printf("teheheth\n");
     hapticDriver.super.setDirection(&hapticDriver.super, globalAngle, globalSpeed);
 
     float amplitudeSliderValue = 0.0f;
@@ -88,10 +92,13 @@ int main()
     SetTargetFPS(60);
     //--------------------------------------------------------------------------------------
 
+    printf("uhuhu\n");
     ToggleFullscreen();
+    printf("wououou\n");
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
+        printf("ksdmflskdflms\n");
         // Update
         //----------------------------------------------------------------------------------
         // TODO: Implement required update logic
@@ -105,7 +112,15 @@ int main()
         BeginDrawing();
 
             ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR))); 
-
+            if (GetFrameTime() > 0) {
+                printf("hu hello?\n");
+                float floatSpeed = Vector2Length(GetMouseDelta())/GetFrameTime();
+                if (floatSpeed > 65535) {
+                    globalSpeed = 65535;
+                } else {
+                    globalSpeed = (uint16_t)floatSpeed;
+                }
+            }
             sprintf(amplitudeValueDisplay, "%d", sig.amplitude);
             sprintf(periodValueDisplay, "%d", sig.period);
             sprintf(dutyValueDisplay, "%d", sig.duty);
@@ -124,24 +139,25 @@ int main()
             GuiSlider((Rectangle){ anchor.x, anchor.y + 4*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "phase", phaseValueDisplay, &phaseSliderValue, 0, 65535);
             GuiSlider((Rectangle){ anchor.x, anchor.y + 5*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "angle", angleValueDisplay, &angleSliderValue, 0, 128);
             GuiSlider((Rectangle){ anchor.x, anchor.y + 6*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "pulses", pulsesValueDisplay, &pulsesSliderValue, 0, 128);
-            GuiSlider((Rectangle){ anchor.x, anchor.y + 7*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "global speed", globalSpeedValueDisplay, &globalSpeedSliderValue, 0, 1000); // TODO FIXME ?
-            GuiSlider((Rectangle){ anchor.x, anchor.y + 8*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "global angle", globalAngleValueDisplay, &globalAngleSliderValue, 0, 128); // Loops around after 128
+            GuiLabel((Rectangle){ anchor.x, anchor.y + 7*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, globalSpeedValueDisplay);
+            // GuiSlider((Rectangle){ anchor.x, anchor.y + 7*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "global speed", globalSpeedValueDisplay, &globalSpeedSliderValue, 0, 1000); // TODO FIXME ?
+            // GuiSlider((Rectangle){ anchor.x, anchor.y + 8*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "global angle", globalAngleValueDisplay, &globalAngleSliderValue, 0, 128); // Loops around after 128
             //----------------------------------------------------------------------------------
 
-            bool globalDirChanged = false;
-            if ((int)globalSpeedSliderValue != globalSpeed) {
-                globalSpeed = (int)globalSpeedSliderValue;
-                globalDirChanged = true;
-            }
-            if ((int)globalAngleSliderValue != globalAngle) {
-                globalAngle = (int)globalAngleSliderValue;
-                globalDirChanged = true;
-            }
+            // bool globalDirChanged = false;
+            // if ((int)globalSpeedSliderValue != globalSpeed) {
+            //     globalSpeed = (int)globalSpeedSliderValue;
+            //     globalDirChanged = true;
+            // }
+            // if ((int)globalAngleSliderValue != globalAngle) {
+            //     globalAngle = (int)globalAngleSliderValue;
+            //     globalDirChanged = true;
+            // }
 
-            if (globalDirChanged) {
-                hapticDriver.super.setDirection(&hapticDriver.super, globalAngle, globalSpeed);
-                printf("global angle : %d, global speed : %d\n", globalAngle, globalSpeed);
-            }
+            // if (globalDirChanged) {
+            //     hapticDriver.super.setDirection(&hapticDriver.super, globalAngle, globalSpeed);
+            //     printf("global angle : %d, global speed : %d\n", globalAngle, globalSpeed);
+            // }
 
 
             bool sigChanged = false;

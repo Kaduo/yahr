@@ -57,6 +57,10 @@ bool PhysicalInputService_isMouseButtonUp(InputService *me, MouseButton button) 
     return IsMouseButtonUp(button);
 }
 
+Vector2 PhysicalInputService_getMouseDelta(InputService *me) {
+    return GetMouseDelta();
+}
+
 
 void PhysicalInputService_Construct(InputService *me) {
     me->poll = PhysicalInputService_poll;
@@ -65,6 +69,7 @@ void PhysicalInputService_Construct(InputService *me) {
     me->isMouseButtonPressed = PhysicalInputService_isMouseButtonPressed;
     me->isMouseButtonUp = PhysicalInputService_isMouseButtonUp;
     me->isMouseButtonDown= PhysicalInputService_isMouseButtonDown;
+    me->getMouseDelta = PhysicalInputService_getMouseDelta;
 }
 
 InputService NewPhysicalInputService(void) {

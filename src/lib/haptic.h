@@ -4,6 +4,7 @@
 #include "stdbool.h"
 #include "ringbuffer.h"
 #include "stdio.h"
+#include "input.h"
 
 typedef enum SignalShape {
     SignalShape_STEADY = 1,
@@ -33,6 +34,7 @@ struct HapticDriver {
     void (*setSignal)(HapticDriver *me, Signal signal);
     void (*clearSignal)(HapticDriver *me);
     void (*setDirection)(HapticDriver *me, uint8_t angle, uint16_t speed);
+    InputService *inputService; // Needs to know the speed and direction of the mouse.
 };
 
 
@@ -41,8 +43,7 @@ typedef struct PhysicalHapticDriver {
     int fd;
 } PhysicalHapticDriver;
 
-PhysicalHapticDriver NewPhysicalHapticDriver();
-
+PhysicalHapticDriver NewPhysicalHapticDriver(InputService *inputService);
 typedef struct HapticService HapticService;
 
 struct HapticService {
@@ -60,6 +61,7 @@ void HapticService_addSignalToQueue(HapticService *me, Signal signal);
 void HapticService_popQueue(HapticService *me);
 void HapticService_clearAndPauseQueue(HapticService *me);
 void HapticService_pauseQueue(HapticService *me);
+
 
 
 void PrintSignal(Signal sig);

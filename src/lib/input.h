@@ -14,6 +14,7 @@ struct InputService {
     bool (*isMouseButtonReleased)(InputService *me, MouseButton button);
     bool (*isMouseButtonUp)(InputService *me, MouseButton button);
     bool (*isMouseButtonDown)(InputService *me, MouseButton button);
+    Vector2 (*getMouseDelta)(InputService *me);
 };
 
 typedef enum ButtonStatus {

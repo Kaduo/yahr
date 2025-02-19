@@ -6,6 +6,7 @@
 #include <termios.h>
 #include <unistd.h>
 #include <asm-generic/termbits-common.h>
+#include "raymath.h"
 
 
 // Low-level stuff
@@ -155,14 +156,20 @@ void PrintSignal(Signal sig) {
 
 // High-level Driver
 
-
-HapticDriver NullHapticDriver() {
-    return (HapticDriver){
-        .clearSignal = NULL,
-        .setSignal = NULL,
-        .setDirection = NULL,
-    };
-}
+void HapticDriver_update(HapticDriver *me, float frameTime) {
+    Vector2 mouseDelta = me->inputService->getMouseDelta(me->inputService);
+    if (frameTime > 0) {
+        printf("hu hello?\n");
+        float floatSpeed = Vector2Length(mouseDelta)/frameTime;
+        uint16_t intSpeed;
+        if (floatSpeed > 65535) {
+            intSpeed = 65535;
+        } else {
+            intSpeed = (uint16_t)floatSpeed;
+        }
+        me->setDirection(me, 0, intSpeed);
+    }
+};
 
 void PhysicalHapticDriver_setSignal(HapticDriver *_me, Signal signal) {
     printf("uh!\n");
@@ -186,9 +193,9 @@ void PhysicalHapticDriver_Construct(PhysicalHapticDriver *me) {
     me->super.setDirection = PhysicalHapticDriver_setDirection;
 }
 
-PhysicalHapticDriver NewPhysicalHapticDriver() {
+PhysicalHapticDriver NewPhysicalHapticDriver(InputService *inputService) {
     int fd = ConnectToTTY();
-    HapticDriver super = {NULL};
+    HapticDriver super = {.inputService = inputService};
     PhysicalHapticDriver physicalHapticDriver = {
         .super = super,
         .fd = fd
@@ -255,6 +262,7 @@ void HapticService_update(HapticService *me, float frameTime) {
     } else {
         me->driver->clearSignal(me->driver);
     }
+    HapticDriver_update(me->driver, frameTime);
 }
 
 HapticService NewHapticService(HapticDriver *driver) {
