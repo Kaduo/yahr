@@ -134,7 +134,7 @@ void Ping(int fd) {
 }
 
 void SetSignal(int fd, Signal signal) {
-    print("lowlevel\n");
+    printf("lowlevel\n");
     PrintSignal(signal);
     ClearSignal(fd);
     AddSignal(fd, signal);
