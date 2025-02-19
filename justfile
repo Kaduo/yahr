@@ -14,4 +14,4 @@ push:
 pbr: pull build run
 
 build-gui:
-    gcc -Iexternaltemp -I/usr/include/libsocket -Isrc externaltemp/*.c src/*.c -lraylib -lsocket -lGL -lm -lpthread -ldl -lrt -lX11  -o haptic_gui -Wall
+    zig cc -I/usr/include/libsocket -Isrc/external src/hapticgui.c src/lib/*.c -lraylib -lsocket -lGL -lm -lpthread -ldl -lrt -lX11  -o build/haptic_gui -Wall

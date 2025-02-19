@@ -21,9 +21,9 @@ typedef struct Signal {
     uint8_t duty;
     uint8_t offset;
     uint16_t phase;
-    uint8_t angle;
-    uint8_t pulses;
-    float duration;
+    uint8_t angle; // maxes out at 128, no idea why... After 128, seems like it doesn't care about the "global angle"
+    uint8_t pulses; // maxes out at 128, again don't know why, duration of the signal kinda. I guess the unit is the number of periods?
+    float duration; // mine
 } Signal;
 
 

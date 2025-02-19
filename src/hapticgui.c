@@ -16,7 +16,7 @@
 
 #define RAYGUI_IMPLEMENTATION
 #include "raygui.h"
-#include "haptic.h"
+#include "lib/haptic.h"
 
 //----------------------------------------------------------------------------------
 // Controls Functions Declaration
