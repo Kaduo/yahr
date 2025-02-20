@@ -3,7 +3,19 @@
 #include "haptic.h"
 #include "math.h"
 
-const Color ROD_COLOR_FOR_LENGTH[10] = {WHITE, RED, GREEN, DARKPURPLE, YELLOW, DARKGREEN, BLACK, BROWN, BLUE, ORANGE};
+
+const Color ROD_COLOR_FOR_LENGTH[10] = {
+                                        WHITE,                  // WHITE
+                                        {253, 46, 99, 255},     // RED 
+                                        {41, 222, 182, 255},    // LIGHT GREEN
+                                        {253, 74, 185, 255},    // FUSCHIA,
+                                        {238, 211, 121, 255},   // JAUNE
+                                        {17, 163, 155, 255},    // DARK GREEN
+                                        {62, 64, 69, 255},      // BLACK
+                                        {177,82,75, 255},       // BROWN
+                                        {50, 144, 202, 255},    // BLUE
+                                        {216, 157, 118, 255}    // ORANGE
+                                    };
 const float ROD_WIDTH_FOR_LENGTH[NB_ROD_LENGTHS] = {
                                             1 * UNIT_ROD_HEIGHT,
                                             2 * UNIT_ROD_HEIGHT,
