@@ -3,6 +3,8 @@
 #include "stdlib.h"
 #include "rodfactory.h"
 #include "haptic.h"
+#include "collision.h"
+#include "gameobject.h"
 
 Rods EmptyRods(int capacity)
 {
@@ -72,5 +74,23 @@ void SetRodServices(Rods *rods, InputService *inputService, HapticService *hapti
         if (hapticService != NULL) {
             rod->rodHapticComponent->hapticService = hapticService;
         }
+    }
+}
+
+void ShuffleRods(Rods *rods, float xMin, float xMax, float yMin, float yMax) {
+    for (int i =0; i < rods->rods.size; i ++) {
+        Rod *rod = *(Rod**)IndexVec(&rods->rods, i);
+        CollisionInfo collisionInfo;
+        float x;
+        float y;
+
+        do {
+            x = xMin + (float)rand()/(float)(RAND_MAX/(xMax - xMin));
+            y = yMin + (float)rand()/(float)(RAND_MAX/(yMax - yMin));
+            Rectangle targetRectangle = CloneMove(GetHitbox(&rod->collisionComponent->inner), (Vector2){x, y});
+            Rectangle movingRectangle = GetHitbox(&rod->collisionComponent->inner);
+            collisionInfo = ComputeCollisionInfo(rod->world, movingRectangle, targetRectangle);
+        } while (CollidedWithAnotherRod(collisionInfo));
+        rod->position = (Vector2){x, y};
     }
 }

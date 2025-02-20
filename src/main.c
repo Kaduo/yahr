@@ -9,13 +9,9 @@
 #include "unistd.h"
 #include "arpa/inet.h"
 #include "lib/pretest.h"
-
-const int TABLET_WIDTH = 1000;
-const int TABLET_HEIGHT = 600;
-
-const Color colors[10] = {WHITE, RED, GREEN, DARKPURPLE, YELLOW, DARKGREEN, BLACK, BROWN, BLUE, ORANGE};
-
-
+#include "time.h"
+#include "stdlib.h"
+#include "lib/consts.h"
 
 
 int main(int argc, char *argv[]) {
@@ -81,19 +77,6 @@ int main(int argc, char *argv[]) {
     // SetRodServices(rods, &inputService, &hapticService);
     // fclose(file);
 
-
-    float margin = 20;
-    int nbZones = 4;
-    float zoneWidth = (TABLET_WIDTH - margin*(nbZones + 1))/(nbZones);
-    float zoneHeight = (TABLET_HEIGHT/2 - margin*2);
-
-
-
-    Vec zones = EmptyVec(4, sizeof(Zone*));
-    for (int i =0; i < nbZones; i ++) {
-        Zone *zone = NewZone((Rectangle){.x = margin + i*(zoneWidth+margin), .y = TABLET_HEIGHT/2 + margin,  .height = zoneHeight, .width = zoneWidth}, BLACK);
-        PushVec(&zones, &zone);
-    }
 
     SetTraceLogLevel(LOG_ERROR);
     InitWindow(TABLET_WIDTH, TABLET_HEIGHT, "Haptic Rods");

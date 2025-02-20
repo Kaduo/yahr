@@ -246,9 +246,9 @@ void CollisionComponent_computeAndNotifyCorrectedTarget(CollisionComponent *me, 
 {
     Rectangle targetRectangle = CloneMove(GetHitbox(me), target);
     Rectangle movingRectangle = GetHitbox(me);
-    XYBounds xyBounds = GetCollisionBounds(*me->world, movingRectangle, targetRectangle);
+    CollisionInfo collisionInfo = ComputeCollisionInfo(*me->world, movingRectangle, targetRectangle);
 
-    if (xyBounds.xBounds.nbBounds <= 2 && xyBounds.yBounds.nbBounds <= 2) // Pas de collision
+    if (!CollidedWithAnotherRod(collisionInfo)) // Pas de collision
     {
         for (int i = 0; i < me->observers.size; i++)
         {
@@ -277,12 +277,12 @@ void CollisionComponent_computeAndNotifyCorrectedTarget(CollisionComponent *me, 
     Rectangle candidateRectangle = movingRectangle;
     Rectangle bestRectangle = candidateRectangle;
     float bestDist = Vector2DistanceSqr(GetTopLeft(targetRectangle), GetTopLeft(candidateRectangle));
-    for (int ix = 0; ix < xyBounds.xBounds.nbBounds; ix++)
+    for (int ix = 0; ix < collisionInfo.xBounds.nbBounds; ix++)
     {
-        for (int iy = 0; iy < xyBounds.yBounds.nbBounds; iy++)
+        for (int iy = 0; iy < collisionInfo.yBounds.nbBounds; iy++)
         {
-            Bound yBound = xyBounds.yBounds.bounds[iy];
-            Bound xBound = xyBounds.xBounds.bounds[ix];
+            Bound yBound = collisionInfo.yBounds.bounds[iy];
+            Bound xBound = collisionInfo.xBounds.bounds[ix];
             if (yBound.collisionType == FROM_ABOVE)
             {
                 SetBottom(&candidateRectangle, yBound.value);

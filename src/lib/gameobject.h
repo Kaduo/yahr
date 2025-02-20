@@ -36,6 +36,8 @@ typedef struct CollisionComponent
     Vec observers;
 } CollisionComponent;
 
+Rectangle GetHitbox(const CollisionComponent *me);
+
 
 
 struct RodCollisionComponent

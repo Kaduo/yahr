@@ -24,11 +24,13 @@ typedef struct Bounds {
   Bound bounds[BOUNDS_MAX_COUNT];
 } Bounds;
 
-typedef struct XYBounds {
+typedef struct CollisionInfo {
   Bounds xBounds;
   Bounds yBounds;
-} XYBounds;
+  bool collided;
+} CollisionInfo;
 
 Rectangle CloneMove(Rectangle rect, Vector2 targetTopLeft);
-XYBounds GetCollisionBounds(Iterator *world, Rectangle movingRectangle, Rectangle targetRectangle);
+CollisionInfo ComputeCollisionInfo(Iterator *world, Rectangle movingRectangle, Rectangle targetRectangle);
 bool StrictlyCollide(Rectangle rect1, Rectangle rect2);
+bool CollidedWithAnotherRod(const CollisionInfo collisionInfo);

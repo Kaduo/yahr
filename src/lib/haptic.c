@@ -159,7 +159,6 @@ void PrintSignal(Signal sig) {
 void HapticDriver_update(HapticDriver *me, float frameTime) {
     Vector2 mouseDelta = me->inputService->getMouseDelta(me->inputService);
     if (frameTime > 0) {
-        printf("hu hello?\n");
         float floatSpeed = Vector2Length(mouseDelta)/frameTime;
         uint16_t intSpeed;
         if (floatSpeed > 65535) {

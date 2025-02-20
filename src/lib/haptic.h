@@ -22,8 +22,8 @@ typedef struct Signal {
     uint8_t duty;
     uint8_t offset;
     uint16_t phase;
-    uint8_t angle; // maxes out at 128, no idea why... After 128, seems like it doesn't care about the "global angle"
-    uint8_t pulses; // maxes out at 128, again don't know why, duration of the signal kinda. I guess the unit is the number of periods?
+    uint8_t angle; // For values greater than 128, it's an isotropic (?) signal (doesn't care about the direction of the finger's movements)
+    uint8_t pulses; // Number of periods that the signal plays out before stopping.  For values greater than 128, the signal lasts indefinitely
     float duration; // mine
 } Signal;
 

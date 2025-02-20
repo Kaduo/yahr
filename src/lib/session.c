@@ -6,12 +6,8 @@
 #include "stdlib.h"
 #include "string.h"
 #include "raylib.h"
+#include "session.h"
 
-typedef struct Session {
-    InputService *inputService;
-    HapticService *hapticService;
-    Rods *rods;
-} Session;
 
 // Interface que je veux :
 // Charger une session (à partir d'un nom de fichier)

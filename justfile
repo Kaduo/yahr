@@ -20,3 +20,6 @@ pbr: pull build run
 
 build-gui:
     {{CC}} {{CC_ARGS}} src/hapticgui.c -o {{BUILD_DIR}}/haptic_gui
+
+build-pretest:
+    {{CC}} {{CC_ARGS}} src/pretest.c -o {{BUILD_DIR}}/pretest

@@ -75,18 +75,9 @@ int main()
     char globalSpeedValueDisplay[10];
     char globalAngleValueDisplay[10];
 
-    //----------------------------------------------------------------------------------
-
-    // float *SliderValues[] = {
-    //     &amplitudeSliderValue,
-    //     &periodSliderValue,
-    //     &dutySliderValue,
-    //     &offsetSliderValue,
-    //     &phaseSliderValue,
-    //     &angleSliderValue,
-    //     &pulsesSliderValue,
-    //     &globalSpeedSliderValue,
-    //     &globalAngleSliderValue};
+    const int SLIDER_WIDTH = 300;
+    const int SLIDER_HEIGHT = 20;
+    const int SLIDER_GAP = 10;
 
     SetTargetFPS(60);
     //--------------------------------------------------------------------------------------
@@ -96,13 +87,44 @@ int main()
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
         // Update
-        //----------------------------------------------------------------------------------
-        // TODO: Implement required update logic
-        //----------------------------------------------------------------------------------
 
-        const int SLIDER_WIDTH = 300;
-        const int SLIDER_HEIGHT = 20;
-        const int SLIDER_GAP = 10;
+
+        bool sigChanged = false;
+        if ((unsigned)amplitudeSliderValue != sig.amplitude) {
+            sig.amplitude = (unsigned)amplitudeSliderValue;
+            sigChanged = true;
+        }
+        if ((unsigned)periodSliderValue != sig.period) {
+            sig.period = (unsigned)periodSliderValue;
+            sigChanged = true;
+        }
+        if ((unsigned)dutySliderValue != sig.duty) {
+            sig.duty = (unsigned)dutySliderValue;
+            sigChanged = true;
+        }
+        if ((unsigned)offsetSliderValue != sig.offset) {
+            sig.offset = (unsigned)offsetSliderValue;
+            sigChanged = true;
+        }
+        if ((unsigned)phaseSliderValue != sig.phase) {
+            sig.phase = (unsigned)phaseSliderValue;
+            sigChanged = true;
+        }
+        if ((unsigned)angleSliderValue != sig.angle) {
+            sig.angle = (unsigned)angleSliderValue;
+            sigChanged = true;
+        }
+        if ((unsigned)pulsesSliderValue != sig.pulses) {
+            sig.pulses = (unsigned)pulsesSliderValue;
+            sigChanged = true;
+        }
+
+        if (sigChanged) {
+            HapticService_playSignal(&hapticService, sig);
+        }
+
+        HapticService_update(&hapticService, GetFrameTime());
+
         // Draw
         //----------------------------------------------------------------------------------
         BeginDrawing();
@@ -135,61 +157,7 @@ int main()
             GuiSlider((Rectangle){ anchor.x, anchor.y + 5*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "angle", angleValueDisplay, &angleSliderValue, 0, 128);
             GuiSlider((Rectangle){ anchor.x, anchor.y + 6*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "pulses", pulsesValueDisplay, &pulsesSliderValue, 0, 128);
             GuiLabel((Rectangle){ anchor.x, anchor.y + 7*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, globalSpeedValueDisplay);
-            // GuiSlider((Rectangle){ anchor.x, anchor.y + 7*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "global speed", globalSpeedValueDisplay, &globalSpeedSliderValue, 0, 1000); // TODO FIXME ?
-            // GuiSlider((Rectangle){ anchor.x, anchor.y + 8*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "global angle", globalAngleValueDisplay, &globalAngleSliderValue, 0, 128); // Loops around after 128
-            //----------------------------------------------------------------------------------
 
-            // bool globalDirChanged = false;
-            // if ((int)globalSpeedSliderValue != globalSpeed) {
-            //     globalSpeed = (int)globalSpeedSliderValue;
-            //     globalDirChanged = true;
-            // }
-            // if ((int)globalAngleSliderValue != globalAngle) {
-            //     globalAngle = (int)globalAngleSliderValue;
-            //     globalDirChanged = true;
-            // }
-
-            // if (globalDirChanged) {
-            //     hapticDriver.super.setDirection(&hapticDriver.super, globalAngle, globalSpeed);
-            //     printf("global angle : %d, global speed : %d\n", globalAngle, globalSpeed);
-            // }
-
-
-            bool sigChanged = false;
-            if ((unsigned)amplitudeSliderValue != sig.amplitude) {
-                sig.amplitude = (unsigned)amplitudeSliderValue;
-                sigChanged = true;
-            }
-            if ((unsigned)periodSliderValue != sig.period) {
-                sig.period = (unsigned)periodSliderValue;
-                sigChanged = true;
-            }
-            if ((unsigned)dutySliderValue != sig.duty) {
-                sig.duty = (unsigned)dutySliderValue;
-                sigChanged = true;
-            }
-            if ((unsigned)offsetSliderValue != sig.offset) {
-                sig.offset = (unsigned)offsetSliderValue;
-                sigChanged = true;
-            }
-            if ((unsigned)phaseSliderValue != sig.phase) {
-                sig.phase = (unsigned)phaseSliderValue;
-                sigChanged = true;
-            }
-            if ((unsigned)angleSliderValue != sig.angle) {
-                sig.angle = (unsigned)angleSliderValue;
-                sigChanged = true;
-            }
-            if ((unsigned)pulsesSliderValue != sig.pulses) {
-                sig.pulses = (unsigned)pulsesSliderValue;
-                sigChanged = true;
-            }
-
-            if (sigChanged) {
-                HapticService_playSignal(&hapticService, sig);
-            }
-
-        HapticService_update(&hapticService, GetFrameTime());
         EndDrawing();
         //----------------------------------------------------------------------------------
     }

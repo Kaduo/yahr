@@ -85,17 +85,21 @@ void AddBound(Bounds *bounds, Bound bound) {
   bounds->nbBounds += 1;
 }
 
-void AddYBound(XYBounds *xyBounds, Bound bound) {
-  AddBound(&xyBounds->yBounds, bound);
+void AddYBound(CollisionInfo *collisionInfo, Bound bound) {
+  AddBound(&collisionInfo->yBounds, bound);
 }
 
-void AddXBound(XYBounds *xyBounds, Bound bound) {
-  AddBound(&xyBounds->xBounds, bound);
+void AddXBound(CollisionInfo *collisionInfo, Bound bound) {
+  AddBound(&collisionInfo->xBounds, bound);
 }
 
-XYBounds GetCollisionBounds(Iterator *world, Rectangle movingRectangle, Rectangle targetRectangle) {
+bool CollidedWithAnotherRod(const CollisionInfo collisionInfo) {
+  return collisionInfo.collided;
+}
 
-  XYBounds xyBounds = {0};
+CollisionInfo ComputeCollisionInfo(Iterator *world, Rectangle movingRectangle, Rectangle targetRectangle) {
+
+  CollisionInfo collisionInfo = {.collided = false};
   Rod **otherRod;
 
   world->reinit(world);
@@ -111,86 +115,23 @@ XYBounds GetCollisionBounds(Iterator *world, Rectangle movingRectangle, Rectangl
     {
       if (collisionType == FROM_ABOVE || collisionType == FROM_BELOW)
       {
-        AddYBound(&xyBounds, newBound(otherRectangle, collisionType));
+        AddYBound(&collisionInfo, newBound(otherRectangle, collisionType));
       }
       else
       {
-        AddXBound(&xyBounds, newBound(otherRectangle, collisionType));
+        AddXBound(&collisionInfo, newBound(otherRectangle, collisionType));
       }
+
+      collisionInfo.collided = true;
     }
   }
-  AddYBound(&xyBounds, (Bound){.value =  GetBottom(targetRectangle), FROM_ABOVE});
-  AddXBound(&xyBounds, (Bound){.value =  GetRight(targetRectangle), FROM_LEFT});
-  AddYBound(&xyBounds,(Bound){.value =  GetBottom(movingRectangle), FROM_ABOVE});
-  AddXBound(&xyBounds,(Bound){.value =  GetRight(movingRectangle), FROM_LEFT});
 
-  return xyBounds;
+  if (collisionInfo.collided) { // Virtual bounds, corresponding to the rod being aligned with its original position or its target position.
+    AddYBound(&collisionInfo, (Bound){.value =  GetBottom(targetRectangle), FROM_ABOVE});
+    AddXBound(&collisionInfo, (Bound){.value =  GetRight(targetRectangle), FROM_LEFT});
+    AddYBound(&collisionInfo, (Bound){.value =  GetBottom(movingRectangle), FROM_ABOVE});
+    AddXBound(&collisionInfo, (Bound){.value =  GetRight(movingRectangle), FROM_LEFT});
+  }
+
+  return collisionInfo;
 }
-
-// // Returns true if there was a collision
-// bool Move(Iterator *world, Rectangle *movingRectangle, Vector2 targetTopLeft)
-// {
-//   Rectangle targetRectangle = CloneMove(*movingRectangle, targetTopLeft);
-
-//   XYBounds xyBounds = GetCollisionBounds(world, movingRectangle, targetRectangle);
-
-//   if (xyBounds.xBounds.nbBounds <= 2 && xyBounds.yBounds.nbBounds <= 2)
-//   {
-//     SetTopLeft(movingRectangle, targetTopLeft);
-//     return false;
-//   }
-
-//   Rectangle candidateRectangle = *movingRectangle;
-//   Rectangle bestRectangle = candidateRectangle;
-//   float bestDist = Vector2DistanceSqr(GetTopLeft(targetRectangle), GetTopLeft(candidateRectangle));
-//   for (int ix = 0; ix < xyBounds.xBounds.nbBounds; ix++)
-//   {
-//     for (int iy = 0; iy < xyBounds.yBounds.nbBounds; iy++)
-//     {
-//       Bound yBound = xyBounds.yBounds.bounds[iy];
-//       Bound xBound = xyBounds.xBounds.bounds[ix];
-//       if (yBound.collisionType == FROM_ABOVE)
-//       {
-//         SetBottom(&candidateRectangle, yBound.value);
-//       }
-//       else
-//       {
-//         SetTop(&candidateRectangle, yBound.value);
-//       }
-
-//       if (xBound.collisionType == FROM_LEFT)
-//       {
-//         SetRight(&candidateRectangle, xBound.value);
-//       }
-//       else
-//       {
-//         SetLeft(&candidateRectangle, xBound.value);
-//       }
-
-//       float candidateDist = Vector2DistanceSqr(GetTopLeft(targetRectangle), GetTopLeft(candidateRectangle));
-
-//       if (candidateDist < bestDist)
-//       {
-//         bool noCollision = true;
-
-//         Rectangle *otherRectangle;
-//         world->reinit(world);
-//         while (otherRectangle = world->next(world) != NULL)
-//         {
-//           if (StrictlyCollide(*otherRectangle, candidateRectangle))
-//           {
-//             noCollision = false;
-//             break;
-//           }
-//         }
-//         if (noCollision)
-//         {
-//           bestDist = candidateDist;
-//           bestRectangle = candidateRectangle;
-//         }
-//       }
-//     }
-//   }
-//   SetTopLeft(movingRectangle, GetTopLeft(bestRectangle));
-//   return true;
-// }

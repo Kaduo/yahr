@@ -21,3 +21,4 @@ Rod *CreateRod(const StandardRodFactory *me, int length, float x, float y, Color
 void SetRodServices(Rods *rods, InputService *inputService, HapticService *hapticService);
 void ClearRods(Rods *me);
 void FreeRods(Rods *me);
+void ShuffleRods(Rods *rods, float xMin, float xMax, float yMin, float yMax);
