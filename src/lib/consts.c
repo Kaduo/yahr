@@ -49,9 +49,14 @@ const RodGroup ROD_GROUP_FOR_LENGTH[NB_ROD_LENGTHS] = {
     ROD_GROUP_5_10
 };
 
-uint8_t ComputeOffset(int l) {
+uint8_t NormalizeBikeShedSqrtLog(int l, float min, float max) {
+    return (uint8_t)(sqrt(-log((l+1)/10))*(max-min)/(sqrt(-log(1/10))) + min);
+}
+
+uint8_t ComputeOffset(int l, int maxAmplitude) {
     printf("amplitude : %f\n", (sqrt(-log((l+1.)/10.))*88.9 + 120.));
     return 255 - (uint8_t)(sqrt(-log((l+1)/10.))*102. + 50.);
+    return NormalizeBikeShedSqrtLog(l, 0, 255 - maxAmplitude);
 }
 
 
@@ -59,7 +64,8 @@ uint8_t ComputeAmplitude(int l) {
     // printf("hmm %f\n", log(1./10.));
     // printf("amplitude : %f\n", (sqrt(-log((l+1.)/10.))*88.9 + 120.));
     // return (uint8_t)(sqrt(-log((l+1)/10.))*102. + 100.);
-    return 255 - ComputeOffset(l);
+    // return 255 - ComputeOffset(l);
+    return 130;
 }
 
 
@@ -95,7 +101,7 @@ Signal RodSignalForLength(int l) {
         .angle = ROD_SIGNAL_ANGLE,
         .duration = ROD_SIGNAL_DURATION,
         .duty = ROD_SIGNAL_DUTY,
-        .offset = ComputeOffset(l),
+        .offset = ComputeOffset(l, ComputeAmplitude(0)),
         .period = ComputePeriod(ROD_GROUP_FOR_LENGTH[l]),
         .phase = ROD_SIGNAL_PHASE,
         .pulses = ROD_SIGNAL_PULSES,

@@ -1,9 +1,9 @@
 nbRods 14
 rod
-rect 394.448669 115.937080 30.000000 90.000000 endrect
+rect 450.108734 262.401947 30.000000 90.000000 endrect
 color 255 255 255 255 endcolor
 sig
-amplitude 204
+amplitude 130
 angle 128
 duration 0.000000
 duty 0
@@ -15,10 +15,10 @@ signalShape 4
 endsig
 endrod
 rod
-rect 94.106682 34.257153 30.000000 90.000000 endrect
+rect 407.950195 18.618874 30.000000 90.000000 endrect
 color 255 255 255 255 endcolor
 sig
-amplitude 204
+amplitude 130
 angle 128
 duration 0.000000
 duty 0
@@ -30,10 +30,10 @@ signalShape 4
 endsig
 endrod
 rod
-rect 409.359802 3.506475 30.000000 90.000000 endrect
+rect 668.591980 156.773285 30.000000 90.000000 endrect
 color 253 46 99 255 endcolor
 sig
-amplitude 179
+amplitude 130
 angle 128
 duration 0.000000
 duty 0
@@ -45,10 +45,10 @@ signalShape 4
 endsig
 endrod
 rod
-rect 431.072235 219.856537 30.000000 90.000000 endrect
+rect 323.909027 123.508629 30.000000 90.000000 endrect
 color 41 222 182 255 endcolor
 sig
-amplitude 161
+amplitude 130
 angle 128
 duration 0.000000
 duty 0
@@ -60,10 +60,25 @@ signalShape 4
 endsig
 endrod
 rod
-rect 463.187347 148.420990 30.000000 90.000000 endrect
+rect 443.138885 82.796471 30.000000 90.000000 endrect
+color 41 222 182 255 endcolor
+sig
+amplitude 130
+angle 128
+duration 0.000000
+duty 0
+offset 94
+period 70
+phase 0
+pulses 128
+signalShape 4
+endsig
+endrod
+rod
+rect 258.603394 198.674973 30.000000 90.000000 endrect
 color 253 74 185 255 endcolor
 sig
-amplitude 147
+amplitude 130
 angle 128
 duration 0.000000
 duty 0
@@ -75,10 +90,10 @@ signalShape 4
 endsig
 endrod
 rod
-rect 8.478789 266.019928 30.000000 90.000000 endrect
+rect 179.168930 132.582901 30.000000 90.000000 endrect
 color 253 74 185 255 endcolor
 sig
-amplitude 147
+amplitude 130
 angle 128
 duration 0.000000
 duty 0
@@ -90,10 +105,10 @@ signalShape 4
 endsig
 endrod
 rod
-rect 721.350281 253.867844 30.000000 90.000000 endrect
+rect 86.419388 137.054001 30.000000 90.000000 endrect
 color 238 211 121 255 endcolor
 sig
-amplitude 134
+amplitude 130
 angle 128
 duration 0.000000
 duty 0
@@ -105,25 +120,10 @@ signalShape 4
 endsig
 endrod
 rod
-rect 471.989807 72.417847 30.000000 90.000000 endrect
-color 238 211 121 255 endcolor
-sig
-amplitude 134
-angle 128
-duration 0.000000
-duty 0
-offset 121
-period 200
-phase 0
-pulses 128
-signalShape 4
-endsig
-endrod
-rod
-rect 646.864441 22.332396 30.000000 90.000000 endrect
+rect 28.814743 88.573944 30.000000 90.000000 endrect
 color 17 163 155 255 endcolor
 sig
-amplitude 122
+amplitude 130
 angle 128
 duration 0.000000
 duty 0
@@ -135,10 +135,10 @@ signalShape 4
 endsig
 endrod
 rod
-rect 567.098694 216.842392 30.000000 90.000000 endrect
+rect 34.171539 254.551941 30.000000 90.000000 endrect
 color 62 64 69 255 endcolor
 sig
-amplitude 110
+amplitude 130
 angle 128
 duration 0.000000
 duty 0
@@ -150,25 +150,10 @@ signalShape 4
 endsig
 endrod
 rod
-rect 22.843824 88.461761 30.000000 90.000000 endrect
-color 62 64 69 255 endcolor
-sig
-amplitude 110
-angle 128
-duration 0.000000
-duty 0
-offset 145
-period 4
-phase 0
-pulses 128
-signalShape 4
-endsig
-endrod
-rod
-rect 199.979477 149.476471 30.000000 90.000000 endrect
+rect 296.781281 53.983410 30.000000 90.000000 endrect
 color 177 82 75 255 endcolor
 sig
-amplitude 98
+amplitude 130
 angle 128
 duration 0.000000
 duty 0
@@ -180,10 +165,10 @@ signalShape 4
 endsig
 endrod
 rod
-rect 334.990723 62.356895 30.000000 90.000000 endrect
+rect 640.810303 262.814240 30.000000 90.000000 endrect
 color 50 144 202 255 endcolor
 sig
-amplitude 83
+amplitude 130
 angle 128
 duration 0.000000
 duty 0
@@ -195,10 +180,25 @@ signalShape 4
 endsig
 endrod
 rod
-rect 629.126282 181.396317 30.000000 90.000000 endrect
+rect 401.116150 193.397095 30.000000 90.000000 endrect
 color 216 157 118 255 endcolor
 sig
-amplitude 50
+amplitude 130
+angle 128
+duration 0.000000
+duty 0
+offset 205
+period 200
+phase 0
+pulses 128
+signalShape 4
+endsig
+endrod
+rod
+rect 192.588425 2.103864 30.000000 90.000000 endrect
+color 216 157 118 255 endcolor
+sig
+amplitude 130
 angle 128
 duration 0.000000
 duty 0
