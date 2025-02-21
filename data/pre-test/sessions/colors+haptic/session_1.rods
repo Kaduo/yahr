@@ -1,6 +1,6 @@
 nbRods 14
 rod
-rect 220.017075 139.795273 30.000000 90.000000 endrect
+rect 150.832581 174.605820 30.000000 90.000000 endrect
 color 255 255 255 255 endcolor
 sig
 amplitude 130
@@ -15,7 +15,7 @@ signalShape 4
 endsig
 endrod
 rod
-rect 514.894043 162.528687 30.000000 90.000000 endrect
+rect 270.648468 96.084068 30.000000 90.000000 endrect
 color 253 46 99 255 endcolor
 sig
 amplitude 130
@@ -30,7 +30,7 @@ signalShape 4
 endsig
 endrod
 rod
-rect 695.428162 115.359947 30.000000 90.000000 endrect
+rect 169.038315 235.323151 30.000000 90.000000 endrect
 color 41 222 182 255 endcolor
 sig
 amplitude 130
@@ -45,7 +45,7 @@ signalShape 4
 endsig
 endrod
 rod
-rect 423.514252 179.043472 30.000000 90.000000 endrect
+rect 685.033447 178.432846 30.000000 90.000000 endrect
 color 253 74 185 255 endcolor
 sig
 amplitude 130
@@ -60,7 +60,7 @@ signalShape 4
 endsig
 endrod
 rod
-rect 608.564575 219.638046 30.000000 90.000000 endrect
+rect 404.888306 227.814697 30.000000 90.000000 endrect
 color 238 211 121 255 endcolor
 sig
 amplitude 130
@@ -75,22 +75,7 @@ signalShape 4
 endsig
 endrod
 rod
-rect 15.179238 163.365906 30.000000 90.000000 endrect
-color 238 211 121 255 endcolor
-sig
-amplitude 130
-angle 128
-duration 0.000000
-duty 0
-offset 68
-period 200
-phase 180
-pulses 128
-signalShape 4
-endsig
-endrod
-rod
-rect 153.303757 18.882929 30.000000 90.000000 endrect
+rect 80.050056 80.243065 30.000000 90.000000 endrect
 color 17 163 155 255 endcolor
 sig
 amplitude 130
@@ -105,7 +90,7 @@ signalShape 4
 endsig
 endrod
 rod
-rect 716.097961 163.877365 30.000000 90.000000 endrect
+rect 300.914581 245.734024 30.000000 90.000000 endrect
 color 17 163 155 255 endcolor
 sig
 amplitude 130
@@ -120,7 +105,7 @@ signalShape 4
 endsig
 endrod
 rod
-rect 714.365540 81.684319 30.000000 90.000000 endrect
+rect 90.536774 43.327633 30.000000 90.000000 endrect
 color 62 64 69 255 endcolor
 sig
 amplitude 130
@@ -135,7 +120,7 @@ signalShape 4
 endsig
 endrod
 rod
-rect 380.745361 223.804565 30.000000 90.000000 endrect
+rect 479.804626 7.065504 30.000000 90.000000 endrect
 color 62 64 69 255 endcolor
 sig
 amplitude 130
@@ -150,7 +135,7 @@ signalShape 4
 endsig
 endrod
 rod
-rect 197.518082 224.041245 30.000000 90.000000 endrect
+rect 700.503174 78.550194 30.000000 90.000000 endrect
 color 177 82 75 255 endcolor
 sig
 amplitude 130
@@ -165,7 +150,22 @@ signalShape 4
 endsig
 endrod
 rod
-rect 250.986206 265.678589 30.000000 90.000000 endrect
+rect 290.299652 27.599169 30.000000 90.000000 endrect
+color 177 82 75 255 endcolor
+sig
+amplitude 130
+angle 128
+duration 0.000000
+duty 0
+offset 38
+period 28
+phase 25
+pulses 128
+signalShape 4
+endsig
+endrod
+rod
+rect 524.110229 235.945755 30.000000 90.000000 endrect
 color 50 144 202 255 endcolor
 sig
 amplitude 130
@@ -180,22 +180,22 @@ signalShape 4
 endsig
 endrod
 rod
-rect 312.580109 82.944603 30.000000 90.000000 endrect
-color 50 144 202 255 endcolor
+rect 698.487854 251.705215 30.000000 90.000000 endrect
+color 216 157 118 255 endcolor
 sig
 amplitude 130
 angle 128
 duration 0.000000
 duty 0
-offset 26
-period 70
-phase 63
+offset 0
+period 200
+phase 180
 pulses 128
 signalShape 4
 endsig
 endrod
 rod
-rect 297.747711 4.510338 30.000000 90.000000 endrect
+rect 376.886444 91.418251 30.000000 90.000000 endrect
 color 216 157 118 255 endcolor
 sig
 amplitude 130
