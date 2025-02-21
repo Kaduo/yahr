@@ -51,8 +51,8 @@ const RodGroup ROD_GROUP_FOR_LENGTH[NB_ROD_LENGTHS] = {
 
 uint8_t ComputeAmplitude(int l) {
     // printf("hmm %f\n", log(1./10.));
-    printf("amplitude : %f\n", (sqrt(-log((l+1.)/10.))*141. + 40.));
-    return (uint8_t)(sqrt(-log((l+1)/10.))*141. + 40.);
+    printf("amplitude : %f\n", (sqrt(-log((l+1.)/10.))*114. + 100.));
+    return (uint8_t)(sqrt(-log((l+1)/10.))*102. + 100.);
 }
 
 uint16_t ComputePeriod(RodGroup rodGroup) {
@@ -61,13 +61,13 @@ uint16_t ComputePeriod(RodGroup rodGroup) {
             return 10;
             break;
         case ROD_GROUP_2_4_8:
-            return 30;
+            return 15;
             break;
         case ROD_GROUP_3_6_9:
-            return 90;
+            return 20;
             break;
         case ROD_GROUP_5_10:
-            return 180;
+            return 30;
             break;  
     };
 }
