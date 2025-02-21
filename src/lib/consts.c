@@ -64,10 +64,10 @@ uint16_t ComputePeriod(RodGroup rodGroup) {
             return 25;
             break;
         case ROD_GROUP_3_6_9:
-            return 50;
+            return 60;
             break;
         case ROD_GROUP_5_10:
-            return 100;
+            return 120;
             break;  
     };
 }
