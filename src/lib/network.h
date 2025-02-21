@@ -29,6 +29,7 @@ Vec *ActiveSocket_readMessage(ActiveSocket *me);
 void Server_initAndWaitForConnection(Server *me, char *address, char *port);
 void Server_closeConnection(Server *me);
 void ActiveSocket_closeConnection(ActiveSocket *me);
-void ActiveSocket_connectToServer(ActiveSocket *me, char *address, char *port);
+void ActiveSocket_connectToServer(ActiveSocket *me, char *address, char *port, int flags);
 void ActiveSocket_write(ActiveSocket *me, char *message, uint16_t messageLen);
 void ActiveSocket_writeStr(ActiveSocket *me, char *message);
+void ActiveSocket_writeFile(ActiveSocket *me, char *fileName);

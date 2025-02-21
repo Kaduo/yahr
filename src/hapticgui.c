@@ -14,8 +14,6 @@
 
 #include "raylib.h"
 #include "raymath.h"
-
-#define RAYGUI_IMPLEMENTATION
 #include "raygui.h"
 #include "lib/haptic.h"
 

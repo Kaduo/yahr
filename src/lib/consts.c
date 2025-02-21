@@ -93,3 +93,6 @@ Signal RodSignalForLength(int l) {
         .signalShape = ROD_SIGNAL_SHAPE,
     };
 }
+
+const char *TABLET_IP = "192.168.1.24";
+const char *TABLET_PORT = "34892";

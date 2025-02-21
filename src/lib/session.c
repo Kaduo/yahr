@@ -14,14 +14,12 @@
 // Possibilité de sauvegarder une session
 // Possibilité de sauvegarder les inputs
 
-void Session_loadFromFile(Session *me, char *fileName) {
+
+
+
+void Session_loadFromFile(Session *me, FILE* file) {
     if (me->rods != NULL) {
         FreeRods(me->rods);
-    }
-    FILE *file = fopen(fileName, "r");
-    if (file == NULL) {
-        perror(0);
-        exit(1);
     }
     
     me->rods = ReadRods(file);
@@ -34,13 +32,28 @@ void Session_loadFromFile(Session *me, char *fileName) {
     SetRodServices(me->rods, me->inputService, me->hapticService);
 }
 
-void Session_saveToFile(Session *me, char *fileName) {
+void Session_loadFromFileName(Session *me, char *fileName) {
+    FILE *file = fopen(fileName, "r");
+    if (file == NULL) {
+        perror(0);
+        exit(1);
+    }
+    Session_loadFromFile(me, file);
+}
+
+void Session_saveToFile(Session *me, FILE *file) {
+    WriteRods(file, me->rods);
+}
+
+void Session_saveToFileName(Session *me, char *fileName) {
     FILE *file = fopen(fileName, "w");
     if (file == NULL) {
         perror(0);
         exit(1);
     }
-    WriteRods(file, me->rods);
+
+    Session_saveToFile(me, file);
+
     if (fclose(file) != 0) {
         perror(0);
         exit(1);
@@ -63,16 +76,6 @@ Session NewSession(InputService *inputService, HapticService *hapticService) {
 const char *SESSION_FILE_EXTENSION = ".rods";
 
 
-// Une par user.
-// TODO : trouver un meilleur nom.
-typedef struct SessionList {
-    Session session;
-    char *sessionFolderPath; // path to the directory that contains the .rods files, must end with "/"
-    char *userFolderPath;
-    int sessionId;
-    unsigned userId;
-    unsigned nbSessions;
-} SessionList;
 
 const unsigned MAX_PATH_LEN = 50;
 
@@ -97,7 +100,7 @@ char *ConstructSessionPath(char *parentFolderPath, int sessionId, char *buf) {
     return buf;
 }
 
-SessionList NewSessionList(char *sessionFolderPath, char *saveFolderPath, unsigned userId, unsigned nbSessions, InputService *inputService, HapticService *hapticService) {
+SessionList NewSessionList(char *sessionFolderPath, char *saveFolderPath, int userId, int nbSessions, InputService *inputService, HapticService *hapticService) {
 
     SessionList sessionList = (SessionList){
         .session = NewSession(inputService, hapticService),
@@ -118,18 +121,20 @@ SessionList NewSessionList(char *sessionFolderPath, char *saveFolderPath, unsign
 void SessionList_loadCurrentSession(SessionList *me) {
     char sessionPath[MAX_PATH_LEN];
     ConstructSessionPath(me->sessionFolderPath, me->sessionId, sessionPath);
-    Session_loadFromFile(&me->session, sessionPath);
+    printf("CURRENT SESSION FILENAME : %s\n", sessionPath);
+    Session_loadFromFileName(&me->session, sessionPath);
 }
 
 void SessionList_saveCurrentSession(SessionList *me) {
     char savePath[MAX_PATH_LEN];
     ConstructSessionPath(me->userFolderPath, me->sessionId, savePath);
-    Session_saveToFile(&me->session, savePath);
+    Session_saveToFileName(&me->session, savePath);
 }
 
 bool SessionList_loadNextSession(SessionList *me) {
     
     if (me->sessionId >= me->nbSessions - 1) {
+        printf("whaa! %d %d\n", me->sessionId, me->nbSessions - 1);
         return false;
     }
 

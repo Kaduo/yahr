@@ -1,25 +1,30 @@
 #include "utils.h"
+#include "stdio.h"
+#include "stdlib.h"
 
-// TODO ;  pas très utile, delete me...
+char *ReadFile(char *filename) {
+    char * buffer = 0;
+    long length;
+    FILE *f = fopen (filename, "rb");
 
-unsigned powi(unsigned base, unsigned exp) {
-    unsigned res = 1;
-    while (exp) {
-        if (exp%2) {
-            res *= base;
+    if (f)
+    {
+        fseek (f, 0, SEEK_END);
+        length = ftell (f);
+        fseek (f, 0, SEEK_SET);
+        buffer = malloc (length + 1);
+        if (buffer)
+        {
+            fread(buffer, 1, length, f);
         }
-        exp /= 2;
-        base *= base;
+        fclose (f);
     }
-    return res;
-}
 
-unsigned rawBytesToUnsignedInt(char *bytes, unsigned nbBytes) {
-    unsigned res = 0;
-    unsigned base = 1;
-    for (int i =0; i < nbBytes; i++) {
-        res += base*bytes[i];
-        base *= 2;
+    if (buffer)
+    {
+        buffer[length] = '\0';
+        return buffer;
+    } else {
+        return NULL;
     }
-    return res;
 }
