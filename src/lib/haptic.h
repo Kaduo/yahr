@@ -17,7 +17,7 @@ typedef enum SignalShape {
 
 typedef struct Signal {
     SignalShape signalShape;
-    uint16_t period;
+    uint16_t period; // 0 is a bugged value and therefore should never be used
     uint8_t amplitude;
     uint8_t duty;
     uint8_t offset;
