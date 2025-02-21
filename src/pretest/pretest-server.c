@@ -49,7 +49,9 @@ int main(void) {
     InputService inputService = NewPhysicalInputService();
     PhysicalHapticDriver hapticDriver = NewPhysicalHapticDriver(&inputService);
     HapticService hapticService = NewHapticService((HapticDriver*)&hapticDriver);
-    SessionList sessionList = NewSessionList("data/pre-test/sessions/colors+haptic+length/", "data/pre-test/results/colors+haptic/", 0, 10, &inputService, &hapticService);
+    // SessionList sessionList = NewSessionList("data/pre-test/sessions/colors+haptic+length/", "data/pre-test/results/colors+haptic/", 0, 10, &inputService, &hapticService);
+    SessionList sessionList = NewSessionList("data/pre-test/sessions/haptic/", "data/pre-test/results/haptic/", 0, 10, &inputService, &hapticService);
+
     SessionList_loadNextSession(&sessionList);
     
     // ToggleFullscreen(); // TODO : uncomment me ?
