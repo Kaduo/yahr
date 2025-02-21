@@ -166,7 +166,11 @@ void HapticDriver_update(HapticDriver *me, float frameTime) {
         } else {
             intSpeed = (uint16_t)floatSpeed;
         }
-        me->setDirection(me, 0, intSpeed);
+
+        float floatAngle = Vector2Angle((Vector2){.x=1, .y=0}, mouseDelta); // Between -pi and pi
+        uint8_t intAngle = (uint8_t)((floatAngle + PI)*127/(2*PI)); // normalize so that it falls between 0 and 127
+        printf("%f %d\n", floatAngle, intAngle);
+        me->setDirection(me, intAngle, intSpeed);
     }
 };
 

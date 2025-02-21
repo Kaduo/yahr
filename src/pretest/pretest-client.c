@@ -6,10 +6,16 @@
 #include "libinetsocket.h"
 #include "arpa/inet.h"
 
-int main(void) {
+int main(int argc, char *argv[]) {
+
+    // if (argc <= 1) {
+    //     fprintf(stderr, "Please enter the port number of the server you are trying to connect to!\n");
+    // }
+
 
     ActiveSocket socket = NewActiveSocket();
     ActiveSocket_connectToServer(&socket, TABLET_IP, TABLET_PORT, SOCK_NONBLOCK);
+
 
     SetTraceLogLevel(LOG_ERROR);
     InitWindow(GetScreenWidth(), GetScreenHeight(), "layout_name");
@@ -27,7 +33,7 @@ int main(void) {
         BeginDrawing();
             ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR))); 
 
-            GuiLabel((Rectangle){ GetScreenHeight()/2, GetScreenWidth()/2, 100, 100 },
+            GuiLabel((Rectangle){ GetScreenHeight()/2, GetScreenWidth()/2, 1000000, 100 },
             "Triez les réglettes par similarité.");
         EndDrawing();
     }

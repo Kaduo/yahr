@@ -8,7 +8,7 @@ const Color ROD_COLOR_FOR_LENGTH[10] = {
                                         WHITE,                  // WHITE
                                         {253, 46, 99, 255},     // RED 
                                         {41, 222, 182, 255},    // LIGHT GREEN
-                                        {253, 74, 185, 255},    // FUSCHIA,
+                                        {253, 74, 185, 255},    // FUSCHIA
                                         {238, 211, 121, 255},   // JAUNE
                                         {17, 163, 155, 255},    // DARK GREEN
                                         {62, 64, 69, 255},      // BLACK

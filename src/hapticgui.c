@@ -58,10 +58,10 @@ int main()
     float dutySliderValue = 0.0f;
     float offsetSliderValue = 0.0f;
     float phaseSliderValue = 0.0f;
-    float angleSliderValue = 0.0f;
-    float pulsesSliderValue = 0.0f;
-    float globalSpeedSliderValue = 0.0f;
-    float globalAngleSliderValue = 0.0f;
+    float angleSliderValue = 128.0f;
+    float pulsesSliderValue = 128.0f;
+
+    int signalToggleValue = 0;
 
     char amplitudeValueDisplay[10];
     char periodValueDisplay[10];
@@ -76,6 +76,8 @@ int main()
     const int SLIDER_WIDTH = 300;
     const int SLIDER_HEIGHT = 20;
     const int SLIDER_GAP = 10;
+
+    const SignalShape signalShapes[] = {SignalShape_SINE, SignalShape_STEADY, SignalShape_FRONT_TEETH, SignalShape_BACK_TEETH, SignalShape_TRIANGLE};
 
     SetTargetFPS(60);
     //--------------------------------------------------------------------------------------
@@ -116,6 +118,10 @@ int main()
             sig.pulses = (unsigned)pulsesSliderValue;
             sigChanged = true;
         }
+        if (signalShapes[signalToggleValue] != sig.signalShape) {
+            sig.signalShape = signalShapes[signalToggleValue];
+            sigChanged = true;
+        }
 
         if (sigChanged) {
             HapticService_playSignal(&hapticService, sig);
@@ -148,13 +154,13 @@ int main()
                     // raygui: controls drawing
             //----------------------------------------------------------------------------------
             GuiSlider((Rectangle){ anchor.x, anchor.y + 0*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "amplitude", amplitudeValueDisplay, &amplitudeSliderValue, 0, 255);
-            GuiSlider((Rectangle){ anchor.x, anchor.y + 1*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "period", periodValueDisplay, &periodSliderValue, 0, 400); // TODO FIXME ?
+            GuiSlider((Rectangle){ anchor.x, anchor.y + 1*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "period", periodValueDisplay, &periodSliderValue, 0, 200); // TODO FIXME ?
             GuiSlider((Rectangle){ anchor.x, anchor.y + 2*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "duty", dutyValueDisplay, &dutySliderValue, 0, 255);
             GuiSlider((Rectangle){ anchor.x, anchor.y + 3*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "offset", offsetValueDisplay, &offsetSliderValue, 0, 255);
             GuiSlider((Rectangle){ anchor.x, anchor.y + 4*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "phase", phaseValueDisplay, &phaseSliderValue, 0, 65535);
             GuiSlider((Rectangle){ anchor.x, anchor.y + 5*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "angle", angleValueDisplay, &angleSliderValue, 0, 128);
             GuiSlider((Rectangle){ anchor.x, anchor.y + 6*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "pulses", pulsesValueDisplay, &pulsesSliderValue, 0, 128);
-            GuiLabel((Rectangle){ anchor.x, anchor.y + 7*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, globalSpeedValueDisplay);
+            GuiToggleGroup((Rectangle){ anchor.x - 100, anchor.y + 8*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH * 0.8, 2*SLIDER_HEIGHT}, "SINE;STEADY;FRONT_TEETH;BACK_TEETH;TRIANGLE", &signalToggleValue);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
