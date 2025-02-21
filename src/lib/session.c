@@ -123,6 +123,7 @@ void SessionList_loadCurrentSession(SessionList *me) {
     ConstructSessionPath(me->sessionFolderPath, me->sessionId, sessionPath);
     printf("CURRENT SESSION FILENAME : %s\n", sessionPath);
     Session_loadFromFileName(&me->session, sessionPath);
+    printf("success loading no ?\n");
 }
 
 void SessionList_saveCurrentSession(SessionList *me) {
