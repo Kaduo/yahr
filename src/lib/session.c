@@ -36,6 +36,7 @@ void Session_loadFromFileName(Session *me, char *fileName) {
     FILE *file = fopen(fileName, "r");
     if (file == NULL) {
         perror(0);
+        printf("HMMM %s\n", fileName);
         exit(1);
     }
     Session_loadFromFile(me, file);
@@ -77,7 +78,7 @@ const char *SESSION_FILE_EXTENSION = ".rods";
 
 
 
-const unsigned MAX_PATH_LEN = 50;
+const unsigned MAX_PATH_LEN = 100;
 
 
 char *ConstructUserFolderPath(char *baseSaveFolderPath, unsigned userId, char *buf) {
