@@ -9,7 +9,7 @@
 int main(void) {
 
     ActiveSocket socket = NewActiveSocket();
-    ActiveSocket_connectToServer(&socket, "localhost", TABLET_PORT, SOCK_NONBLOCK);
+    ActiveSocket_connectToServer(&socket, TABLET_IP, TABLET_PORT, SOCK_NONBLOCK);
 
     SetTraceLogLevel(LOG_ERROR);
     InitWindow(GetScreenWidth(), GetScreenHeight(), "layout_name");

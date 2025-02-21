@@ -1,7 +1,9 @@
-CC := "zig cc"
-CC_ARGS := "-I/usr/include/libsocket -Isrc/lib -Ipretest/lib src/lib/*.c -Isrc/external -lraylib -lsocket -lGL -lm -lpthread -ldl -lrt -lX11 -Wall -std=gnu11"
-BUILD_DIR := "build"
 
+cflags := " "
+
+CC := "zig cc"
+CC_ARGS := "-I/usr/include/libsocket -Isrc/lib -Ipretest/lib src/lib/*.c -Isrc/external -lraylib -lsocket -lGL -lm -lpthread -ldl -lrt -lX11 -Wall -std=gnu11" + " " + cflags
+BUILD_DIR := "build"
 
 build:
     {{CC}} {{CC_ARGS}} src/main.c -o {{BUILD_DIR}}/haptic_rods

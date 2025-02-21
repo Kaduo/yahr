@@ -94,5 +94,9 @@ Signal RodSignalForLength(int l) {
     };
 }
 
+#ifndef DEBUG
 const char *TABLET_IP = "192.168.1.24";
+#else
+const char *TABLET_IP = "localhost";
+#endif
 const char *TABLET_PORT = "34892";
