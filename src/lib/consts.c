@@ -58,16 +58,16 @@ uint8_t ComputeAmplitude(int l) {
 uint16_t ComputePeriod(RodGroup rodGroup) {
     switch (rodGroup) {
         case ROD_GROUP_1_7:
-            return 10;
+            return 5;
             break;
         case ROD_GROUP_2_4_8:
-            return 25;
+            return 20;
             break;
         case ROD_GROUP_3_6_9:
-            return 60;
+            return 50;
             break;
         case ROD_GROUP_5_10:
-            return 120;
+            return 100;
             break;  
     };
 }
