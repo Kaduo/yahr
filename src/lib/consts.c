@@ -125,11 +125,11 @@ const char *TABLET_PORT = "34689";
 const Signal IMPULSE_SIGNAL = {
     .amplitude = 255,
     .angle = 128,
-    .duration = 0.05,
+    .duration = 0.0001,
     .duty = 0,
     .offset = 255,
     .period = 1,
-    .pulses = 128,
+    .pulses = 1,
     .signalShape = SignalShape_BACK_TEETH,
 };
 
