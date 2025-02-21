@@ -116,4 +116,29 @@ const char *TABLET_IP = "192.168.1.24";
 #else
 const char *TABLET_IP = "localhost";
 #endif
+
 const char *TABLET_PORT = "34989";
+
+const Signal IMPULSE_SIGNAL = {
+    .amplitude = 255,
+    .angle = 128,
+    .duration = 0.2,
+    .duty = 0,
+    .offset = 255,
+    .period = 1,
+    .pulses = 128,
+    .signalShape = SignalShape_STEADY,
+};
+
+
+
+const Signal COLLISION_SIGNAL = {
+    .amplitude = 0,
+    .angle = -1,
+    .duration = 0,
+    .duty = 0,
+    .offset = 0,
+    .period = 0,
+    .pulses = -1,
+    .signalShape = SignalShape_STEADY,
+};

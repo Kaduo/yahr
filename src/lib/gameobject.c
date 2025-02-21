@@ -8,6 +8,7 @@
 #include "gameobject.h"
 #include "stdio.h"
 #include "haptic.h"
+#include "consts.h"
 
 typedef struct SelectableObject SelectableObject;
 typedef struct SelectionComponent SelectionComponent;
@@ -426,28 +427,6 @@ void RodHapticComponent_selectionStatusChangedCallback(SelectionObserver *_me, b
     }
     me->colliding = false;
 }
-
-const Signal IMPULSE_SIGNAL = {
-    .amplitude = 255,
-    .angle = 128,
-    .duration = 0.2,
-    .duty = 0,
-    .offset = 255,
-    .period = 1,
-    .pulses = 128,
-    .signalShape = SignalShape_STEADY,
-};
-
-const Signal COLLISION_SIGNAL = {
-    .amplitude = 0,
-    .angle = -1,
-    .duration = 0,
-    .duty = 0,
-    .offset = 0,
-    .period = 0,
-    .pulses = -1,
-    .signalShape = SignalShape_STEADY,
-};
 
 void RodHapticComponent_collidedOrNotCallback(CollisionObserver *_me, bool collided) {
     RodHapticComponent *me = (RodHapticComponent*)_me;

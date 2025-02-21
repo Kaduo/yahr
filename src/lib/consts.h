@@ -12,3 +12,5 @@ extern const Color ROD_COLOR_FOR_LENGTH[NB_ROD_LENGTHS];
 Signal RodSignalForLength(int l);
 extern const char *TABLET_IP;
 extern const char *TABLET_PORT;
+extern const Signal IMPULSE_SIGNAL;
+extern const Signal COLLISION_SIGNAL;
