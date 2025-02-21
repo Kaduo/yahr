@@ -1,8 +1,8 @@
 
-cflags := " "
+cflags := ""
 
 CC := "zig cc"
-CC_ARGS := "-I/usr/include/libsocket -Isrc/lib -Ipretest/lib src/lib/*.c -Isrc/external -lraylib -lsocket -lGL -lm -lpthread -ldl -lrt -lX11 -Wall -std=gnu11" + " " + cflags
+CC_ARGS := "-I/usr/include/libsocket -Isrc/lib -Ipretest/lib src/lib/*.c -Isrc/external -lraylib -lsocket -lGL -lm -lpthread -ldl -lrt -lX11 -Wall -std=c23" + " " + cflags
 BUILD_DIR := "build"
 
 build:

@@ -134,7 +134,6 @@ const Signal IMPULSE_SIGNAL = {
 };
 
 
-
 const Signal COLLISION_SIGNAL = {
     .amplitude = 0,
     .angle = 128,
