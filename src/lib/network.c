@@ -122,6 +122,8 @@ void Server_initAndWaitForConnection(Server *me, char *address, char *port) {
 
     // Block until a connection is made.
     while (me->super.pfd < 0) {
+        printf("hmmm!\n");
+        perror(0);
         me->super.pfd = accept_inet_stream_socket(me->sfd, 0, 0, 0, 0, 0, SOCK_NONBLOCK);
     }
 
@@ -152,6 +154,7 @@ void ActiveSocket_connectToServer(ActiveSocket *me, char *address, char *port, i
     me->pfd = create_inet_stream_socket(address, port, LIBSOCKET_IPv4, 0);
 
     while (me->pfd < 0) {
+        perror(0);
         me->pfd = create_inet_stream_socket(address, port, LIBSOCKET_IPv4, flags);
     }
     printf("got out!\n");
