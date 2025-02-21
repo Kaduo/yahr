@@ -172,7 +172,7 @@ void HapticDriver_update(HapticDriver *me, float frameTime) {
         printf("%f %d\n", floatAngle, intAngle);
         // me->setDirection(me, intAngle, intSpeed);
 
-        if (floatSpeed > 0) {
+        if (floatSpeed > EPSILON) {
             me->setDirection(me, intAngle, intSpeed);
         } else {
             me->setDirection(me, 0, 0);
