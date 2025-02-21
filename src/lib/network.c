@@ -126,6 +126,7 @@ void Server_initAndWaitForConnection(Server *me, char *address, char *port) {
         perror(0);
         me->super.pfd = accept_inet_stream_socket(me->sfd, 0, 0, 0, 0, 0, SOCK_NONBLOCK);
     }
+    print("there (:\n)");
 
     // if (me->super.pfd < 0) {
     //     perror(0);
