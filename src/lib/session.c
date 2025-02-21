@@ -36,9 +36,11 @@ void Session_loadFromFileName(Session *me, char *fileName) {
     FILE *file = fopen(fileName, "r");
     if (file == NULL) {
         perror(0);
+        printf("HMMMM\n");
         printf("HMMM %s\n", fileName);
         exit(1);
     }
+    printf("oh no wait\n");
     Session_loadFromFile(me, file);
 }
 
