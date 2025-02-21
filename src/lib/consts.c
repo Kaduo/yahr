@@ -49,11 +49,20 @@ const RodGroup ROD_GROUP_FOR_LENGTH[NB_ROD_LENGTHS] = {
     ROD_GROUP_5_10
 };
 
+uint8_t ComputeOffset(int l) {
+    printf("amplitude : %f\n", (sqrt(-log((l+1.)/10.))*88.9 + 120.));
+    return 255 - (uint8_t)(sqrt(-log((l+1)/10.))*102. + 50.);
+}
+
+
 uint8_t ComputeAmplitude(int l) {
     // printf("hmm %f\n", log(1./10.));
-    printf("amplitude : %f\n", (sqrt(-log((l+1.)/10.))*88.9 + 120.));
-    return (uint8_t)(sqrt(-log((l+1)/10.))*102. + 100.);
+    // printf("amplitude : %f\n", (sqrt(-log((l+1.)/10.))*88.9 + 120.));
+    // return (uint8_t)(sqrt(-log((l+1)/10.))*102. + 100.);
+    return 255 - ComputeOffset(l);
 }
+
+
 
 uint16_t ComputePeriod(RodGroup rodGroup) {
     switch (rodGroup) {
@@ -86,7 +95,7 @@ Signal RodSignalForLength(int l) {
         .angle = ROD_SIGNAL_ANGLE,
         .duration = ROD_SIGNAL_DURATION,
         .duty = ROD_SIGNAL_DUTY,
-        .offset = ROD_SIGNAL_OFFSET,
+        .offset = ComputeOffset(l),
         .period = ComputePeriod(ROD_GROUP_FOR_LENGTH[l]),
         .phase = ROD_SIGNAL_PHASE,
         .pulses = ROD_SIGNAL_PULSES,

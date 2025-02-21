@@ -1,13 +1,13 @@
 nbRods 14
 rod
-rect 528.630493 70.058746 30.000000 90.000000 endrect
+rect 697.541809 258.230133 30.000000 90.000000 endrect
 color 255 255 255 255 endcolor
 sig
-amplitude 254
+amplitude 204
 angle 128
 duration 0.000000
 duty 0
-offset 0
+offset 51
 period 4
 phase 0
 pulses 128
@@ -15,14 +15,14 @@ signalShape 4
 endsig
 endrod
 rod
-rect 169.179871 138.071960 30.000000 90.000000 endrect
+rect 191.826965 134.977249 30.000000 90.000000 endrect
 color 255 255 255 255 endcolor
 sig
-amplitude 229
+amplitude 179
 angle 128
 duration 0.000000
 duty 0
-offset 0
+offset 76
 period 28
 phase 0
 pulses 128
@@ -30,14 +30,44 @@ signalShape 4
 endsig
 endrod
 rod
-rect 404.378632 175.127182 30.000000 90.000000 endrect
+rect 569.136597 193.390656 30.000000 90.000000 endrect
 color 255 255 255 255 endcolor
 sig
-amplitude 211
+amplitude 179
 angle 128
 duration 0.000000
 duty 0
-offset 0
+offset 76
+period 28
+phase 0
+pulses 128
+signalShape 4
+endsig
+endrod
+rod
+rect 399.410767 48.716660 30.000000 90.000000 endrect
+color 255 255 255 255 endcolor
+sig
+amplitude 179
+angle 128
+duration 0.000000
+duty 0
+offset 76
+period 28
+phase 0
+pulses 128
+signalShape 4
+endsig
+endrod
+rod
+rect 36.739792 183.835175 30.000000 90.000000 endrect
+color 255 255 255 255 endcolor
+sig
+amplitude 161
+angle 128
+duration 0.000000
+duty 0
+offset 94
 period 70
 phase 0
 pulses 128
@@ -45,29 +75,14 @@ signalShape 4
 endsig
 endrod
 rod
-rect 623.473083 68.650063 30.000000 90.000000 endrect
+rect 538.851929 248.855209 30.000000 90.000000 endrect
 color 255 255 255 255 endcolor
 sig
-amplitude 211
+amplitude 147
 angle 128
 duration 0.000000
 duty 0
-offset 0
-period 70
-phase 0
-pulses 128
-signalShape 4
-endsig
-endrod
-rod
-rect 28.245434 41.701199 30.000000 90.000000 endrect
-color 255 255 255 255 endcolor
-sig
-amplitude 197
-angle 128
-duration 0.000000
-duty 0
-offset 0
+offset 108
 period 28
 phase 0
 pulses 128
@@ -75,29 +90,14 @@ signalShape 4
 endsig
 endrod
 rod
-rect 656.181824 268.373474 30.000000 90.000000 endrect
+rect 423.187103 137.701080 30.000000 90.000000 endrect
 color 255 255 255 255 endcolor
 sig
-amplitude 197
+amplitude 134
 angle 128
 duration 0.000000
 duty 0
-offset 0
-period 28
-phase 0
-pulses 128
-signalShape 4
-endsig
-endrod
-rod
-rect 409.621124 229.701492 30.000000 90.000000 endrect
-color 255 255 255 255 endcolor
-sig
-amplitude 184
-angle 128
-duration 0.000000
-duty 0
-offset 0
+offset 121
 period 200
 phase 0
 pulses 128
@@ -105,14 +105,29 @@ signalShape 4
 endsig
 endrod
 rod
-rect 461.830994 132.205383 30.000000 90.000000 endrect
+rect 674.911194 159.075562 30.000000 90.000000 endrect
 color 255 255 255 255 endcolor
 sig
-amplitude 172
+amplitude 134
 angle 128
 duration 0.000000
 duty 0
-offset 0
+offset 121
+period 200
+phase 0
+pulses 128
+signalShape 4
+endsig
+endrod
+rod
+rect 305.420654 66.443764 30.000000 90.000000 endrect
+color 255 255 255 255 endcolor
+sig
+amplitude 122
+angle 128
+duration 0.000000
+duty 0
+offset 133
 period 70
 phase 0
 pulses 128
@@ -120,14 +135,14 @@ signalShape 4
 endsig
 endrod
 rod
-rect 530.199402 245.789688 30.000000 90.000000 endrect
+rect 81.962227 44.658947 30.000000 90.000000 endrect
 color 255 255 255 255 endcolor
 sig
-amplitude 160
+amplitude 110
 angle 128
 duration 0.000000
 duty 0
-offset 0
+offset 145
 period 4
 phase 0
 pulses 128
@@ -135,14 +150,29 @@ signalShape 4
 endsig
 endrod
 rod
-rect 33.743645 174.299347 30.000000 90.000000 endrect
+rect 602.589844 94.306702 30.000000 90.000000 endrect
 color 255 255 255 255 endcolor
 sig
-amplitude 148
+amplitude 110
 angle 128
 duration 0.000000
 duty 0
-offset 0
+offset 145
+period 4
+phase 0
+pulses 128
+signalShape 4
+endsig
+endrod
+rod
+rect 408.981873 105.221405 30.000000 90.000000 endrect
+color 255 255 255 255 endcolor
+sig
+amplitude 98
+angle 128
+duration 0.000000
+duty 0
+offset 157
 period 28
 phase 0
 pulses 128
@@ -150,44 +180,14 @@ signalShape 4
 endsig
 endrod
 rod
-rect 386.982391 12.248199 30.000000 90.000000 endrect
+rect 181.711472 213.612396 30.000000 90.000000 endrect
 color 255 255 255 255 endcolor
 sig
-amplitude 148
+amplitude 83
 angle 128
 duration 0.000000
 duty 0
-offset 0
-period 28
-phase 0
-pulses 128
-signalShape 4
-endsig
-endrod
-rod
-rect 637.782959 14.121133 30.000000 90.000000 endrect
-color 255 255 255 255 endcolor
-sig
-amplitude 148
-angle 128
-duration 0.000000
-duty 0
-offset 0
-period 28
-phase 0
-pulses 128
-signalShape 4
-endsig
-endrod
-rod
-rect 634.340637 164.988449 30.000000 90.000000 endrect
-color 255 255 255 255 endcolor
-sig
-amplitude 133
-angle 128
-duration 0.000000
-duty 0
-offset 0
+offset 172
 period 70
 phase 0
 pulses 128
@@ -195,14 +195,14 @@ signalShape 4
 endsig
 endrod
 rod
-rect 225.726776 29.655451 30.000000 90.000000 endrect
+rect 649.579468 10.012415 30.000000 90.000000 endrect
 color 255 255 255 255 endcolor
 sig
-amplitude 100
+amplitude 50
 angle 128
 duration 0.000000
 duty 0
-offset 0
+offset 205
 period 200
 phase 0
 pulses 128
