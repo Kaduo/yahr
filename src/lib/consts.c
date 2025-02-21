@@ -50,12 +50,14 @@ const RodGroup ROD_GROUP_FOR_LENGTH[NB_ROD_LENGTHS] = {
 };
 
 uint8_t NormalizeBikeShedSqrtLog(int l, float min, float max) {
-    return (uint8_t)(sqrt(-log((l+1)/10))*(max-min)/(sqrt(-log(1/10))) + min);
+    printf("blablabla %f\n",(max-min)/(sqrt(-log(1./10.))));
+    printf("hophop %f\n", sqrt(-log((l+1)/10))*(max-min)/(sqrt(-log(1./10))) + min);
+    return (uint8_t)(sqrt(-log((l+1.)/10.))*(max-min)/(sqrt(-log(1./10.))) + min);
 }
 
 uint8_t ComputeOffset(int l, int maxAmplitude) {
     printf("amplitude : %f\n", (sqrt(-log((l+1.)/10.))*88.9 + 120.));
-    return 255 - (uint8_t)(sqrt(-log((l+1)/10.))*102. + 50.);
+    // return 255 - (uint8_t)(sqrt(-log((l+1)/10.))*102. + 50.);
     return NormalizeBikeShedSqrtLog(l, 0, 255 - maxAmplitude);
 }
 
