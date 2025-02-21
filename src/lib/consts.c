@@ -58,7 +58,7 @@ uint8_t ComputeAmplitude(int l) {
 uint16_t ComputePeriod(RodGroup rodGroup) {
     switch (rodGroup) {
         case ROD_GROUP_1_7:
-            return 5;
+            return 10;
             break;
         case ROD_GROUP_2_4_8:
             return 20;
@@ -72,7 +72,7 @@ uint16_t ComputePeriod(RodGroup rodGroup) {
     };
 }
 
-const SignalShape ROD_SIGNAL_SHAPE = SignalShape_SINE;
+const SignalShape ROD_SIGNAL_SHAPE = SignalShape_FRONT_TEETH;
 const uint8_t ROD_SIGNAL_OFFSET = 0;
 const uint8_t ROD_SIGNAL_DUTY = 0;
 const uint8_t ROD_SIGNAL_PULSES = 128;
