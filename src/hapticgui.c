@@ -41,7 +41,7 @@ int main()
     //----------------------------------------------------------------------------------
     Vector2 anchor = { 200, 50 };
 
-    Signal sig = (Signal){.signalShape = SignalShape_SINE};
+    Signal sig = (Signal){.signalShape = SignalShape_SINE, .period = 1};
 
     InputService inputService = NewPhysicalInputService();
 
