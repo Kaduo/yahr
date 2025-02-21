@@ -89,11 +89,14 @@ uint16_t ComputePeriod(RodGroup rodGroup) {
     };
 }
 
+uint16_t ComputePhase(uint16_t period) {
+    return (uint16_t)(0.9 * period);
+}
+
 const SignalShape ROD_SIGNAL_SHAPE = SignalShape_FRONT_TEETH;
 const uint8_t ROD_SIGNAL_OFFSET = 0;
 const uint8_t ROD_SIGNAL_DUTY = 0;
 const uint8_t ROD_SIGNAL_PULSES = 128;
-const uint16_t ROD_SIGNAL_PHASE = 0;
 const uint8_t ROD_SIGNAL_ANGLE = 128;
 const float ROD_SIGNAL_DURATION = 0.;
 
@@ -105,7 +108,7 @@ Signal RodSignalForLength(int l) {
         .duty = ROD_SIGNAL_DUTY,
         .offset = ComputeOffset(l, ComputeAmplitude(0)),
         .period = ComputePeriod(ROD_GROUP_FOR_LENGTH[l]),
-        .phase = ROD_SIGNAL_PHASE,
+        .phase = ComputePhase(ComputePeriod(ROD_GROUP_FOR_LENGTH[l])),
         .pulses = ROD_SIGNAL_PULSES,
         .signalShape = ROD_SIGNAL_SHAPE,
     };
@@ -122,23 +125,23 @@ const char *TABLET_PORT = "34989";
 const Signal IMPULSE_SIGNAL = {
     .amplitude = 255,
     .angle = 128,
-    .duration = 0.2,
+    .duration = 0.1,
     .duty = 0,
     .offset = 255,
     .period = 1,
     .pulses = 128,
-    .signalShape = SignalShape_STEADY,
+    .signalShape = SignalShape_BACK_TEETH,
 };
 
 
 
 const Signal COLLISION_SIGNAL = {
     .amplitude = 0,
-    .angle = -1,
+    .angle = 128,
     .duration = 0,
     .duty = 0,
     .offset = 0,
-    .period = 0,
-    .pulses = -1,
+    .period = 1,
+    .pulses = 128,
     .signalShape = SignalShape_STEADY,
 };
