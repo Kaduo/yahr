@@ -429,12 +429,12 @@ void RodHapticComponent_selectionStatusChangedCallback(SelectionObserver *_me, b
 
 const Signal IMPULSE_SIGNAL = {
     .amplitude = 255,
-    .angle = -1,
-    .duration = 0.1,
+    .angle = 128,
+    .duration = 0.2,
     .duty = 0,
     .offset = 255,
-    .period = 255,
-    .pulses = -1,
+    .period = 1,
+    .pulses = 128,
     .signalShape = SignalShape_STEADY,
 };
 
