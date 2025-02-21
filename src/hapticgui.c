@@ -16,6 +16,7 @@
 #include "raymath.h"
 #include "raygui.h"
 #include "lib/haptic.h"
+#include "consts.h"
 
 //----------------------------------------------------------------------------------
 // Controls Functions Declaration
@@ -29,12 +30,10 @@ int main()
 {
     // Initialization
     //---------------------------------------------------------------------------------------
-    int screenWidth = 1000;
-    int screenHeight = 600;
 
 
     SetTraceLogLevel(LOG_ERROR);
-    InitWindow(screenWidth, screenHeight, "layout_name");
+    InitWindow(TABLET_WIDTH, TABLET_HEIGHT, "layout_name");
     GuiSetStyle(DEFAULT, TEXT_SIZE, 30);
 
 
@@ -82,7 +81,7 @@ int main()
     SetTargetFPS(60);
     //--------------------------------------------------------------------------------------
 
-    ToggleFullscreen();
+    // ToggleFullscreen();
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
@@ -160,7 +159,7 @@ int main()
             GuiSlider((Rectangle){ anchor.x, anchor.y + 4*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "phase", phaseValueDisplay, &phaseSliderValue, 0, 65535);
             GuiSlider((Rectangle){ anchor.x, anchor.y + 5*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "angle", angleValueDisplay, &angleSliderValue, 0, 128);
             GuiSlider((Rectangle){ anchor.x, anchor.y + 6*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH, SLIDER_HEIGHT }, "pulses", pulsesValueDisplay, &pulsesSliderValue, 0, 128);
-            GuiToggleGroup((Rectangle){ anchor.x - 100, anchor.y + 8*(SLIDER_HEIGHT+SLIDER_GAP), SLIDER_WIDTH * 0.8, 2*SLIDER_HEIGHT}, "SINE;STEADY;FRONT_TEETH;BACK_TEETH;TRIANGLE", &signalToggleValue);
+            GuiComboBox((Rectangle){ anchor.x - 100, anchor.y + 8*(SLIDER_HEIGHT+SLIDER_GAP), 1.5*SLIDER_WIDTH, 3*SLIDER_HEIGHT}, "SINE;STEADY;FRONT_TEETH;BACK_TEETH;TRIANGLE", &signalToggleValue);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
