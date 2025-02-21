@@ -104,6 +104,7 @@ int main(void) {
         if (sessionList.session.rods != NULL) {
             UpdateRods(sessionList.session.rods);
         }
+        HapticService_update(&hapticService, GetFrameTime());
         BeginDrawing();
             ClearBackground(WHITE); 
             DrawZones(zones);
