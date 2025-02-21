@@ -1,6 +1,6 @@
 nbRods 14
 rod
-rect 404.173431 238.850769 30.000000 30.000000 endrect
+rect 555.221802 118.940666 30.000000 30.000000 endrect
 color 255 255 255 255 endcolor
 sig
 amplitude 254
@@ -15,7 +15,7 @@ signalShape 4
 endsig
 endrod
 rod
-rect 114.535576 176.516876 30.000000 60.000000 endrect
+rect 211.170059 69.174164 30.000000 60.000000 endrect
 color 255 255 255 255 endcolor
 sig
 amplitude 229
@@ -30,22 +30,7 @@ signalShape 4
 endsig
 endrod
 rod
-rect 516.076721 213.313370 30.000000 60.000000 endrect
-color 255 255 255 255 endcolor
-sig
-amplitude 229
-angle 128
-duration 0.000000
-duty 0
-offset 0
-period 28
-phase 0
-pulses 128
-signalShape 4
-endsig
-endrod
-rod
-rect 625.786987 208.888443 30.000000 90.000000 endrect
+rect 56.584133 104.139778 30.000000 90.000000 endrect
 color 255 255 255 255 endcolor
 sig
 amplitude 211
@@ -53,14 +38,14 @@ angle 128
 duration 0.000000
 duty 0
 offset 0
-period 100
+period 70
 phase 0
 pulses 128
 signalShape 4
 endsig
 endrod
 rod
-rect 408.152466 0.629392 30.000000 120.000000 endrect
+rect 89.111931 195.302902 30.000000 120.000000 endrect
 color 255 255 255 255 endcolor
 sig
 amplitude 197
@@ -75,7 +60,22 @@ signalShape 4
 endsig
 endrod
 rod
-rect 198.891220 110.053299 30.000000 150.000000 endrect
+rect 376.141479 22.220549 30.000000 120.000000 endrect
+color 255 255 255 255 endcolor
+sig
+amplitude 197
+angle 128
+duration 0.000000
+duty 0
+offset 0
+period 28
+phase 0
+pulses 128
+signalShape 4
+endsig
+endrod
+rod
+rect 660.463928 130.357010 30.000000 150.000000 endrect
 color 255 255 255 255 endcolor
 sig
 amplitude 184
@@ -83,14 +83,14 @@ angle 128
 duration 0.000000
 duty 0
 offset 0
-period 230
+period 200
 phase 0
 pulses 128
 signalShape 4
 endsig
 endrod
 rod
-rect 323.312927 162.858856 30.000000 150.000000 endrect
+rect 24.119268 54.225552 30.000000 150.000000 endrect
 color 255 255 255 255 endcolor
 sig
 amplitude 184
@@ -98,14 +98,14 @@ angle 128
 duration 0.000000
 duty 0
 offset 0
-period 230
+period 200
 phase 0
 pulses 128
 signalShape 4
 endsig
 endrod
 rod
-rect 503.411377 87.763145 30.000000 180.000000 endrect
+rect 677.840820 244.560562 30.000000 180.000000 endrect
 color 255 255 255 255 endcolor
 sig
 amplitude 172
@@ -113,14 +113,14 @@ angle 128
 duration 0.000000
 duty 0
 offset 0
-period 100
+period 70
 phase 0
 pulses 128
 signalShape 4
 endsig
 endrod
 rod
-rect 483.880737 268.348724 30.000000 210.000000 endrect
+rect 525.689026 60.523193 30.000000 210.000000 endrect
 color 255 255 255 255 endcolor
 sig
 amplitude 160
@@ -135,7 +135,7 @@ signalShape 4
 endsig
 endrod
 rod
-rect 698.223022 94.954300 30.000000 210.000000 endrect
+rect 704.074341 25.776566 30.000000 210.000000 endrect
 color 255 255 255 255 endcolor
 sig
 amplitude 160
@@ -150,7 +150,22 @@ signalShape 4
 endsig
 endrod
 rod
-rect 119.329338 53.357708 30.000000 240.000000 endrect
+rect 348.368256 238.016495 30.000000 210.000000 endrect
+color 255 255 255 255 endcolor
+sig
+amplitude 160
+angle 128
+duration 0.000000
+duty 0
+offset 0
+period 4
+phase 0
+pulses 128
+signalShape 4
+endsig
+endrod
+rod
+rect 253.536316 163.148697 30.000000 240.000000 endrect
 color 255 255 255 255 endcolor
 sig
 amplitude 148
@@ -165,7 +180,7 @@ signalShape 4
 endsig
 endrod
 rod
-rect 364.447449 46.308918 30.000000 270.000000 endrect
+rect 439.629364 195.613846 30.000000 270.000000 endrect
 color 255 255 255 255 endcolor
 sig
 amplitude 133
@@ -173,14 +188,14 @@ angle 128
 duration 0.000000
 duty 0
 offset 0
-period 100
+period 70
 phase 0
 pulses 128
 signalShape 4
 endsig
 endrod
 rod
-rect 698.656128 248.750076 30.000000 300.000000 endrect
+rect 167.634354 112.681877 30.000000 300.000000 endrect
 color 255 255 255 255 endcolor
 sig
 amplitude 100
@@ -188,22 +203,7 @@ angle 128
 duration 0.000000
 duty 0
 offset 0
-period 230
-phase 0
-pulses 128
-signalShape 4
-endsig
-endrod
-rod
-rect 178.353943 204.545990 30.000000 300.000000 endrect
-color 255 255 255 255 endcolor
-sig
-amplitude 100
-angle 128
-duration 0.000000
-duty 0
-offset 0
-period 230
+period 200
 phase 0
 pulses 128
 signalShape 4
