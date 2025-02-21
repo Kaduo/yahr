@@ -1,6 +1,6 @@
 nbRods 14
 rod
-rect 354.974091 78.772865 30.000000 30.000000 endrect
+rect 598.542236 53.072483 30.000000 30.000000 endrect
 color 255 255 255 255 endcolor
 sig
 amplitude 254
@@ -8,14 +8,29 @@ angle 128
 duration 0.000000
 duty 0
 offset 0
-period 9
+period 4
 phase 0
 pulses 128
 signalShape 4
 endsig
 endrod
 rod
-rect 645.833252 76.904076 30.000000 60.000000 endrect
+rect 478.324158 166.680725 30.000000 30.000000 endrect
+color 255 255 255 255 endcolor
+sig
+amplitude 254
+angle 128
+duration 0.000000
+duty 0
+offset 0
+period 4
+phase 0
+pulses 128
+signalShape 4
+endsig
+endrod
+rod
+rect 425.896912 234.652008 30.000000 60.000000 endrect
 color 253 46 99 255 endcolor
 sig
 amplitude 229
@@ -30,7 +45,7 @@ signalShape 4
 endsig
 endrod
 rod
-rect 720.861572 172.807190 30.000000 90.000000 endrect
+rect 231.190811 150.934723 30.000000 90.000000 endrect
 color 41 222 182 255 endcolor
 sig
 amplitude 211
@@ -45,22 +60,7 @@ signalShape 4
 endsig
 endrod
 rod
-rect 46.202396 75.655556 30.000000 90.000000 endrect
-color 41 222 182 255 endcolor
-sig
-amplitude 211
-angle 128
-duration 0.000000
-duty 0
-offset 0
-period 100
-phase 0
-pulses 128
-signalShape 4
-endsig
-endrod
-rod
-rect 477.565979 12.312107 30.000000 120.000000 endrect
+rect 543.462646 3.388834 30.000000 120.000000 endrect
 color 253 74 185 255 endcolor
 sig
 amplitude 197
@@ -75,7 +75,37 @@ signalShape 4
 endsig
 endrod
 rod
-rect 158.641495 127.749321 30.000000 150.000000 endrect
+rect 157.975464 242.619186 30.000000 120.000000 endrect
+color 253 74 185 255 endcolor
+sig
+amplitude 197
+angle 128
+duration 0.000000
+duty 0
+offset 0
+period 28
+phase 0
+pulses 128
+signalShape 4
+endsig
+endrod
+rod
+rect 625.584534 255.315628 30.000000 120.000000 endrect
+color 253 74 185 255 endcolor
+sig
+amplitude 197
+angle 128
+duration 0.000000
+duty 0
+offset 0
+period 28
+phase 0
+pulses 128
+signalShape 4
+endsig
+endrod
+rod
+rect 205.851913 44.498898 30.000000 150.000000 endrect
 color 238 211 121 255 endcolor
 sig
 amplitude 184
@@ -90,7 +120,7 @@ signalShape 4
 endsig
 endrod
 rod
-rect 450.095642 229.645676 30.000000 180.000000 endrect
+rect 324.251221 134.578903 30.000000 180.000000 endrect
 color 17 163 155 255 endcolor
 sig
 amplitude 172
@@ -105,7 +135,7 @@ signalShape 4
 endsig
 endrod
 rod
-rect 226.195663 170.524460 30.000000 210.000000 endrect
+rect 616.433899 118.220505 30.000000 210.000000 endrect
 color 62 64 69 255 endcolor
 sig
 amplitude 160
@@ -113,29 +143,14 @@ angle 128
 duration 0.000000
 duty 0
 offset 0
-period 9
+period 4
 phase 0
 pulses 128
 signalShape 4
 endsig
 endrod
 rod
-rect 656.937683 6.544313 30.000000 210.000000 endrect
-color 62 64 69 255 endcolor
-sig
-amplitude 160
-angle 128
-duration 0.000000
-duty 0
-offset 0
-period 9
-phase 0
-pulses 128
-signalShape 4
-endsig
-endrod
-rod
-rect 571.624023 131.380981 30.000000 240.000000 endrect
+rect 418.323486 83.498138 30.000000 240.000000 endrect
 color 177 82 75 255 endcolor
 sig
 amplitude 148
@@ -150,37 +165,7 @@ signalShape 4
 endsig
 endrod
 rod
-rect 235.139023 18.744715 30.000000 240.000000 endrect
-color 177 82 75 255 endcolor
-sig
-amplitude 148
-angle 128
-duration 0.000000
-duty 0
-offset 0
-period 28
-phase 0
-pulses 128
-signalShape 4
-endsig
-endrod
-rod
-rect 256.480438 46.140934 30.000000 240.000000 endrect
-color 177 82 75 255 endcolor
-sig
-amplitude 148
-angle 128
-duration 0.000000
-duty 0
-offset 0
-period 28
-phase 0
-pulses 128
-signalShape 4
-endsig
-endrod
-rod
-rect 73.301346 224.958786 30.000000 270.000000 endrect
+rect 714.974121 52.963444 30.000000 270.000000 endrect
 color 50 144 202 255 endcolor
 sig
 amplitude 133
@@ -195,7 +180,22 @@ signalShape 4
 endsig
 endrod
 rod
-rect 151.093216 6.911453 30.000000 300.000000 endrect
+rect 357.694153 197.434570 30.000000 270.000000 endrect
+color 50 144 202 255 endcolor
+sig
+amplitude 133
+angle 128
+duration 0.000000
+duty 0
+offset 0
+period 100
+phase 0
+pulses 128
+signalShape 4
+endsig
+endrod
+rod
+rect 665.911621 14.130008 30.000000 300.000000 endrect
 color 216 157 118 255 endcolor
 sig
 amplitude 100
