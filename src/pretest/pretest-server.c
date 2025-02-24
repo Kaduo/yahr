@@ -15,14 +15,16 @@ typedef enum ServerState {
     SERVER_WAITING_FOR_INSTRUCTION,
 } ServerState;
 
-Vec MakeZones(int nbZones, float intraZoneXMargin, float rodZoneYMargin, float borderZoneXMargin, float borderZoneYMargin) {
-    float zoneWidth = (TABLET_WIDTH - intraZoneXMargin*nbZones + borderZoneXMargin)/(nbZones);
+Vec MakeZones(int nbZonesPerRow, int nbRows, float intraRowYMargin, float intraZoneXMargin, float rodZoneYMargin, float borderZoneXMargin, float borderZoneYMargin) {
+    float zoneWidth = (TABLET_WIDTH - intraZoneXMargin*nbZonesPerRow + borderZoneXMargin)/(nbZonesPerRow);
     float zoneHeight = (TABLET_HEIGHT/2 - borderZoneYMargin - rodZoneYMargin);
 
-    Vec zones = EmptyVec(nbZones, sizeof(Zone*));
-    for (int i =0; i < nbZones; i ++) {
-        Zone *zone = NewZone((Rectangle){.x = borderZoneXMargin + i*(zoneWidth+intraZoneXMargin), .y = TABLET_HEIGHT/2. + rodZoneYMargin,  .height = zoneHeight, .width = zoneWidth}, BLACK);
-        PushVec(&zones, &zone);
+    Vec zones = EmptyVec(nbZonesPerRow, sizeof(Zone*));
+    for (int j = 0; j < nbRows; j ++) {
+        for (int i =0; i < nbZonesPerRow; i ++) {
+            Zone *zone = NewZone((Rectangle){.x = borderZoneXMargin + i*(zoneWidth+intraZoneXMargin) + j*intraRowYMargin, .y = TABLET_HEIGHT/2. + rodZoneYMargin,  .height = zoneHeight, .width = zoneWidth}, BLACK);
+            PushVec(&zones, &zone);
+        }
     }
 
     return zones;
@@ -71,7 +73,7 @@ int main(void) {
     
     ToggleFullscreen();
 
-    Vec zones = MakeZones(4, 10, 10, 10, 10);
+    Vec zones = MakeZones(2, 2, 5, 10, 10, 10, 10);
 
     while (!WindowShouldClose()) {
         Vec *message = ActiveSocket_readMessage((ActiveSocket*)&server);
