@@ -110,7 +110,13 @@ CollisionInfo ComputeCollisionInfo(Iterator *world, Rectangle movingRectangle, R
     // if (otherRectangle == movingRectangle) {
     //   continue;
     // }
-    CollisionType collisionType = CheckStrictCollision(movingRectangle, targetRectangle, otherRectangle);
+
+    CollisionType collisionType = NO_STRICT_COLLISION;
+    if (CheckCollisionRecs(targetRectangle, otherRectangle)) {
+      collisionInfo.collided = true; // See what this does... TODO check me
+    } else {
+      collisionType = CheckStrictCollision(movingRectangle, targetRectangle, otherRectangle);
+    }
     if (collisionType != NO_STRICT_COLLISION)
     {
       if (collisionType == FROM_ABOVE || collisionType == FROM_BELOW)
