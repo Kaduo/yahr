@@ -33,7 +33,8 @@ int main(int argc, char *argv[]) {
         BeginDrawing();
             ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR))); 
 
-            GuiLabel((Rectangle){ GetScreenHeight()/2, GetScreenWidth()/2, 1000000, 100 },
+            float labelWidth = 100;
+            GuiLabel((Rectangle){ GetScreenHeight()/2, GetScreenWidth()/2. - labelWidth/2., labelWidth, 100 },
             "Triez les réglettes par similarité.");
         EndDrawing();
     }
