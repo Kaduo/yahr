@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
     SetTraceLogLevel(LOG_ERROR);
     InitWindow(GetScreenWidth(), GetScreenHeight(), "layout_name");
     GuiSetStyle(DEFAULT, TEXT_SIZE, 30);
-    GuiStyle(DEFAULT, LINE_COLOR, BLACK);
+    GuiSetStyle(DEFAULT, LINE_COLOR, BLACK);
     // GuiSetFont(LoadFont("src/pretest/arial.ttf"));
     // ToggleFullscreen();
 
