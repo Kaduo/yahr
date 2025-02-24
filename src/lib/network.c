@@ -29,7 +29,6 @@ char *ActiveSocketReader_read(ActiveSocketReader *me, int pfd) {
             // printf("it happens !\n");
             return NULL;
         }
-        printf("not always tho!\n");
 
         if (ret > 0) {
             printf("read : ");
