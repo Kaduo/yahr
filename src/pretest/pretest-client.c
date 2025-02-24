@@ -19,8 +19,8 @@ int main(int argc, char *argv[]) {
 
     SetTraceLogLevel(LOG_ERROR);
     InitWindow(GetScreenWidth(), GetScreenHeight(), "layout_name");
-    GuiSetStyle(DEFAULT, TEXT_SIZE, 30);
-    GuiSetFont(LoadFont("src/pretest/arial.ttf"));
+    // GuiSetStyle(DEFAULT, TEXT_SIZE, 30);
+    // GuiSetFont(LoadFont("src/pretest/arial.ttf"));
     // ToggleFullscreen();
 
 
