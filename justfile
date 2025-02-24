@@ -30,3 +30,11 @@ build-pretest:
     {{CC}} {{CC_ARGS}} src/pretest/pretest-client.c -o {{BUILD_DIR}}/pretest_client
     {{CC}} {{CC_ARGS}} src/pretest/pretest-server.c -o {{BUILD_DIR}}/pretest_server
     {{CC}} {{CC_ARGS}} src/pretest/pretest-generator.c -o {{BUILD_DIR}}/pretest_generator
+
+pb: pull build-pretest
+
+pbs: pb
+    build/pretest_server
+
+pbc: pb
+    build/pretest_client
