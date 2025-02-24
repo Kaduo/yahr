@@ -50,11 +50,26 @@ int main(void) {
     PhysicalHapticDriver hapticDriver = NewPhysicalHapticDriver(&inputService);
     HapticService hapticService = NewHapticService((HapticDriver*)&hapticDriver);
     // SessionList sessionList = NewSessionList("data/pre-test/sessions/colors+haptic+length/", "data/pre-test/results/colors+haptic/", 0, 10, &inputService, &hapticService);
-    SessionList sessionList = NewSessionList("data/pre-test/sessions/haptic/", "data/pre-test/results/haptic/", 0, 10, &inputService, &hapticService);
+    int sessionListId = 0;
+    char *sessionFolderPaths[] = {
+                                    "data/pre-test/sessions/haptic/",
+                                    "data/pre-test/sessions/colors+length/",
+                                    "data/pre-test/sessions/colors+haptic+length/",
+                                };
+    char *saveFolderPaths[] = {
+                                    "data/pre-test/results/haptic/",
+                                    "data/pre-test/results/colors+length/",
+                                    "data/pre-test/results/colors+haptic+length/",
+
+                                };
+    int nbSessionLists = 3;
+    int userId = 15; // TODO : Change this !!!!
+    int nbSessionPerList = 3;
+    SessionList sessionList = NewSessionList(sessionFolderPaths[sessionListId], saveFolderPaths[sessionListId], userId, nbSessionPerList, &inputService, &hapticService);
 
     SessionList_loadNextSession(&sessionList);
     
-    // ToggleFullscreen(); // TODO : uncomment me ?
+    ToggleFullscreen();
 
     Vec zones = MakeZones(4, 10, 10, 10, 10);
 
@@ -87,11 +102,20 @@ int main(void) {
             }
             
             else if (strcmp(messageStr, "NEXT?") == 0) {
-                printf("hey !\n");
                 SessionList_saveCurrentSession(&sessionList);
                 if(!SessionList_loadNextSession(&sessionList)) {
-                    printf("bye!!\n");
-                    CloseWindow();
+                    if (sessionListId < nbSessionLists - 1) {
+                        sessionListId += 1;
+                        FreeRods(&sessionList.session.rods);
+                        sessionList = NewSessionList(sessionFolderPaths[sessionListId], saveFolderPaths[sessionListId], userId, nbSessionPerList, &inputService, &hapticService);
+                    }
+                    else {
+                        sessionListId = 0;
+                        userId += 1;
+                        FreeRods(&sessionList.session.rods);
+                        sessionList = NewSessionList(sessionFolderPaths[sessionListId], saveFolderPaths[sessionListId], userId, nbSessionPerList, &inputService, &hapticService);
+                    }
+                    SessionList_loadNextSession(&sessionList);
                 }
             }
 

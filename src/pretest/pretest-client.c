@@ -25,18 +25,17 @@ int main(int argc, char *argv[]) {
 
     while (!WindowShouldClose()) {
 
-        if (IsKeyPressed(KEY_ENTER)) {
+        if (IsKeyPressed(KEY_SPACE)) {
             ActiveSocket_writeStr(&socket, "NEXT?");
-            printf("huh!\n");
         }
 
         BeginDrawing();
             ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR))); 
 
-            float labelWidth = 100;
+            float labelWidth = 2000;
             float labelHeight = 10;
             GuiLabel((Rectangle){ GetScreenWidth()/2 - labelWidth/2., GetScreenHeight()/2., labelWidth, labelHeight },
-            "Triez les réglettes par similarité.\n Chaque réglette doit être placée dans une seule zone. Il y a au moins une réglette par zone. \n Appuyez sur la touche espace quand vous êtes satisfait.");
+            "Triez les réglettes par similarité.\n\n\n Chaque réglette doit être placée dans une seule zone. \n\n\n Il y a au moins une réglette par zone. \n\n\n Appuyez sur la touche espace quand vous êtes satisfait.");
         EndDrawing();
     }
 

@@ -7,6 +7,7 @@
 #include "string.h"
 #include "raylib.h"
 #include "session.h"
+#include "stdbool.h"
 
 
 // Interface que je veux :
