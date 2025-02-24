@@ -94,12 +94,12 @@ void AddXBound(CollisionInfo *collisionInfo, Bound bound) {
 }
 
 bool CollidedWithAnotherRod(const CollisionInfo collisionInfo) {
-  return collisionInfo.collided;
+  return collisionInfo.strictlyCollided;
 }
 
 CollisionInfo ComputeCollisionInfo(Iterator *world, Rectangle movingRectangle, Rectangle targetRectangle) {
 
-  CollisionInfo collisionInfo = {.collided = false};
+  CollisionInfo collisionInfo = {.strictlyCollided = false, .collided = false};
   Rod **otherRod;
 
   world->reinit(world);
@@ -111,12 +111,10 @@ CollisionInfo ComputeCollisionInfo(Iterator *world, Rectangle movingRectangle, R
     //   continue;
     // }
 
-    CollisionType collisionType = NO_STRICT_COLLISION;
-    if (CheckCollisionRecs(targetRectangle, otherRectangle)) {
-      collisionInfo.collided = true; // See what this does... TODO check me
-    } else {
-      collisionType = CheckStrictCollision(movingRectangle, targetRectangle, otherRectangle);
+    if (CheckCollisionRecs(movingRectangle, otherRectangle)) {
+      collisionInfo.collided = true;
     }
+    CollisionType collisionType = CheckStrictCollision(movingRectangle, targetRectangle, otherRectangle);
     if (collisionType != NO_STRICT_COLLISION)
     {
       if (collisionType == FROM_ABOVE || collisionType == FROM_BELOW)
@@ -128,16 +126,17 @@ CollisionInfo ComputeCollisionInfo(Iterator *world, Rectangle movingRectangle, R
         AddXBound(&collisionInfo, newBound(otherRectangle, collisionType));
       }
 
-      collisionInfo.collided = true;
+      collisionInfo.strictlyCollided = true;
     }
   }
 
-  if (collisionInfo.collided) { // Virtual bounds, corresponding to the rod being aligned with its original position or its target position.
+  if (collisionInfo.strictlyCollided) { // Virtual bounds, corresponding to the rod being aligned with its original position or its target position.
     AddYBound(&collisionInfo, (Bound){.value =  GetBottom(targetRectangle), FROM_ABOVE});
     AddXBound(&collisionInfo, (Bound){.value =  GetRight(targetRectangle), FROM_LEFT});
     AddYBound(&collisionInfo, (Bound){.value =  GetBottom(movingRectangle), FROM_ABOVE});
     AddXBound(&collisionInfo, (Bound){.value =  GetRight(movingRectangle), FROM_LEFT});
   }
 
+  collisionInfo.collided = collisionInfo.strictlyCollided || collisionInfo.collided;
   return collisionInfo;
 }

@@ -27,6 +27,7 @@ typedef struct Bounds {
 typedef struct CollisionInfo {
   Bounds xBounds;
   Bounds yBounds;
+  bool strictlyCollided;
   bool collided;
 } CollisionInfo;
 
