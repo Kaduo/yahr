@@ -32,8 +32,8 @@ int main(int argc, char *argv[]) {
         BeginDrawing();
             ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR))); 
 
-            float labelWidth = 2000;
-            float labelHeight = 10;
+            float labelWidth = 1000;
+            float labelHeight = 30;
             GuiLabel((Rectangle){ GetScreenWidth()/2 - labelWidth/2., GetScreenHeight()/2., labelWidth, labelHeight },
             "Triez les réglettes par similarité.\n\n\n Chaque réglette doit être placée dans une seule zone. \n\n\n Il y a au moins une réglette par zone. \n\n\n Appuyez sur la touche espace quand vous êtes satisfait.");
         EndDrawing();

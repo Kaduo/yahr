@@ -102,14 +102,18 @@ int main(void) {
             }
             
             else if (strcmp(messageStr, "NEXT?") == 0) {
+                printf("next received!\n");
                 SessionList_saveCurrentSession(&sessionList);
                 if(!SessionList_loadNextSession(&sessionList)) {
+                    printf("next user or session \n");
                     if (sessionListId < nbSessionLists - 1) {
+                        printf("next session !\n");
                         sessionListId += 1;
                         FreeRods(&sessionList.session.rods);
                         sessionList = NewSessionList(sessionFolderPaths[sessionListId], saveFolderPaths[sessionListId], userId, nbSessionPerList, &inputService, &hapticService);
                     }
                     else {
+                        printf("next user !\n");
                         sessionListId = 0;
                         userId += 1;
                         FreeRods(&sessionList.session.rods);
