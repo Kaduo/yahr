@@ -29,6 +29,27 @@ Rods *MakeFullRods(const StandardRodFactory *rodFactory, int nbRodsPerLength[10]
 }
 
 
+Rods *MakeColorAndLengths(const StandardRodFactory *rodFactory, int nbRodsPerLength[10]) {
+    Rods *rods = malloc(sizeof(Rods));
+
+    int nbRodsTotal = 0;
+    for (int l = 0; l <NB_ROD_LENGTHS; l ++) {
+        nbRodsTotal += nbRodsPerLength[l];
+    }
+    *rods = EmptyRods(nbRodsTotal);
+
+    for (int l = 0; l < NB_ROD_LENGTHS; l++) {
+        int nbRods = nbRodsPerLength[l];
+        for (int i = 0; i < nbRods; i++) {
+            AppendRod(rods, CreateRod(rodFactory, (l+1), 0, 0, ROD_COLOR_FOR_LENGTH[l], (Signal){.amplitude = 0, .pulses = 128}));
+        }
+    }
+
+    return rods;
+}
+
+
+
 Rods *HapticAndLengthButNoColor(const StandardRodFactory *rodFactory, int nbRodsPerLength[10]) {
     Rods *rods = malloc(sizeof(Rods));
 
@@ -213,7 +234,7 @@ int main(void) {
         nbRodsPerLength[rand() % NB_ROD_LENGTHS] += 1;
         nbRodsPerLength[rand() % NB_ROD_LENGTHS] += 1;
         nbRodsPerLength[rand() % NB_ROD_LENGTHS] += 1;
-        Rods *rods = HapticAndLengthButNoColor(&rodFactory, nbRodsPerLength);
+        Rods *rods = MakeColorAndLengths(&rodFactory, nbRodsPerLength);
         ShuffleRods(rods, 0, TABLET_WIDTH - 10*rodFactory.rodUnitHeight, 0, TABLET_HEIGHT/2. - rodFactory.rodUnitHeight);
         char filename[60] = {0};
 
