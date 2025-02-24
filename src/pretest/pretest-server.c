@@ -72,7 +72,7 @@ int main(void) {
 
                                 };
     int nbSessionLists = 3;
-    int userId = 15; // TODO : Change this !!!!
+    int userId = 35; // TODO : Change this !!!!
     int nbSessionPerList = 3;
     SessionList sessionList = NewSessionList(sessionFolderPaths[sessionListId], saveFolderPaths[sessionListId], userId, nbSessionPerList, &inputService, &hapticService);
 
