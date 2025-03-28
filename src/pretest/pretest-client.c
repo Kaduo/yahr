@@ -14,8 +14,8 @@ int main(int argc, char *argv[]) {
 
 
     ActiveSocket socket = NewActiveSocket();
-    // ActiveSocket_connectToServer(&socket, TABLET_IP, TABLET_PORT, SOCK_NONBLOCK); // TODO : UNCOMMENT ME !!!!
-    ActiveSocket_connectToServer(&socket, "localhost", TABLET_PORT, SOCK_NONBLOCK); // TODO : COMMENT ME !!!!
+    ActiveSocket_connectToServer(&socket, TABLET_IP, TABLET_PORT, SOCK_NONBLOCK); // TODO : UNCOMMENT ME !!!!
+    // ActiveSocket_connectToServer(&socket, "localhost", TABLET_PORT, SOCK_NONBLOCK); // TODO : COMMENT ME !!!!
 
     SetTraceLogLevel(LOG_ERROR);
     InitWindow(GetScreenWidth(), GetScreenHeight(), "layout_name");
