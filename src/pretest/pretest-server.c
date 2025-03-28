@@ -50,8 +50,8 @@ int main(void) {
     Server server = NewServer();
 
     ServerState serverState = SERVER_WAITING_FOR_CONNECTION;
-    Server_initAndWaitForConnection(&server, TABLET_IP, TABLET_PORT); // TODO !!! UNCOMMENT ME !!
-    // Server_initAndWaitForConnection(&server, "localhost", TABLET_PORT); // TODO : COMMENT ME, ONLY FOR DEBUG
+    // Server_initAndWaitForConnection(&server, TABLET_IP, TABLET_PORT); // TODO !!! UNCOMMENT ME !!
+    Server_initAndWaitForConnection(&server, "localhost", TABLET_PORT); // TODO : COMMENT ME, ONLY FOR DEBUG
     serverState = SERVER_WAITING_FOR_INSTRUCTION;
     
     SetTraceLogLevel(LOG_ERROR);
@@ -79,6 +79,8 @@ int main(void) {
     int nbSessionLists = 2;
 
     int userId;
+
+    int flipped = 0;
     FILE *latestUserFile = fopen("data/pre-test/latest_user_id", "r");
     if (latestUserFile != NULL) {
         fscanf(latestUserFile, "%d", &userId);
@@ -163,10 +165,11 @@ int main(void) {
                         printf("next session !\n");
                         sessionListId += 1;
                         FreeRods(sessionList.session.rods);
-                        sessionList = NewSessionList(sessionFolderPaths[sessionListId], saveFolderPaths[sessionListId], userId, nbSessionPerList, &inputService, &hapticService);
+                        sessionList = NewSessionList(sessionFolderPaths[(sessionListId + flipped) % 2], saveFolderPaths[(sessionListId + flipped) % 2], userId, nbSessionPerList, &inputService, &hapticService);
                     }
                     else {
                         printf("next user !\n");
+                        flipped = 1 - flipped;
                         waitingForNextUser = true;
                         sessionListId = 0;
                         userId += 1;
@@ -181,7 +184,7 @@ int main(void) {
                             exit(1);
                         }
                         FreeRods(sessionList.session.rods);
-                        sessionList = NewSessionList(sessionFolderPaths[sessionListId], saveFolderPaths[sessionListId], userId, nbSessionPerList, &inputService, &hapticService);
+                        sessionList = NewSessionList(sessionFolderPaths[(sessionListId + flipped) % 2], saveFolderPaths[(sessionListId + flipped) % 2], userId, nbSessionPerList, &inputService, &hapticService);
                     }
                     SessionList_loadNextSession(&sessionList);
                 }

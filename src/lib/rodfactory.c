@@ -84,13 +84,16 @@ void ShuffleRods(Rods *rods, float xMin, float xMax, float yMin, float yMax) {
         float x;
         float y;
 
+        Rectangle targetRectangle;
+        Rectangle rodRectangle = GetRodRectangle(rod);
+
         do {
             x = xMin + (float)rand()/(float)(RAND_MAX/(xMax - xMin));
             y = yMin + (float)rand()/(float)(RAND_MAX/(yMax - yMin));
-            Rectangle targetRectangle = CloneMove(GetHitbox(&rod->collisionComponent->inner), (Vector2){x, y});
-            Rectangle movingRectangle = GetHitbox(&rod->collisionComponent->inner);
-            collisionInfo = ComputeCollisionInfo(rod->world, movingRectangle, targetRectangle);
-        } while (CollidedWithAnotherRod(collisionInfo));
+            targetRectangle = CloneMove(rodRectangle, (Vector2){x, y});
+            collisionInfo = ComputeCollisionInfo(rod->world, rodRectangle, targetRectangle);
+        } while (collisionInfo.collided);
+        printf("ONE DONE ! \n");
         rod->position = (Vector2){x, y};
     }
 }

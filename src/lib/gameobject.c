@@ -431,6 +431,10 @@ void RodHapticComponent_selectionStatusChangedCallback(SelectionObserver *_me, b
 void RodHapticComponent_collidedOrNotCallback(CollisionObserver *_me, bool collided) {
     RodHapticComponent *me = (RodHapticComponent*)_me;
 
+    if (me->signal.signalShape == SignalShape_NO_SIGNAL) {
+        return;
+    }
+
     if (!collided && me->colliding) {
         HapticService_playSignal(me->hapticService, me->signal);
         me->colliding = false;

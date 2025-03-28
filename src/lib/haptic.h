@@ -7,6 +7,7 @@
 #include "input.h"
 
 typedef enum SignalShape {
+    SignalShape_NO_SIGNAL = 0,
     SignalShape_STEADY = 1,
     SignalShape_SINE = 2,
     SignalShape_TRIANGLE = 3,

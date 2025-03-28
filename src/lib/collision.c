@@ -41,7 +41,7 @@ CollisionType CheckStrictCollision(Rectangle rect_before, Rectangle rect_after, 
   case JUST_RIGHT: case STRICTLY_RIGHT:
     return FROM_RIGHT;
   default:
-    fprintf(stderr, "THIS HSHOLDN4T AHPPEN!\n");
+    // fprintf(stderr, "THIS HSHOLDN4T AHPPEN!\n");
     return NO_STRICT_COLLISION;
   }
 }
@@ -112,7 +112,7 @@ CollisionInfo ComputeCollisionInfo(Iterator *world, Rectangle movingRectangle, R
     //   continue;
     // }
 
-    if (CheckCollisionRecs(movingRectangle, otherRectangle)) {
+    if (CheckCollisionRecs(targetRectangle, otherRectangle)) {
       collisionInfo.collided = true;
     }
     CollisionType collisionType = CheckStrictCollision(movingRectangle, targetRectangle, otherRectangle);
