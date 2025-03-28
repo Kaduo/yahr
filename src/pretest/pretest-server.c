@@ -137,7 +137,12 @@ int main(void) {
                 if (strcmp(messageStr, "GO_NEXT_USER") == 0) {
                     waitingForNextUser = false;
                     startTime = GetTime();
-                } else {
+                } 
+                else if (strcmp(messageStr, "CLOSE") == 0) {
+                    printf("bye!\n");
+                    CloseWindow();
+                }
+                else {
                     continue;
                 }
             }
