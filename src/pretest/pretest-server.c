@@ -59,6 +59,8 @@ int main(void) {
 
     bool waitingForNextUser = false;
 
+    double startTime = 0;
+
     InputService inputService = NewPhysicalInputService();
     PhysicalHapticDriver hapticDriver = NewPhysicalHapticDriver(&inputService);
     HapticService hapticService = NewHapticService((HapticDriver*)&hapticDriver);
@@ -85,6 +87,16 @@ int main(void) {
         perror(0);
         exit(1);
     }
+
+    FILE *durations = fopen("pre-test-durations", "w");
+
+    if (durations == NULL) {
+        perror(0);
+        exit(1);
+    } else {
+        fprintf(durations, "user_%d\n", userId);
+    }
+
     int nbSessionPerList = 10;
     SessionList sessionList = NewSessionList(sessionFolderPaths[sessionListId], saveFolderPaths[sessionListId], userId, nbSessionPerList, &inputService, &hapticService);
 
@@ -121,6 +133,7 @@ int main(void) {
             if (waitingForNextUser) {
                 if (strcmp(messageStr, "GO_NEXT_USER") == 0) {
                     waitingForNextUser = false;
+                    startTime = GetTime();
                 } else {
                     continue;
                 }
@@ -133,6 +146,9 @@ int main(void) {
             else if (strcmp(messageStr, "NEXT?") == 0) {
                 printf("next received!\n");
                 SessionList_saveCurrentSession(&sessionList);
+                double duration = GetTime() - startTime;
+                startTime = GetTime();
+                fprintf(durations, "%f\n", duration);
                 if(!SessionList_loadNextSession(&sessionList)) {
                     printf("next user or session \n");
                     if (sessionListId < nbSessionLists - 1) {
@@ -146,6 +162,7 @@ int main(void) {
                         waitingForNextUser = true;
                         sessionListId = 0;
                         userId += 1;
+                        fprintf(durations, "user_%d\n", userId);
                         FILE *latestUserFile = fopen("data/pre-test/latest_user_id", "w");
                         if (latestUserFile != NULL) {
                             fprintf(latestUserFile, "%d", userId);
