@@ -170,7 +170,7 @@ int main(void) {
                         waitingForNextUser = true;
                         sessionListId = 0;
                         userId += 1;
-                        fprintf(durations, "user_%d\n", userId);
+                        fprintf(durations, "\n\nuser_%d\n", userId);
                         FILE *latestUserFile = fopen("data/pre-test/latest_user_id", "w");
                         if (latestUserFile != NULL) {
                             fprintf(latestUserFile, "%d", userId);
