@@ -43,6 +43,7 @@ int main(int argc, char *argv[]) {
         EndDrawing();
     }
 
+    ActiveSocket_writeStr(&socket, "CLOSE");
     ActiveSocket_closeConnection(&socket);
     return 0;
 }
