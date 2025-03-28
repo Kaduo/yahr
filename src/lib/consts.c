@@ -78,7 +78,7 @@ uint16_t ComputePeriod(RodGroup rodGroup) {
             return 4;
             break;
         case ROD_GROUP_2_4_8:
-            return 28;
+            return 30;
             break;
         case ROD_GROUP_3_6_9:
             return 70;
@@ -115,7 +115,7 @@ Signal RodSignalForLength(int l) {
 }
 
 #ifndef DEBUG
-const char *TABLET_IP = "192.168.1.24";
+const char *TABLET_IP = "192.168.1.18";
 #else
 const char *TABLET_IP = "localhost";
 #endif
