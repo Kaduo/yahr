@@ -88,7 +88,10 @@ int main(void) {
         exit(1);
     }
 
-    FILE *durations = fopen("pre-test-durations", "w");
+    char durationFileName[100];
+    fprintf(durationFileName, "pre-test-durations-from-user-%d", userId);
+
+    FILE *durations = fopen(durationFileName, "w");
 
     if (durations == NULL) {
         perror(0);
