@@ -140,7 +140,7 @@ int main(void) {
                 } 
                 else if (strcmp(messageStr, "CLOSE") == 0) {
                     printf("bye!\n");
-                    CloseWindow();
+                    break;
                 }
                 else {
                     continue;
@@ -218,5 +218,6 @@ int main(void) {
     }
     fclose(durations);
     Server_closeConnection(&server);
+    CloseWindow();
     return 0;
 }
