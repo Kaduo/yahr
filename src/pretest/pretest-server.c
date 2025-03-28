@@ -7,6 +7,7 @@
 #include "session.h"
 #include "gameobject.h"
 #include "consts.h"
+#include "stdbool.h"
 
 typedef enum ServerState {
     SERVER_WAITING_FOR_NEXT,
@@ -49,8 +50,8 @@ int main(void) {
     Server server = NewServer();
 
     ServerState serverState = SERVER_WAITING_FOR_CONNECTION;
-    // Server_initAndWaitForConnection(&server, TABLET_IP, TABLET_PORT); // TODO !!! UNCOMMENT ME !!
-    Server_initAndWaitForConnection(&server, "localhost", TABLET_PORT); // TODO : COMMENT ME, ONLY FOR DEBUG
+    Server_initAndWaitForConnection(&server, TABLET_IP, TABLET_PORT); // TODO !!! UNCOMMENT ME !!
+    // Server_initAndWaitForConnection(&server, "localhost", TABLET_PORT); // TODO : COMMENT ME, ONLY FOR DEBUG
     serverState = SERVER_WAITING_FOR_INSTRUCTION;
     
     SetTraceLogLevel(LOG_ERROR);
