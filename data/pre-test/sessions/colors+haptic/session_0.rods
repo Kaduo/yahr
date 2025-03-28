@@ -1,6 +1,6 @@
 nbRods 14
 rod
-rect 356.742584 146.194778 30.000000 90.000000 endrect
+rect 698.697876 59.322456 30.000000 90.000000 endrect
 color 255 255 255 255 endcolor
 sig
 amplitude 201
@@ -15,7 +15,7 @@ signalShape 4
 endsig
 endrod
 rod
-rect 148.495743 29.607443 30.000000 90.000000 endrect
+rect 510.945801 37.432415 30.000000 90.000000 endrect
 color 253 46 99 255 endcolor
 sig
 amplitude 201
@@ -23,14 +23,14 @@ angle 128
 duration 0.000000
 duty 0
 offset 54
-period 15
-phase 13
+period 20
+phase 18
 pulses 128
 signalShape 4
 endsig
 endrod
 rod
-rect 408.432861 222.898407 30.000000 90.000000 endrect
+rect 35.104443 8.703493 30.000000 90.000000 endrect
 color 41 222 182 255 endcolor
 sig
 amplitude 201
@@ -45,7 +45,37 @@ signalShape 4
 endsig
 endrod
 rod
-rect 409.740997 2.396951 30.000000 90.000000 endrect
+rect 566.320129 246.971436 30.000000 90.000000 endrect
+color 41 222 182 255 endcolor
+sig
+amplitude 201
+angle 128
+duration 0.000000
+duty 0
+offset 54
+period 70
+phase 63
+pulses 128
+signalShape 4
+endsig
+endrod
+rod
+rect 108.944626 222.407196 30.000000 90.000000 endrect
+color 41 222 182 255 endcolor
+sig
+amplitude 201
+angle 128
+duration 0.000000
+duty 0
+offset 54
+period 70
+phase 63
+pulses 128
+signalShape 4
+endsig
+endrod
+rod
+rect 74.583389 76.246742 30.000000 90.000000 endrect
 color 253 74 185 255 endcolor
 sig
 amplitude 201
@@ -53,44 +83,14 @@ angle 128
 duration 0.000000
 duty 0
 offset 27
-period 15
-phase 13
+period 20
+phase 18
 pulses 128
 signalShape 4
 endsig
 endrod
 rod
-rect 80.312836 63.755501 30.000000 90.000000 endrect
-color 253 74 185 255 endcolor
-sig
-amplitude 201
-angle 128
-duration 0.000000
-duty 0
-offset 27
-period 15
-phase 13
-pulses 128
-signalShape 4
-endsig
-endrod
-rod
-rect 32.196575 264.965881 30.000000 90.000000 endrect
-color 253 74 185 255 endcolor
-sig
-amplitude 201
-angle 128
-duration 0.000000
-duty 0
-offset 27
-period 15
-phase 13
-pulses 128
-signalShape 4
-endsig
-endrod
-rod
-rect 444.541534 96.004982 30.000000 90.000000 endrect
+rect 347.115326 229.259247 30.000000 90.000000 endrect
 color 238 211 121 255 endcolor
 sig
 amplitude 201
@@ -105,22 +105,7 @@ signalShape 4
 endsig
 endrod
 rod
-rect 562.396423 167.867081 30.000000 90.000000 endrect
-color 238 211 121 255 endcolor
-sig
-amplitude 201
-angle 128
-duration 0.000000
-duty 0
-offset 54
-period 200
-phase 180
-pulses 128
-signalShape 4
-endsig
-endrod
-rod
-rect 42.066093 120.578804 30.000000 90.000000 endrect
+rect 674.972595 163.001846 30.000000 90.000000 endrect
 color 17 163 155 255 endcolor
 sig
 amplitude 201
@@ -135,7 +120,7 @@ signalShape 4
 endsig
 endrod
 rod
-rect 573.032471 104.133301 30.000000 90.000000 endrect
+rect 570.979370 106.288582 30.000000 90.000000 endrect
 color 62 64 69 255 endcolor
 sig
 amplitude 201
@@ -150,7 +135,22 @@ signalShape 4
 endsig
 endrod
 rod
-rect 686.531128 58.001419 30.000000 90.000000 endrect
+rect 605.693970 18.433996 30.000000 90.000000 endrect
+color 62 64 69 255 endcolor
+sig
+amplitude 201
+angle 128
+duration 0.000000
+duty 0
+offset 27
+period 4
+phase 3
+pulses 128
+signalShape 4
+endsig
+endrod
+rod
+rect 460.007019 217.280594 30.000000 90.000000 endrect
 color 177 82 75 255 endcolor
 sig
 amplitude 201
@@ -158,14 +158,14 @@ angle 128
 duration 0.000000
 duty 0
 offset 0
-period 15
-phase 13
+period 20
+phase 18
 pulses 128
 signalShape 4
 endsig
 endrod
 rod
-rect 219.236099 209.916031 30.000000 90.000000 endrect
+rect 173.258240 64.693504 30.000000 90.000000 endrect
 color 50 144 202 255 endcolor
 sig
 amplitude 201
@@ -180,22 +180,22 @@ signalShape 4
 endsig
 endrod
 rod
-rect 634.555664 234.563309 30.000000 90.000000 endrect
-color 216 157 118 255 endcolor
+rect 688.220398 249.110474 30.000000 90.000000 endrect
+color 50 144 202 255 endcolor
 sig
 amplitude 201
 angle 128
 duration 0.000000
 duty 0
-offset 27
-period 200
-phase 180
+offset 0
+period 70
+phase 63
 pulses 128
 signalShape 4
 endsig
 endrod
 rod
-rect 517.002197 242.263916 30.000000 90.000000 endrect
+rect 678.417480 197.853531 30.000000 90.000000 endrect
 color 216 157 118 255 endcolor
 sig
 amplitude 201
