@@ -148,8 +148,8 @@ int main(void) {
         BeginDrawing();
             ClearBackground(WHITE); 
             DrawLine(0, TABLET_HEIGHT/2, TABLET_WIDTH, TABLET_HEIGHT/2, BLACK);
+            DrawLine(0, 3*TABLET_HEIGHT/4, TABLET_WIDTH, 3*TABLET_HEIGHT/4, BLACK);
             DrawLine(TABLET_WIDTH/2, TABLET_HEIGHT/2, TABLET_WIDTH/2, TABLET_HEIGHT, BLACK);
-            DrawLine(TABLET_WIDTH/2, 3*TABLET_HEIGHT/4, TABLET_WIDTH/2, 3*TABLET_HEIGHT/4, BLACK);
             // DrawZones(zones);
             if (sessionList.session.rods != NULL) {
                 DrawRods(sessionList.session.rods);
