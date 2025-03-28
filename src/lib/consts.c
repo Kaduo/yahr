@@ -56,9 +56,17 @@ uint8_t NormalizeBikeShedSqrtLog(int l, float min, float max) {
 }
 
 uint8_t ComputeOffset(int l, int maxAmplitude) {
-    printf("amplitude : %f\n", (sqrt(-log((l+1.)/10.))*88.9 + 120.));
-    // return 255 - (uint8_t)(sqrt(-log((l+1)/10.))*102. + 50.);
-    return NormalizeBikeShedSqrtLog(l, 0, 255 - maxAmplitude);
+    l += 1; // Because l ranges from 0 to 9
+    if (l == 1 || l == 2 || l == 3 || l == 5) {
+        return 255 - maxAmplitude;
+    } else if (l == 4 || l == 6 || l == 7 || l == 10) {
+        return (255 - maxAmplitude)/2;
+    } else {
+        return 0;
+    }
+    // printf("amplitude : %f\n", (sqrt(-log((l+1.)/10.))*88.9 + 120.));
+    // // return 255 - (uint8_t)(sqrt(-log((l+1)/10.))*102. + 50.);
+    // return NormalizeBikeShedSqrtLog(l, 0, 255 - maxAmplitude);
 }
 
 
@@ -67,7 +75,7 @@ uint8_t ComputeAmplitude(int l) {
     // printf("amplitude : %f\n", (sqrt(-log((l+1.)/10.))*88.9 + 120.));
     // return (uint8_t)(sqrt(-log((l+1)/10.))*102. + 100.);
     // return 255 - ComputeOffset(l);
-    return 130;
+    return 201;
 }
 
 

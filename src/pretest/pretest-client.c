@@ -14,8 +14,8 @@ int main(int argc, char *argv[]) {
 
 
     ActiveSocket socket = NewActiveSocket();
-    ActiveSocket_connectToServer(&socket, TABLET_IP, TABLET_PORT, SOCK_NONBLOCK); // TODO : UNCOMMENT ME !!!!
-    // ActiveSocket_connectToServer(&socket, "localhost", TABLET_PORT, SOCK_NONBLOCK); // TODO : COMMENT ME !!!!
+    // ActiveSocket_connectToServer(&socket, TABLET_IP, TABLET_PORT, SOCK_NONBLOCK); // TODO : UNCOMMENT ME !!!!
+    ActiveSocket_connectToServer(&socket, "localhost", TABLET_PORT, SOCK_NONBLOCK); // TODO : COMMENT ME !!!!
 
     SetTraceLogLevel(LOG_ERROR);
     InitWindow(GetScreenWidth(), GetScreenHeight(), "layout_name");
@@ -29,6 +29,8 @@ int main(int argc, char *argv[]) {
 
         if (IsKeyPressed(KEY_ENTER)) {
             ActiveSocket_writeStr(&socket, "NEXT?");
+        } else if (IsKeyPressed(KEY_N) && IsKeyDown(KEY_LEFT_SHIFT)) {
+            ActiveSocket_writeStr(&socket, "GO_NEXT_USER");
         }
 
         BeginDrawing();

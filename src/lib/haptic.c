@@ -90,7 +90,7 @@ int ConnectToTTY() {
 void write_to_tty(int fd, unsigned char *buffer, int buffer_len) {
     int wlen = write(fd, buffer, buffer_len);
     if (wlen != buffer_len) {
-         printf("Error from write: %d, %d\n", wlen, errno);
+        //  printf("Error from write: %d, %d\n", wlen, errno);
     }
     tcdrain(fd);    /* delay for output */
 }

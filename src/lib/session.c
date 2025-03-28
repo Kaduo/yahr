@@ -136,7 +136,7 @@ void SessionList_saveCurrentSession(SessionList *me) {
 bool SessionList_loadNextSession(SessionList *me) {
     
     if (me->sessionId >= me->nbSessions - 1) {
-        printf("whaa! %d %d\n", me->sessionId, me->nbSessions - 1);
+        printf("Session id, then nbSessions - 1 : ! %d %d\n", me->sessionId, me->nbSessions - 1);
         return false;
     }
 

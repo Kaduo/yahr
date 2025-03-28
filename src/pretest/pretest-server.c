@@ -49,12 +49,14 @@ int main(void) {
     Server server = NewServer();
 
     ServerState serverState = SERVER_WAITING_FOR_CONNECTION;
-    Server_initAndWaitForConnection(&server, TABLET_IP, TABLET_PORT); // TODO !!! UNCOMMENT ME !!
-    // Server_initAndWaitForConnection(&server, "localhost", TABLET_PORT); // TODO : COMMENT ME, ONLY FOR DEBUG
+    // Server_initAndWaitForConnection(&server, TABLET_IP, TABLET_PORT); // TODO !!! UNCOMMENT ME !!
+    Server_initAndWaitForConnection(&server, "localhost", TABLET_PORT); // TODO : COMMENT ME, ONLY FOR DEBUG
     serverState = SERVER_WAITING_FOR_INSTRUCTION;
     
     SetTraceLogLevel(LOG_ERROR);
     InitWindow(GetScreenWidth(), GetScreenHeight(), "layout_name");
+
+    bool waitingForNextUser = false;
 
     InputService inputService = NewPhysicalInputService();
     PhysicalHapticDriver hapticDriver = NewPhysicalHapticDriver(&inputService);
@@ -64,17 +66,25 @@ int main(void) {
     char *sessionFolderPaths[] = {
                                     "data/pre-test/sessions/haptic/",
                                     "data/pre-test/sessions/colors+length/",
-                                    "data/pre-test/sessions/colors+haptic+length/",
+                                    // "data/pre-test/sessions/colors+haptic+length/",
                                 };
     char *saveFolderPaths[] = {
                                     "data/pre-test/results/haptic/",
                                     "data/pre-test/results/colors+length/",
-                                    "data/pre-test/results/colors+haptic+length/",
-
+                                    // "data/pre-test/results/colors+haptic+length/",
                                 };
-    int nbSessionLists = 3;
-    int userId = 35; // TODO : Change this !!!!
-    int nbSessionPerList = 3;
+    int nbSessionLists = 2;
+
+    int userId;
+    FILE *latestUserFile = fopen("data/pre-test/latest_user_id", "r");
+    if (latestUserFile != NULL) {
+        fscanf(latestUserFile, "%d", &userId);
+        fclose(latestUserFile);
+    } else {
+        perror(0);
+        exit(1);
+    }
+    int nbSessionPerList = 10;
     SessionList sessionList = NewSessionList(sessionFolderPaths[sessionListId], saveFolderPaths[sessionListId], userId, nbSessionPerList, &inputService, &hapticService);
 
     SessionList_loadNextSession(&sessionList);
@@ -106,7 +116,15 @@ int main(void) {
             //     default:
             //         break;
             // };
-            if (strcmp(messageStr, "CLOSE") == 0) {
+
+            if (waitingForNextUser) {
+                if (strcmp(messageStr, "GO_NEXT_USER") == 0) {
+                    waitingForNextUser = false;
+                } else {
+                    continue;
+                }
+            }
+            else if (strcmp(messageStr, "CLOSE") == 0) {
                 printf("bye!\n");
                 CloseWindow();
             }
@@ -124,8 +142,18 @@ int main(void) {
                     }
                     else {
                         printf("next user !\n");
+                        waitingForNextUser = true;
                         sessionListId = 0;
                         userId += 1;
+                        FILE *latestUserFile = fopen("data/pre-test/latest_user_id", "w");
+                        if (latestUserFile != NULL) {
+                            fprintf(latestUserFile, "%d", userId);
+                            fclose(latestUserFile);
+                        } else {
+                            printf("HEREEE ?!");
+                            perror(0);
+                            exit(1);
+                        }
                         FreeRods(sessionList.session.rods);
                         sessionList = NewSessionList(sessionFolderPaths[sessionListId], saveFolderPaths[sessionListId], userId, nbSessionPerList, &inputService, &hapticService);
                     }
@@ -147,12 +175,17 @@ int main(void) {
         HapticService_update(&hapticService, GetFrameTime());
         BeginDrawing();
             ClearBackground(WHITE); 
-            DrawLine(0, TABLET_HEIGHT/2, TABLET_WIDTH, TABLET_HEIGHT/2, BLACK);
-            DrawLine(0, 3*TABLET_HEIGHT/4, TABLET_WIDTH, 3*TABLET_HEIGHT/4, BLACK);
-            DrawLine(TABLET_WIDTH/2, TABLET_HEIGHT/2, TABLET_WIDTH/2, TABLET_HEIGHT, BLACK);
-            // DrawZones(zones);
-            if (sessionList.session.rods != NULL) {
-                DrawRods(sessionList.session.rods);
+            if (waitingForNextUser) {
+                DrawText("Merci d'avoir participé !", TABLET_WIDTH/2, TABLET_HEIGHT/2, 20, BLACK);
+            } else {
+                DrawLine(0, TABLET_HEIGHT/2, TABLET_WIDTH, TABLET_HEIGHT/2, BLACK);
+                DrawLine(0, 3*TABLET_HEIGHT/4, TABLET_WIDTH, 3*TABLET_HEIGHT/4, BLACK);
+                DrawLine(TABLET_WIDTH/2, TABLET_HEIGHT/2, TABLET_WIDTH/2, TABLET_HEIGHT, BLACK);
+                // DrawZones(zones);
+                if (sessionList.session.rods != NULL) {
+                    DrawRods(sessionList.session.rods);
+                }
+    
             }
 
         EndDrawing();

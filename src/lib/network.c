@@ -184,7 +184,7 @@ void ActiveSocket_write(ActiveSocket *me, char *message, uint16_t messageLen) {
 }
 
 void ActiveSocket_writeStr(ActiveSocket *me, char *message) {
-    ActiveSocket_write(me, message, strlen(message));
+    ActiveSocket_write(me, message, strlen(message) + 1);
 }
 
 void ActiveSocket_writeFile(ActiveSocket *me, char *fileName) {
