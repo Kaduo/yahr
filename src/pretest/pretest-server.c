@@ -49,7 +49,8 @@ int main(void) {
     Server server = NewServer();
 
     ServerState serverState = SERVER_WAITING_FOR_CONNECTION;
-    Server_initAndWaitForConnection(&server, TABLET_IP, TABLET_PORT);
+    Server_initAndWaitForConnection(&server, TABLET_IP, TABLET_PORT); // TODO !!! UNCOMMENT ME !!
+    // Server_initAndWaitForConnection(&server, "localhost", TABLET_PORT); // TODO : COMMENT ME, ONLY FOR DEBUG
     serverState = SERVER_WAITING_FOR_INSTRUCTION;
     
     SetTraceLogLevel(LOG_ERROR);
@@ -80,7 +81,7 @@ int main(void) {
     
     ToggleFullscreen();
 
-    Vec zones = MakeZones(2, 2, 5, 10, 10, 10, 10, 400, 200);
+    // Vec zones = MakeZones(2, 2, 5, 10, 10, 10, 10, 400, 200);
 
     while (!WindowShouldClose()) {
         Vec *message = ActiveSocket_readMessage((ActiveSocket*)&server);
@@ -146,7 +147,10 @@ int main(void) {
         HapticService_update(&hapticService, GetFrameTime());
         BeginDrawing();
             ClearBackground(WHITE); 
-            DrawZones(zones);
+            DrawLine(0, TABLET_HEIGHT/2, TABLET_WIDTH, TABLET_HEIGHT/2, BLACK);
+            DrawLine(TABLET_WIDTH/2, TABLET_HEIGHT/2, TABLET_WIDTH/2, TABLET_HEIGHT, BLACK);
+            DrawLine(TABLET_WIDTH/2, 3*TABLET_HEIGHT/4, TABLET_WIDTH/2, 3*TABLET_HEIGHT/4, BLACK);
+            // DrawZones(zones);
             if (sessionList.session.rods != NULL) {
                 DrawRods(sessionList.session.rods);
             }
