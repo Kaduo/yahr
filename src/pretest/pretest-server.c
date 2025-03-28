@@ -100,6 +100,7 @@ int main(void) {
         exit(1);
     } else {
         fprintf(durations, "user_%d\n", userId);
+        fflush(durations);
     }
 
     int nbSessionPerList = 10;
@@ -139,7 +140,7 @@ int main(void) {
                 if (strcmp(messageStr, "GO_NEXT_USER") == 0) {
                     waitingForNextUser = false;
                     startTime = GetTime();
-                } 
+                }
                 else if (strcmp(messageStr, "CLOSE") == 0) {
                     printf("bye!\n");
                     break;
@@ -150,7 +151,7 @@ int main(void) {
             }
             else if (strcmp(messageStr, "CLOSE") == 0) {
                 printf("bye!\n");
-                CloseWindow();
+                break;
             }
             
             else if (strcmp(messageStr, "NEXT?") == 0) {
@@ -159,6 +160,7 @@ int main(void) {
                 double duration = GetTime() - startTime;
                 startTime = GetTime();
                 fprintf(durations, "%f\n", duration);
+                fflush(durations);
                 if(!SessionList_loadNextSession(&sessionList)) {
                     printf("next user or session \n");
                     if (sessionListId < nbSessionLists - 1) {
