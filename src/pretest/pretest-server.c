@@ -208,6 +208,7 @@ int main(void) {
 
         EndDrawing();
     }
+    fclose(durations);
     Server_closeConnection(&server);
     return 0;
 }
