@@ -89,7 +89,7 @@ int main(void) {
     }
 
     char durationFileName[100];
-    fprintf(durationFileName, "pre-test-durations-from-user-%d", userId);
+    sprintf(durationFileName, "pre-test-durations-from-user-%d", userId);
 
     FILE *durations = fopen(durationFileName, "w");
 
