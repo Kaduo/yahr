@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
     GuiSetStyle(DEFAULT, TEXT_SIZE, 30);
     GuiSetStyle(DEFAULT, LINE_COLOR, 20);
     // GuiSetFont(LoadFont("src/pretest/arial.ttf"));
-    // ToggleFullscreen();
+    ToggleFullscreen();
 
 
     while (!WindowShouldClose()) {
