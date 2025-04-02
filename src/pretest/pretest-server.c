@@ -186,7 +186,9 @@ int main(void) {
                             exit(1);
                         }
                         FreeRods(sessionList.session.rods);
-                        sessionList = NewSessionList(sessionFolderPaths[(sessionListId + flipped) % 2], saveFolderPaths[(sessionListId + flipped) % 2], userId, nbSessionPerList, &inputService, &hapticService);
+                        // sessionList = NewSessionList(sessionFolderPaths[(sessionListId + flipped) % 2], saveFolderPaths[(sessionListId + flipped) % 2], userId, nbSessionPerList, &inputService, &hapticService);
+                        sessionList = NewSessionList(sessionFolderPaths[sessionListId], saveFolderPaths[sessionListId], userId, nbSessionPerList, &inputService, &hapticService);
+
                     }
                     SessionList_loadNextSession(&sessionList);
                 }
