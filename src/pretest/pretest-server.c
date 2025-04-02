@@ -76,7 +76,7 @@ int main(void) {
                                     // "data/pre-test/results/colors+length/",
                                     "data/pre-test/results/colors+haptic+length/",
                                 };
-    int nbSessionLists = 2;
+    int nbSessionLists = 1;
 
     int userId;
 
