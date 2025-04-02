@@ -162,21 +162,21 @@ int main(void) {
     StandardRodFactory rodFactory = {.inputService = (InputService*)&inputService, .hapticService = &hapticService, .rodUnitHeight = 30};
 
 
-    // for (int i =0; i<10; i ++) {
-    //     int nbRodsPerLength[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-    //     nbRodsPerLength[rand() % NB_ROD_LENGTHS] += 1;
-    //     nbRodsPerLength[rand() % NB_ROD_LENGTHS] += 1;
-    //     nbRodsPerLength[rand() % NB_ROD_LENGTHS] += 1;
-    //     nbRodsPerLength[rand() % NB_ROD_LENGTHS] += 1;
-    //     Rods *rods = MakeFullRods(&rodFactory, nbRodsPerLength);
-    //     ShuffleRods(rods, 0, TABLET_WIDTH - 10*rodFactory.rodUnitHeight, 0, TABLET_HEIGHT/2. - rodFactory.rodUnitHeight);
-    //     char filename[60] = {0};
+    for (int i =0; i<10; i ++) {
+        int nbRodsPerLength[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+        nbRodsPerLength[rand() % NB_ROD_LENGTHS] += 1;
+        nbRodsPerLength[rand() % NB_ROD_LENGTHS] += 1;
+        nbRodsPerLength[rand() % NB_ROD_LENGTHS] += 1;
+        nbRodsPerLength[rand() % NB_ROD_LENGTHS] += 1;
+        Rods *rods = MakeFullRods(&rodFactory, nbRodsPerLength);
+        ShuffleRods(rods, 0, TABLET_WIDTH - 10*rodFactory.rodUnitHeight, 0, TABLET_HEIGHT/2. - rodFactory.rodUnitHeight);
+        char filename[60] = {0};
 
-    //     sprintf(filename, "data/pre-test/sessions/colors+haptic+length/session_%d.rods", i);
-    //     FILE *f = fopen(filename, "w");
-    //     WriteRods(f, rods);
-    //     fclose(f);
-    // }
+        sprintf(filename, "data/pre-test/sessions/colors+haptic+length/session_%d.rods", i);
+        FILE *f = fopen(filename, "w");
+        WriteRods(f, rods);
+        fclose(f);
+    }
 
     // for (int i =0; i<10; i ++) {
     //     int nbRodsPerLength[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
@@ -194,21 +194,21 @@ int main(void) {
     //     fclose(f);
     // }
 
-    for (int i =0; i<10; i ++) {
-        int nbRodsPerLength[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-        nbRodsPerLength[rand() % NB_ROD_LENGTHS] += 1;
-        nbRodsPerLength[rand() % NB_ROD_LENGTHS] += 1;
-        nbRodsPerLength[rand() % NB_ROD_LENGTHS] += 1;
-        nbRodsPerLength[rand() % NB_ROD_LENGTHS] += 1;
-        Rods *rods = OnlyHaptics(&rodFactory, nbRodsPerLength);
-        ShuffleRods(rods, 0, TABLET_WIDTH - 10*rodFactory.rodUnitHeight, 0, TABLET_HEIGHT/2. - rodFactory.rodUnitHeight);
-        char filename[60] = {0};
+    // for (int i =0; i<10; i ++) {
+    //     int nbRodsPerLength[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    //     nbRodsPerLength[rand() % NB_ROD_LENGTHS] += 1;
+    //     nbRodsPerLength[rand() % NB_ROD_LENGTHS] += 1;
+    //     nbRodsPerLength[rand() % NB_ROD_LENGTHS] += 1;
+    //     nbRodsPerLength[rand() % NB_ROD_LENGTHS] += 1;
+    //     Rods *rods = OnlyHaptics(&rodFactory, nbRodsPerLength);
+    //     ShuffleRods(rods, 0, TABLET_WIDTH - 10*rodFactory.rodUnitHeight, 0, TABLET_HEIGHT/2. - rodFactory.rodUnitHeight);
+    //     char filename[60] = {0};
 
-        sprintf(filename, "data/pre-test/sessions/haptic/session_%d.rods", i);
-        FILE *f = fopen(filename, "w");
-        WriteRods(f, rods);
-        fclose(f);
-    }
+    //     sprintf(filename, "data/pre-test/sessions/haptic/session_%d.rods", i);
+    //     FILE *f = fopen(filename, "w");
+    //     WriteRods(f, rods);
+    //     fclose(f);
+    // }
 
 
     // for (int i =0; i<10; i ++) {
@@ -228,21 +228,21 @@ int main(void) {
     // }
 
 
-    for (int i =0; i<10; i ++) {
-        int nbRodsPerLength[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-        nbRodsPerLength[rand() % NB_ROD_LENGTHS] += 1;
-        nbRodsPerLength[rand() % NB_ROD_LENGTHS] += 1;
-        nbRodsPerLength[rand() % NB_ROD_LENGTHS] += 1;
-        nbRodsPerLength[rand() % NB_ROD_LENGTHS] += 1;
-        Rods *rods = MakeColorAndLengths(&rodFactory, nbRodsPerLength);
-        ShuffleRods(rods, 0, TABLET_WIDTH - 10*rodFactory.rodUnitHeight, 0, TABLET_HEIGHT/2. - rodFactory.rodUnitHeight);
-        char filename[60] = {0};
+//     for (int i =0; i<10; i ++) {
+//         int nbRodsPerLength[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+//         nbRodsPerLength[rand() % NB_ROD_LENGTHS] += 1;
+//         nbRodsPerLength[rand() % NB_ROD_LENGTHS] += 1;
+//         nbRodsPerLength[rand() % NB_ROD_LENGTHS] += 1;
+//         nbRodsPerLength[rand() % NB_ROD_LENGTHS] += 1;
+//         Rods *rods = MakeColorAndLengths(&rodFactory, nbRodsPerLength);
+//         ShuffleRods(rods, 0, TABLET_WIDTH - 10*rodFactory.rodUnitHeight, 0, TABLET_HEIGHT/2. - rodFactory.rodUnitHeight);
+//         char filename[60] = {0};
 
-        sprintf(filename, "data/pre-test/sessions/colors+length/session_%d.rods", i);
-        FILE *f = fopen(filename, "w");
-        WriteRods(f, rods);
-        fclose(f);
-    }
-   return 0;
+//         sprintf(filename, "data/pre-test/sessions/colors+length/session_%d.rods", i);
+//         FILE *f = fopen(filename, "w");
+//         WriteRods(f, rods);
+//         fclose(f);
+//     }
+//    return 0;
 
 }
