@@ -17,6 +17,7 @@ struct InputService {
     Vector2 (*getMouseDelta)(InputService *me);
 };
 
+
 typedef enum ButtonStatus {
     PRESSED,
     RELEASED,
@@ -28,3 +29,16 @@ ButtonStatus GetButtonStatus(InputService *me, MouseButton button);
 
 InputService NewPhysicalInputService(void);
 
+
+typedef struct WriteTapInputService {
+    InputService super;
+    InputService inner;
+    FILE *save;
+} WriteTapInputService;
+
+typedef struct ReadTapInputService ReadTapInputService;
+
+struct ReadTapInputService {
+    InputService super;
+
+};

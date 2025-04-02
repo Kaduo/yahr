@@ -4,3 +4,4 @@
 /build/*
 /scrap/*
 /data/pre-test/latest_user_id
+/.venv

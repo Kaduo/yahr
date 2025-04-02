@@ -67,14 +67,14 @@ int main(void) {
     // SessionList sessionList = NewSessionList("data/pre-test/sessions/colors+haptic+length/", "data/pre-test/results/colors+haptic/", 0, 10, &inputService, &hapticService);
     int sessionListId = 0;
     char *sessionFolderPaths[] = {
-                                    "data/pre-test/sessions/haptic/",
-                                    "data/pre-test/sessions/colors+length/",
-                                    // "data/pre-test/sessions/colors+haptic+length/",
+                                    // "data/pre-test/sessions/haptic/",
+                                    // "data/pre-test/sessions/colors+length/",
+                                    "data/pre-test/sessions/colors+haptic+length/",
                                 };
     char *saveFolderPaths[] = {
-                                    "data/pre-test/results/haptic/",
-                                    "data/pre-test/results/colors+length/",
-                                    // "data/pre-test/results/colors+haptic+length/",
+                                    // "data/pre-test/results/haptic/",
+                                    // "data/pre-test/results/colors+length/",
+                                    "data/pre-test/results/colors+haptic+length/",
                                 };
     int nbSessionLists = 2;
 

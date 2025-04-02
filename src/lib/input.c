@@ -3,6 +3,7 @@
 #include "stdlib.h"
 #include "input.h"
 #include "stdio.h"
+#include "serialize.h"
 
 
 // TODO : add HistoryInputService
@@ -76,4 +77,55 @@ InputService NewPhysicalInputService(void) {
     InputService physicalInputService;
     PhysicalInputService_Construct(&physicalInputService);
     return physicalInputService;
+}
+
+void WriteTapInputService_poll(InputService *_me) {
+    WriteTapInputService *me = (WriteTapInputService*)_me;
+    Tap tap = {0};
+    bool writeTap = false;
+    me->inner.poll(&me->inner);
+    if (me->inner.isMouseButtonReleased(&me->inner, MOUSE_BUTTON_LEFT)
+    || me->inner.isMouseButtonPressed(&me->inner, MOUSE_BUTTON_LEFT)) {
+        writeTap = true;
+        tap.flipped = true;
+    } else {
+        writeTap = me->inner.isMouseButtonDown(&me->inner, MOUSE_BUTTON_LEFT);
+    }
+    tap.mousePosition = me->inner.getMousePosition(&me->inner);
+    tap.frameTime = GetFrameTime();
+    if (writeTap) {
+        WriteTap(me->save, tap);
+    }
+}
+
+
+bool WriteTapInputService_isMouseButtonPressed(InputService *_me, MouseButton button) {
+    WriteTapInputService *me = (WriteTapInputService*)_me;
+    return me->inner.isMouseButtonPressed(&me->inner, button);
+}
+
+bool WriteTapInputService_isMouseButtonReleased(InputService *_me, MouseButton button) {
+    WriteTapInputService *me = (WriteTapInputService*)_me;
+
+    return me->inner.isMouseButtonReleased(&me->inner, button);
+}
+
+
+bool WriteTapInputService_isMouseButtonDown(InputService *_me, MouseButton button) {
+    WriteTapInputService *me = (WriteTapInputService*)_me;
+
+    return me->inner.isMouseButtonDown(&me->inner, button);
+}
+
+
+bool WriteTapInputService_isMouseButtonUp(InputService *_me, MouseButton button) {
+    WriteTapInputService *me = (WriteTapInputService*)_me;
+
+    return me->inner.isMouseButtonUp(&me->inner, button);
+}
+
+Vector2 WriteTapInputService_getMouseDelta(InputService *_me) {
+    WriteTapInputService *me = (WriteTapInputService*)_me;
+
+    return me->inner.getMouseDelta(&me->inner);
 }
