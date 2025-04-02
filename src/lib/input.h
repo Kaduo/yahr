@@ -1,6 +1,7 @@
 #pragma once
 #include "raylib.h"
 #include "hashmap.h"
+#include "stdio.h"
 
 typedef struct InputService InputService;
 
