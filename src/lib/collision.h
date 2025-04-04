@@ -1,5 +1,16 @@
+#pragma once
 #include "raylib.h"
 #include "vec.h"
+#include "gameobject.h"
+#include "stdlib.h"
+#include "stdbool.h"
+#include "raylib.h"
+#include "coords.h"
+#include "stdio.h"
+#include "vec.h"
+
+
+
 #define BOUNDS_MAX_COUNT 22
 
 

@@ -1,21 +1,22 @@
-#include "input.h"
-#include "haptic.h"
-#include "rodfactory.h"
+#include "session.h"
 #include "serialize.h"
 #include "stdio.h"
 #include "stdlib.h"
 #include "string.h"
-#include "raylib.h"
-#include "session.h"
-#include "stdbool.h"
+
+
+
+// #include "input.h"
+// #include "haptic.h"
+// #include "rodfactory.h"
+// #include "raylib.h"
+// #include "stdbool.h"
 
 
 // Interface que je veux :
 // Charger une session (à partir d'un nom de fichier)
 // Possibilité de sauvegarder une session
 // Possibilité de sauvegarder les inputs
-
-
 
 
 void Session_loadFromFile(Session *me, FILE* file) {

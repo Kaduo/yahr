@@ -6,8 +6,8 @@
 #include <termios.h>
 #include <unistd.h>
 #include <asm-generic/termbits-common.h>
-#include "raymath.h"
 
+#include "raymath.h"
 
 // Low-level stuff
 

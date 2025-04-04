@@ -1,11 +1,4 @@
-#include "raylib.h"
-#include "coords.h"
-#include "stdio.h"
-#include "vec.h"
 #include "collision.h"
-#include "gameobject.h"
-#include "stdlib.h"
-#include "stdbool.h"
 
 bool StrictlyCollide(Rectangle rect1, Rectangle rect2)
 {

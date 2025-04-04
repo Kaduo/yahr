@@ -1,8 +1,19 @@
 #pragma once
 #include "raylib.h"
-#include "input.h"
+
+// #include "raylib.h"
 #include "vec.h"
+// #include "haptic.h"
+#include "input.h"
+// #include "raymath.h"
+// #include "stdlib.h"
+// #include "coords.h"
+// #include "vec.h"
+// #include "collision.h"
+// #include "stdio.h"
 #include "haptic.h"
+// #include "consts.h"
+
 
 typedef struct InputComponent InputComponent;
 typedef struct CollisionComponent CollisionComponent;

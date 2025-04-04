@@ -1,10 +1,6 @@
-#include "gameobject.h"
-#include "vec.h"
-#include "stdlib.h"
 #include "rodfactory.h"
-#include "haptic.h"
-#include "collision.h"
 #include "gameobject.h"
+#include "collision.h"
 
 Rods EmptyRods(int capacity)
 {

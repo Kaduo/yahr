@@ -1,13 +1,5 @@
-#include "input.h"
-#include "raylib.h"
-#include "raymath.h"
-#include "stdlib.h"
-#include "coords.h"
-#include "vec.h"
-#include "collision.h"
 #include "gameobject.h"
-#include "stdio.h"
-#include "haptic.h"
+#include "collision.h"
 #include "consts.h"
 
 typedef struct SelectableObject SelectableObject;

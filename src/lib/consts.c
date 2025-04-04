@@ -1,7 +1,4 @@
 #include "consts.h"
-#include "raylib.h"
-#include "haptic.h"
-#include "math.h"
 
 
 const Color ROD_COLOR_FOR_LENGTH[10] = {
@@ -130,7 +127,7 @@ const char *TABLET_IP = "localhost";
 const char *TABLET_IP = "localhost";
 #endif
 
-const char *TABLET_PORT = "31122";
+const char *TABLET_PORT = "37122";
 
 const Signal IMPULSE_SIGNAL = {
     .amplitude = 255,

@@ -1,13 +1,12 @@
 #pragma once
 #include "raylib.h"
-#include "hashmap.h"
+
 #include "stdio.h"
-#include "serialize.h"
-
-typedef struct InputService InputService;
-
+#include "tap.h"
 // TODO : add HistoryInputService
 // TODO : add option to consume inputs
+
+typedef struct InputService InputService;
 struct InputService {
     void (*poll)(InputService *me);
     // HashMap inputStatus;
@@ -18,7 +17,6 @@ struct InputService {
     bool (*isMouseButtonDown)(InputService *me, MouseButton button);
     Vector2 (*getMouseDelta)(InputService *me);
 };
-
 
 typedef enum ButtonStatus {
     PRESSED,

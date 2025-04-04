@@ -38,3 +38,6 @@ pbs: pb
 
 pbc: pb
     build/pretest_client
+
+buildv2test:
+    {{CC}} {{CC_ARGS}} src/v2/testv2.c -o {{BUILD_DIR}}/testv2

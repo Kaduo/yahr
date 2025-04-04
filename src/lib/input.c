@@ -1,12 +1,8 @@
-#include "raylib.h"
-#include "stdbool.h"
-#include "stdlib.h"
 #include "input.h"
-#include "stdio.h"
-#include "serialize.h"
-#include <stdbool.h>
+#include "raylib.h"
 #include "raymath.h"
-
+#include "string.h"
+#include "stdlib.h"
 
 // TODO : add HistoryInputService
 // TODO : add option to consume inputs
@@ -162,6 +158,21 @@ WriteTapInputService NewWriteTapInputService(InputService inner, char *filename)
     writeTapInputService.inner = inner;
     WriteTapInputService_Construct(&writeTapInputService);
     return writeTapInputService;
+}
+
+void WriteTapInputServiceCloseSave(WriteTapInputService *me) {
+    fclose(me->save);
+}
+
+void WriteTapInputServiceOpenSave(WriteTapInputService *me, char *filename) {
+    WriteTapInputServiceCloseSave(me);
+    FILE *save = fopen(filename, "w");
+    if (save != NULL) {
+        me->save = save;
+    } else {
+        perror(0);
+        exit(1);
+    }
 }
 
 

@@ -56,6 +56,7 @@ int main(void) {
     
     SetTraceLogLevel(LOG_ERROR);
     InitWindow(GetScreenWidth(), GetScreenHeight(), "layout_name");
+    SetTargetFPS(60);
 
     bool waitingForNextUser = false;
 
@@ -204,11 +205,12 @@ int main(void) {
         }
 
         if (sessionList.session.rods != NULL) {
+            inputService.super.poll(&inputService);
             UpdateRods(sessionList.session.rods);
         }
         HapticService_update(&hapticService, GetFrameTime());
         BeginDrawing();
-            ClearBackground(WHITE); 
+            ClearBackground(WHITE);
             if (waitingForNextUser) {
                 DrawText("Merci d'avoir participé !", TABLET_WIDTH/2, TABLET_HEIGHT/2, 20, BLACK);
             } else {
@@ -221,11 +223,13 @@ int main(void) {
                 }
     
             }
+        DrawFPS(0, 0);
 
         EndDrawing();
     }
     fclose(durations);
     Server_closeConnection(&server);
     CloseWindow();
+
     return 0;
 }

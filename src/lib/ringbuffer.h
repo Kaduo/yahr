@@ -1,3 +1,5 @@
+#pragma once
+
 typedef struct RingBuffer {
     void *contents;
     int capacity;

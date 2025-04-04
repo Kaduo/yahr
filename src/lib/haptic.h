@@ -1,10 +1,13 @@
 #pragma once
 #include "stdint.h"
-#include "vec.h"
-#include "stdbool.h"
 #include "ringbuffer.h"
-#include "stdio.h"
 #include "input.h"
+
+
+typedef struct HapticService HapticService;
+typedef struct Signal Signal;
+
+
 
 typedef enum SignalShape {
     SignalShape_NO_SIGNAL = 0,
@@ -16,7 +19,7 @@ typedef enum SignalShape {
 } SignalShape;
 
 
-typedef struct Signal {
+struct Signal {
     SignalShape signalShape;
     uint16_t period; // 0 is a bugged value and therefore should never be used
     uint8_t amplitude;
@@ -26,7 +29,7 @@ typedef struct Signal {
     uint8_t angle; // For values greater than 128, it's an isotropic (?) signal (doesn't care about the direction of the finger's movements)
     uint8_t pulses; // Number of periods that the signal plays out before stopping.  For values greater than 128, the signal lasts indefinitely
     float duration; // mine
-} Signal;
+};
 
 
 typedef struct HapticDriver HapticDriver;
@@ -45,8 +48,6 @@ typedef struct PhysicalHapticDriver {
 } PhysicalHapticDriver;
 
 PhysicalHapticDriver NewPhysicalHapticDriver(InputService *inputService);
-typedef struct HapticService HapticService;
-
 struct HapticService {
     HapticDriver *driver;
     RingBuffer signalQueue;
