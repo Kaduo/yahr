@@ -119,6 +119,7 @@ Rod *ReadRod(FILE *file) {
     return NewRod(rect, color, NULL, NULL, NULL, signal);
 }
 
+
 void WriteRods(FILE *file, const Rods *rods) {
     fprintf(file, "nbRods %d\n", rods->rods.size);
     for (int i = 0; i < rods->rods.size; i++) {

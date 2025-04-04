@@ -4,6 +4,7 @@
 #include "coords.h"
 #include "collision2.h"
 #include "consts.h"
+#include "serialize.h"
 
 Rod2 *RodSystem_getSelectedRod(RodSystem *me) {
     if (me->selectedRodId >= 0) {
@@ -155,6 +156,7 @@ void RodSystem_drawRods(RodSystem *me) {
     for (int i =0; i<me->rods.size; i++) {
         Rod2 rod = *(Rod2*)IndexVec(&me->rods, i);
         DrawRectangleRec(rod.rect, rod.color);
+        DrawRectangleLinesEx(rod.rect, 1, BLACK);
     }
 }
 
@@ -170,6 +172,92 @@ void RodSystem_updateAndDrawRods(RodSystem *me) {
     RodSystem_drawRods(me);
     printf("draw update\n");
 
+}
+
+void RodSystem_shuffleRods(RodSystem *me, float xMin, float xMax, float yMin, float yMax) {
+    for (int i =0; i < me->rods.size; i ++) {
+        Rod2 *rod = (Rod2*)IndexVec(&me->rods, i);
+        CollisionInfo2 collisionInfo;
+        float x;
+        float y;
+
+        Rectangle targetRectangle;
+        Rectangle rodRectangle = rod->rect;
+
+        do {
+            x = xMin + (float)rand()/(float)(RAND_MAX/(xMax - xMin));
+            y = yMin + (float)rand()/(float)(RAND_MAX/(yMax - yMin));
+            targetRectangle = CloneMove2(rodRectangle, (Vector2){x, y});
+            collisionInfo = ComputeCollisionInfo2(me, targetRectangle);
+        } while (collisionInfo.collided);
+        rod->rect.x = x;
+        rod->rect.y = y;
+    }
+}
+
+void RodSystem_addRod(RodSystem *me, Rod2 rod) {
+    PushVec(&me->rods, &rod);
+}
+
+void WriteRod2(FILE *file, Rod2 rod) {
+    fprintf(file, "rod\n");
+    WriteRect(file, rod.rect);
+    WriteColor(file, (rod.color));
+    WriteSignal(file, rod.signal);
+    fprintf(file, "endrod\n");
+}
+
+Rod2 ReadRod2(FILE *file) {
+    fscanf(file, "rod\n");
+    Rectangle rect = ReadRect(file);
+    Color color = ReadColor(file);
+    Signal signal = ReadSignal(file);
+    fscanf(file, "endrod\n");
+    return (Rod2){
+        .color = color,
+        .signal = signal, 
+        .rect = rect,
+    };
+}
+
+
+
+void SaveRodSystem(RodSystem *me, char *filename) {
+    FILE *save = fopen(filename, "w");
+    if (save != NULL) {
+        fprintf(save, "nbRods %d\n", me->rods.size);
+        for (int i = 0; i<me->rods.size; i++) {
+            WriteRod2(save, *(Rod2*)IndexVec(&me->rods, i));
+        }
+    } else {
+        perror(0);
+        exit(1);
+    }
+}
+
+void RodSystem_clear(RodSystem *me) {
+    me->collided= false;
+    me->previousCollided = false;
+    me->selectedRodId = -1;
+    me->previousSelectedRodId = -1;
+    me->selectionOffset = (Vector2){0, 0};
+    ClearVec(&me->rods);
+}
+
+void RodSystem_loadRods(RodSystem *me, char *filename) {
+    RodSystem_clear(me);
+    FILE *save=  fopen(filename, "r");
+    if (save != NULL) {
+        int nbRods;
+        fscanf(save, "nbRods %d\n", &nbRods);
+        for (int i = 0; i <nbRods; i++) {
+            Rod2 rod = ReadRod2(save);
+            PushVec(&me->rods, &rod);
+        }
+    } else {
+        perror(0);
+        exit(1);
+    }
 }
 
 RodSystem NewRodSystem(InputService *inputService, HapticService *hapticService) {

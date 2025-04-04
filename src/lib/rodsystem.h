@@ -23,3 +23,4 @@ typedef struct RodSystem {
 Rod2 *RodSystem_getSelectedRod(RodSystem *me);
 RodSystem NewRodSystem(InputService *inputService, HapticService *hapticService);
 void RodSystem_updateAndDrawRods(RodSystem *me);
+void RodSystem_loadRods(RodSystem *me, char *filename);

@@ -12,6 +12,9 @@
 #include "vec.h"
 #include "rodsystem.h"
 
+// TODO :
+// 
+
 int main(void) {
     InputService inputService = NewPhysicalInputService();
     PhysicalHapticDriver hapticDriver = NewPhysicalHapticDriver(&inputService);
@@ -22,28 +25,29 @@ int main(void) {
     InitWindow(1000, 1000, "v2");
 
     RodSystem rodSystem = NewRodSystem(&inputService, &hapticService);
-    Rod2 rod1 = (Rod2){
-        .color = RED,
-        .rect = {10, 10, 90, 30},
-        .signal = RodSignalForLength(2),
-    };
+    RodSystem_loadRods(&rodSystem, "/home/balthazar/job/research/Cuisenaire_rods/Code/yahr/data/pre-test/sessions/colors+haptic+length/session_0.rods");
+    // Rod2 rod1 = (Rod2){
+    //     .color = RED,
+    //     .rect = {10, 10, 90, 30},
+    //     .signal = RodSignalForLength(2),
+    // };
 
-    Rod2 rod2 = (Rod2){
-        .color = BLUE,
-        .rect = {100, 100, 30, 120},
-        .signal = RodSignalForLength(3),
-    };
-    Rod2 rod3 = (Rod2){
-        .color = GREEN,
-        .rect = {400, 100, 20, 120},
-        .signal = RodSignalForLength(5),
-    };
-    printf("hi !\n");
+    // Rod2 rod2 = (Rod2){
+    //     .color = BLUE,
+    //     .rect = {100, 100, 30, 120},
+    //     .signal = RodSignalForLength(3),
+    // };
+    // Rod2 rod3 = (Rod2){
+    //     .color = GREEN,
+    //     .rect = {400, 100, 20, 120},
+    //     .signal = RodSignalForLength(5),
+    // };
+    // printf("hi !\n");
 
-    PushVec(&rodSystem.rods, &rod1);
-    PushVec(&rodSystem.rods, &rod2);
-    PushVec(&rodSystem.rods, &rod3);
-    printf("huh\n");
+    // PushVec(&rodSystem.rods, &rod1);
+    // PushVec(&rodSystem.rods, &rod2);
+    // PushVec(&rodSystem.rods, &rod3);
+    // printf("huh\n");
 
     while (!WindowShouldClose()) {
         inputService.poll(&inputService);
