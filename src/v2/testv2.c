@@ -46,6 +46,9 @@ int main(void) {
     printf("huh\n");
 
     while (!WindowShouldClose()) {
+        inputService.poll(&inputService);
+        HapticService_update(&hapticService, GetFrameTime());
+
         BeginDrawing();
         ClearBackground(WHITE);
         printf("hihishi\n");
