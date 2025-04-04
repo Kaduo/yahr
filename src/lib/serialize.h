@@ -1,5 +1,8 @@
+#pragma once
 #include "rodfactory.h"
 #include "stdio.h"
+#include "input.h"
+#include "haptic.h"
 
 typedef struct Tap {
     float frameTime;

@@ -4,6 +4,8 @@
 #include "input.h"
 #include "stdio.h"
 #include "serialize.h"
+#include <stdbool.h>
+#include "raymath.h"
 
 
 // TODO : add HistoryInputService
@@ -96,6 +98,7 @@ void WriteTapInputService_poll(InputService *_me) {
     if (writeTap) {
         WriteTap(me->save, tap);
     }
+    fflush(me->save);
 }
 
 
@@ -124,8 +127,110 @@ bool WriteTapInputService_isMouseButtonUp(InputService *_me, MouseButton button)
     return me->inner.isMouseButtonUp(&me->inner, button);
 }
 
+Vector2 WriteTapInputService_getMousePosition(InputService *_me) {
+    WriteTapInputService *me = (WriteTapInputService*)_me;
+    return me->inner.getMousePosition(&me->inner);
+}
+
 Vector2 WriteTapInputService_getMouseDelta(InputService *_me) {
     WriteTapInputService *me = (WriteTapInputService*)_me;
 
     return me->inner.getMouseDelta(&me->inner);
 }
+
+void WriteTapInputService_Construct(WriteTapInputService *me) {
+    me->super.poll = WriteTapInputService_poll;
+    me->super.getMousePosition = WriteTapInputService_getMousePosition;
+    me->super.isMouseButtonReleased = WriteTapInputService_isMouseButtonReleased;
+    me->super.isMouseButtonPressed = WriteTapInputService_isMouseButtonPressed;
+    me->super.isMouseButtonUp = WriteTapInputService_isMouseButtonUp;
+    me->super.isMouseButtonDown= WriteTapInputService_isMouseButtonDown;
+    me->super.getMouseDelta = WriteTapInputService_getMouseDelta;
+}
+
+
+WriteTapInputService NewWriteTapInputService(InputService inner, char *filename) {
+
+    WriteTapInputService writeTapInputService = {0};
+    FILE *save = fopen(filename, "w");
+    if (save != NULL) {
+        writeTapInputService.save = save;
+    } else {
+        perror(0);
+        exit(1);
+    }
+    writeTapInputService.inner = inner;
+    WriteTapInputService_Construct(&writeTapInputService);
+    return writeTapInputService;
+}
+
+
+void ReadTapInputService_poll(InputService *_me) {
+    ReadTapInputService *me = (ReadTapInputService*)_me;
+    me->oldTap = me->currentTap;
+    me->currentTap = ReadTap(me->save);
+    if (me->currentTap.flipped) {
+        me->leftMouseButtonDown = !me->leftMouseButtonDown;
+    }
+}
+
+bool ReadTapInputService_isMouseButtonPressed(InputService *_me, MouseButton button) {
+    ReadTapInputService *me = (ReadTapInputService*)_me;
+    if (button == MOUSE_BUTTON_LEFT) {
+        return me->leftMouseButtonDown && me->currentTap.flipped;
+    } else {
+        return false;
+    }
+}
+
+bool ReadTapInputService_isMouseButtonReleased(InputService *_me, MouseButton button) {
+    ReadTapInputService *me = (ReadTapInputService*)_me;
+
+    if (button == MOUSE_BUTTON_LEFT) {
+        return !me->leftMouseButtonDown && me->currentTap.flipped;
+    } else {
+        return false;
+    }
+}
+
+
+bool ReadTapInputService_isMouseButtonDown(InputService *_me, MouseButton button) {
+    ReadTapInputService *me = (ReadTapInputService*)_me;
+    if (button == MOUSE_BUTTON_LEFT) {
+        return me->leftMouseButtonDown;
+    } else {
+        return false;
+    }
+
+}
+
+
+bool ReadTapInputService_isMouseButtonUp(InputService *_me, MouseButton button) {
+    ReadTapInputService *me = (ReadTapInputService*)_me;
+    if (button == MOUSE_BUTTON_LEFT) {
+        return !me->leftMouseButtonDown;
+    } else {
+        return false;
+    }
+}
+
+Vector2 ReadTapInputService_getMousePosition(InputService *_me) {
+    ReadTapInputService *me = (ReadTapInputService*)_me;
+    return me->currentTap.mousePosition;
+}
+
+Vector2 ReadTapInputService_getMouseDelta(InputService *_me) {
+    ReadTapInputService *me = (ReadTapInputService*)_me;
+    return Vector2Subtract(me->currentTap.mousePosition, me->oldTap.mousePosition);
+}
+
+void ReadTapInputService_Construct(ReadTapInputService *me) {
+    me->super.poll = ReadTapInputService_poll;
+    me->super.getMousePosition = ReadTapInputService_getMousePosition;
+    me->super.isMouseButtonReleased = ReadTapInputService_isMouseButtonReleased;
+    me->super.isMouseButtonPressed = ReadTapInputService_isMouseButtonPressed;
+    me->super.isMouseButtonUp = ReadTapInputService_isMouseButtonUp;
+    me->super.isMouseButtonDown= ReadTapInputService_isMouseButtonDown;
+    me->super.getMouseDelta = ReadTapInputService_getMouseDelta;
+}
+

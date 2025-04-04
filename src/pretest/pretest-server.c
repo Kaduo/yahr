@@ -61,7 +61,8 @@ int main(void) {
 
     double startTime = 0;
 
-    InputService inputService = NewPhysicalInputService();
+    InputService innerInputService = NewPhysicalInputService();
+    WriteTapInputService inputService = NewWriteTapInputService(innerInputService, "save_test!");
     PhysicalHapticDriver hapticDriver = NewPhysicalHapticDriver(&inputService);
     HapticService hapticService = NewHapticService((HapticDriver*)&hapticDriver);
     // SessionList sessionList = NewSessionList("data/pre-test/sessions/colors+haptic+length/", "data/pre-test/results/colors+haptic/", 0, 10, &inputService, &hapticService);

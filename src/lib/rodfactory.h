@@ -1,6 +1,9 @@
 #pragma once
 #include "gameobject.h"
 #include "raylib.h"
+#include "input.h"
+#include "signal.h"
+#include "haptic.h"
 
 typedef struct Rods {
     Vec rods;

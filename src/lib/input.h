@@ -2,6 +2,7 @@
 #include "raylib.h"
 #include "hashmap.h"
 #include "stdio.h"
+#include "serialize.h"
 
 typedef struct InputService InputService;
 
@@ -41,5 +42,10 @@ typedef struct ReadTapInputService ReadTapInputService;
 
 struct ReadTapInputService {
     InputService super;
-
+    FILE *save;
+    bool leftMouseButtonDown;
+    Tap currentTap;
+    Tap oldTap;
 };
+
+WriteTapInputService NewWriteTapInputService(InputService inner, char *filename);
