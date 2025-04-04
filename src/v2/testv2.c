@@ -25,7 +25,7 @@ int main(void) {
     InitWindow(1000, 1000, "v2");
 
     RodSystem rodSystem = NewRodSystem(&inputService, &hapticService);
-    RodSystem_loadRods(&rodSystem, "/home/balthazar/job/research/Cuisenaire_rods/Code/yahr/data/pre-test/sessions/colors+haptic+length/session_0.rods");
+    RodSystem_loadRods(&rodSystem, "data/pre-test/sessions/colors+haptic+length/session_0.rods");
     // Rod2 rod1 = (Rod2){
     //     .color = RED,
     //     .rect = {10, 10, 90, 30},
