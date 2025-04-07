@@ -179,7 +179,6 @@ void HapticDriver_update(HapticDriver *me, float frameTime) {
 };
 
 void PhysicalHapticDriver_setSignal(HapticDriver *_me, Signal signal) {
-    printf("uh!\n");
     PhysicalHapticDriver *me = (PhysicalHapticDriver*)_me;
     SetSignal(me->fd, signal);
 }

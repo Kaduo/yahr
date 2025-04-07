@@ -70,7 +70,7 @@ int main(int argc, char *argv[]) {
     Problem problem;
     char *statement;
 
-    FILE *answers = fopen("hugo.answers", "w");
+    FILE *answers = fopen("deleteme.answers", "w");
 
     if (answers == NULL) {
         perror(0);
@@ -128,7 +128,6 @@ int main(int argc, char *argv[]) {
 
 
         EndDrawing();
-        printf("HERE?\n");
     }
     fclose(answers);
     // ActiveSocket_writeStr(&socket, "CLOSE");

@@ -3,6 +3,8 @@
 #include "raymath.h"
 #include "string.h"
 #include "stdlib.h"
+#include "serialize.h"
+#include "time.h"
 
 // TODO : add HistoryInputService
 // TODO : add option to consume inputs
@@ -163,8 +165,8 @@ WriteTapInputService NewWriteTapInputService(InputService inner, char *filename)
 void WriteTapInputServiceCloseSave(WriteTapInputService *me) {
     if (!me->isClosed) {
         fprintf(me->save, "endsave\n");
-        fclose(me->save);   
-        me->isClosed = true; 
+        fclose(me->save);
+        me->isClosed = true;
     }
 }
 
@@ -173,6 +175,7 @@ void WriteTapInputServiceOpenSave(WriteTapInputService *me, char *filename) {
     FILE *save = fopen(filename, "w");
     if (save != NULL) {
         me->save = save;
+        fprintf(me->save, "%u\n", (unsigned)time(NULL));
         me->isClosed = false;
     } else {
         perror(0);
@@ -182,18 +185,15 @@ void WriteTapInputServiceOpenSave(WriteTapInputService *me, char *filename) {
 
 
 void ReadTapInputService_poll(InputService *_me) {
-    printf("hu\n\n");
     ReadTapInputService *me = (ReadTapInputService*)_me;
     if (feof(me->save)) {
         printf("FINITO\n");
     }
 
     if (GetTime() > me->currentTap.time) {
-        printf("whaa\n");
 
         me->oldTap = me->currentTap;
         me->currentTap = ReadTap(me->save);
-        printf("hein!\n");
         if (me->currentTap.flipped) {
             me->leftMouseButtonDown = !me->leftMouseButtonDown;
         }
@@ -263,6 +263,8 @@ void ReadTapInputService_Construct(ReadTapInputService *me) {
 ReadTapInputService NewReadTapInputService(char *filename) {
     FILE *save = fopen(filename, "r");
     if (save != NULL) {
+        char con[50];
+        ReadStringTillSpace(save, con);
         ReadTapInputService readTapInputService = {
             .currentTap = {0},
             .leftMouseButtonDown = false,

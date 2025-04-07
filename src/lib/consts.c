@@ -6,19 +6,17 @@ const Color ROD_COLOR_FOR_LENGTH[10] = {
                                         WHITE,                  // WHITE
                                         {253, 46, 99, 255},     // RED 
                                         {41, 222, 182, 255},    // LIGHT GREEN
-                                        {253, 74, 185, 255},    // FUSCHIA
+                                        {253, 74, 185, 255},    // MAUVE
                                         {238, 211, 121, 255},   // JAUNE
                                         {17, 163, 155, 255},    // DARK GREEN
                                         {62, 64, 69, 255},      // BLACK
-                                        {177,82,75, 255},       // BROWN
+                                        {177,82, 75, 255},       // BROWN
                                         {50, 144, 202, 255},    // BLUE
                                         {216, 157, 118, 255}    // ORANGE
                                     };
 
 
 bool IsEqualColors(Color color1, Color color2) {
-    printf("%d %d %d %d\n", color1.a, color1.r, color1.g, color1.g);
-    printf("%d %d %d %d\n", color2.a, color2.r, color2.g, color2.g);
 
     return color1.a == color2.a && color1.g == color2.g && color1.b == color2.b && color1.r == color2.r;
 }
@@ -30,7 +28,6 @@ char *GetColorName(Color color) {
             break;
         }
     }
-    printf("HMMMAAAA%d", i);
     switch (i)
     {
     case 0:
@@ -43,7 +40,7 @@ char *GetColorName(Color color) {
         return "vert clair";
         break;
     case 3:
-        return "fuschia";
+        return "mauve";
     case 4:
         return "jaune";
     case 5:
@@ -97,8 +94,6 @@ const RodGroup ROD_GROUP_FOR_LENGTH[NB_ROD_LENGTHS] = {
 };
 
 uint8_t NormalizeBikeShedSqrtLog(int l, float min, float max) {
-    printf("blablabla %f\n",(max-min)/(sqrt(-log(1./10.))));
-    printf("hophop %f\n", sqrt(-log((l+1)/10))*(max-min)/(sqrt(-log(1./10))) + min);
     return (uint8_t)(sqrt(-log((l+1.)/10.))*(max-min)/(sqrt(-log(1./10.))) + min);
 }
 

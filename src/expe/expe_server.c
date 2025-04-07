@@ -28,7 +28,6 @@ int GetCurrentUserId() {
 char *GetUserDirPath(int userId) {
     char *path = calloc(50, sizeof(char));
     sprintf(path, "expe_results_user_%d", userId);
-    printf("smdfsf %s\n", path);
     return path;
 }
 
@@ -38,7 +37,6 @@ char *GetCurrentUserDirPath() {
 
 int MakeNewUser() {
     int id = GetCurrentUserId();
-    printf("hih\n");
     FILE *latestUserIdFile = fopen("latest_user_id_expe", "w");
     if (latestUserIdFile != NULL) {
         fprintf(latestUserIdFile, "%d", (id+1));
@@ -47,7 +45,6 @@ int MakeNewUser() {
         perror(0);
         exit(1);
     }
-    printf("Sdf\n");
 
     char *nextUserDirPath = GetUserDirPath(id+1);
     MakeDirectory(nextUserDirPath);
@@ -79,7 +76,6 @@ void DrawZones() {
 void SaveCurrentUser(int problemId, RodSystem *rodSystem, WriteTapInputService *inputService) {
     char path1[50] = {0};
     sprintf(path1, "%s/%s%d%s", GetCurrentUserDirPath(), "problem_", problemId, ".rods");
-    printf("ouuuu%s\n", path1);
     SaveRodSystem(rodSystem, path1);
     WriteTapInputServiceCloseSave(inputService);
 }
@@ -139,7 +135,6 @@ int main() {
                     sprintf(path2, "data/experiment/problemes/problem_%d.rods", problemId);
 
                     RodSystem_loadRods(&rodSystem, path2);
-                    printf("uh\n");
                 } else {
                     break;
                 }

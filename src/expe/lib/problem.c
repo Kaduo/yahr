@@ -138,7 +138,6 @@ Problem MakeRandomInterestingProblem() {
         prob.mysteryRod = GetRod2ForN(GetRandomValue(1, 10));
         int length = GetRandomValue(1, 10);
         prob.knownLength = length;
-        printf("%d euhuhuh\n", prob.knownRod.color.r);
     } while (!IsProblemInteresting(prob));
 
     return prob;

@@ -14,9 +14,9 @@
 #include "problem.h"
 
 int main(void) {
-    InputService innerInputService = NewPhysicalInputService();
-    WriteTapInputService inputService = NewWriteTapInputService(innerInputService, "test_save.tap");
-    // ReadTapInputService inputService = NewReadTapInputService("test_save.tap");
+    // InputService innerInputService = NewPhysicalInputService();
+    // WriteTapInputService inputService = NewWriteTapInputService(innerInputService, "test_save.tap");
+    ReadTapInputService inputService = NewReadTapInputService("/home/balthazar/job/research/Cuisenaire_rods/Code/yahr/expe_results_user_41/problem_2.tap");
     PhysicalHapticDriver hapticDriver = NewPhysicalHapticDriver((InputService*)&inputService);
     HapticService hapticService = NewHapticService((HapticDriver*)&hapticDriver);
 
@@ -26,10 +26,9 @@ int main(void) {
     Problem prob = MakeRandomInterestingProblem();
     RodSystem rodSystem = NewRodSystem(&inputService, &hapticService);
     // RodSystem_loadRods(&rodSystem, "data/pre-test/sessions/colors+haptic+length/session_0.rods");
-    printf("so far so good ?\n");
-    rodSystem.rods = GetRandomRodsForProblem(prob, 15);
+    // rodSystem.rods = GetRandomRodsForProblem(prob, 15);
+    RodSystem_loadRods(&rodSystem, "/home/balthazar/job/research/Cuisenaire_rods/Code/yahr/data/experiment/problemes/problem_2.rods");
 
-    printf("hehehe\n");
     while (!WindowShouldClose()) {
         ((InputService*)(&inputService))->poll((InputService*)&inputService);
         HapticService_update(&hapticService, GetFrameTime());
@@ -37,8 +36,9 @@ int main(void) {
         BeginDrawing();
         ClearBackground(WHITE);
         RodSystem_updateAndDrawRods(&rodSystem);
+        DrawCircle(inputService.super.getMousePosition(&inputService.super).x, inputService.super.getMousePosition(&inputService.super).y, 3, RED);
         EndDrawing();
     }
-    WriteTapInputServiceCloseSave(&inputService);
+    // WriteTapInputServiceCloseSave(&inputService);
     return 0;
 }

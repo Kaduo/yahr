@@ -168,18 +168,14 @@ void ShuffleRods2(Vec *rods, float xMin, float xMax, float yMin, float yMax) {
         int myXMax = xMax - rod->rect.width;
         float x;
         float y;
-        printf("here?sdfsf\n");
 
         Rectangle targetRectangle;
         Rectangle rodRectangle = rod->rect;
-        printf("nonsod\n");
 
         do {
             x = xMin + (float)rand()/(float)(RAND_MAX/(myXMax - xMin));
             y = yMin + (float)rand()/(float)(RAND_MAX/(myYMax - yMin));
-            printf("slkdflmsjfldmsfAHHA\n");
             targetRectangle = CloneMove2(rodRectangle, (Vector2){x, y});
-            printf("hsmljfd\n");
             collisionInfo = ComputeCollisionInfo2(rods, i, targetRectangle);
         } while (collisionInfo.collided);
         rod->rect.x = x;
