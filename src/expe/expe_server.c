@@ -103,8 +103,9 @@ int main() {
     Server_initAndWaitForConnection(&server, TABLET_IP, TABLET_PORT);
     
     SetTraceLogLevel(LOG_ERROR);
-    InitWindow(TABLET_WIDTH, TABLET_HEIGHT, "layout_name");
+    InitWindow(GetScreenWidth(), GetScreenHeight(), "layout_name");
     SetTargetFPS(60);
+    ToggleFullscreen();
 
     int problemId = 0;
     int userId = MakeNewUser();

@@ -61,7 +61,7 @@ int main(int argc, char *argv[]) {
     ActiveSocket_connectToServer(&socket, TABLET_IP, TABLET_PORT, SOCK_NONBLOCK); // TODO : UNCOMMENT ME !!!!
 
     SetTraceLogLevel(LOG_ERROR);
-    InitWindow(1000, 1000, "Client");
+    InitWindow(GetScreenWidth(), GetScreenHeight(), "Client");
     GuiSetStyle(DEFAULT, TEXT_SIZE, 30);
     GuiSetStyle(DEFAULT, LINE_COLOR, 20);
     ToggleFullscreen();
