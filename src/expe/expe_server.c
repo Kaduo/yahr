@@ -158,6 +158,6 @@ int main() {
         RodSystem_updateAndDrawRods(&rodSystem);
         EndDrawing();
     }
-    // WriteTapInputServiceCloseSave(&inputService);
+    WriteTapInputServiceCloseSave(&inputService);
     return 0;
 }

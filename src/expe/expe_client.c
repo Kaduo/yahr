@@ -95,7 +95,7 @@ int main(int argc, char *argv[]) {
             }
             if (problemId < 15 && problemId >= 5) {
                 problem = GetProblemById(problemId);
-                char *statement = DisplayProblem(problem);
+                statement = DisplayProblem(problem);
 
             }
         }
@@ -108,15 +108,14 @@ int main(int argc, char *argv[]) {
         //     }
         // }
 
-        printf("ok so far\n");
         BeginDrawing();
             ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR))); 
 
             if (problemId >= 5 && problemId < 15) {
-                GuiLabel((Rectangle){0, 0, 10000, 1000}, statement);
+                GuiLabel((Rectangle){200, 400, 5000, 50}, statement);
                 float labelWidth = 1000;
                 float labelHeight = 30;
-                GuiTextBox((Rectangle){130, 20, 500, 50}, fracInput, 50, true);
+                GuiTextBox((Rectangle){300, 500, 500, 50}, fracInput, 50, true);
     
             } else {
                 float labelWidth = 1000;
