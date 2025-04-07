@@ -91,21 +91,21 @@ bool CollidedWithAnotherRod2(const CollisionInfo2 collisionInfo) {
   return collisionInfo.strictlyCollided;
 }
 
-CollisionInfo2 ComputeCollisionInfo2(RodSystem *rodSystem, Rectangle targetRectangle) {
+CollisionInfo2 ComputeCollisionInfo2(Vec *rods, int selectedRodId, Rectangle targetRectangle) {
 
   CollisionInfo2 collisionInfo = {.strictlyCollided = false, .collided = false};
 
-  Rod2 *selectedRod = RodSystem_getSelectedRod(rodSystem);
+  Rod2 *selectedRod = (Rod2*)IndexVec(rods, selectedRodId);
   Rectangle selectedRectangle = selectedRod->rect;
   // while ((otherRod = (Rod**)world->next(world)) != NULL)
-  for (int i = 0; i<rodSystem->rods.size; i++)
+  for (int i = 0; i<rods->size; i++)
   {
 
-    if (i == rodSystem->selectedRodId) {
+    if (i == selectedRodId) {
       continue;
     }
 
-    Rod2 *otherRod = (Rod2*)IndexVec(&rodSystem->rods, i);
+    Rod2 *otherRod = (Rod2*)IndexVec(rods, i);
     Rectangle otherRectangle = otherRod->rect;
     // THIS CHECK SHOULD BE USELESS!
     // if (otherRectangle == movingRectangle) {

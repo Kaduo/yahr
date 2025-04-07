@@ -90,7 +90,7 @@ void WriteTapInputService_poll(InputService *_me) {
         writeTap = me->inner.isMouseButtonDown(&me->inner, MOUSE_BUTTON_LEFT);
     }
     tap.mousePosition = me->inner.getMousePosition(&me->inner);
-    tap.frameTime = GetFrameTime();
+    tap.time = GetTime();
     if (writeTap) {
         WriteTap(me->save, tap);
     }
@@ -161,7 +161,11 @@ WriteTapInputService NewWriteTapInputService(InputService inner, char *filename)
 }
 
 void WriteTapInputServiceCloseSave(WriteTapInputService *me) {
-    fclose(me->save);
+    if (!me->isClosed) {
+        fprintf(me->save, "endsave\n");
+        fclose(me->save);   
+        me->isClosed = true; 
+    }
 }
 
 void WriteTapInputServiceOpenSave(WriteTapInputService *me, char *filename) {
@@ -169,6 +173,7 @@ void WriteTapInputServiceOpenSave(WriteTapInputService *me, char *filename) {
     FILE *save = fopen(filename, "w");
     if (save != NULL) {
         me->save = save;
+        me->isClosed = false;
     } else {
         perror(0);
         exit(1);
@@ -177,11 +182,21 @@ void WriteTapInputServiceOpenSave(WriteTapInputService *me, char *filename) {
 
 
 void ReadTapInputService_poll(InputService *_me) {
+    printf("hu\n\n");
     ReadTapInputService *me = (ReadTapInputService*)_me;
-    me->oldTap = me->currentTap;
-    me->currentTap = ReadTap(me->save);
-    if (me->currentTap.flipped) {
-        me->leftMouseButtonDown = !me->leftMouseButtonDown;
+    if (feof(me->save)) {
+        printf("FINITO\n");
+    }
+
+    if (GetTime() > me->currentTap.time) {
+        printf("whaa\n");
+
+        me->oldTap = me->currentTap;
+        me->currentTap = ReadTap(me->save);
+        printf("hein!\n");
+        if (me->currentTap.flipped) {
+            me->leftMouseButtonDown = !me->leftMouseButtonDown;
+        }
     }
 }
 
@@ -245,3 +260,19 @@ void ReadTapInputService_Construct(ReadTapInputService *me) {
     me->super.getMouseDelta = ReadTapInputService_getMouseDelta;
 }
 
+ReadTapInputService NewReadTapInputService(char *filename) {
+    FILE *save = fopen(filename, "r");
+    if (save != NULL) {
+        ReadTapInputService readTapInputService = {
+            .currentTap = {0},
+            .leftMouseButtonDown = false,
+            .oldTap = {0},
+            .save = save,
+        };
+        ReadTapInputService_Construct(&readTapInputService);
+        return  readTapInputService;
+    } else {
+        perror(0);
+        exit(1);
+    }
+}

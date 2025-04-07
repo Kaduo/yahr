@@ -41,6 +41,6 @@ typedef struct CollisionInfo2 {
 } CollisionInfo2;
 
 Rectangle CloneMove2(Rectangle rect, Vector2 targetTopLeft);
-CollisionInfo2 ComputeCollisionInfo2(RodSystem *rodSystem, Rectangle targetRectangle);
+CollisionInfo2 ComputeCollisionInfo2(Vec *rods, int selectedRodId, Rectangle targetRectangle);
 bool StrictlyCollide2(Rectangle rect1, Rectangle rect2);
 bool CollidedWithAnotherRod2(const CollisionInfo2 collisionInfo);

@@ -51,7 +51,6 @@ int main(void) {
 
     ServerState serverState = SERVER_WAITING_FOR_CONNECTION;
     Server_initAndWaitForConnection(&server, TABLET_IP, TABLET_PORT); // TODO !!! UNCOMMENT ME !!
-    // Server_initAndWaitForConnection(&server, "localhost", TABLET_PORT); // TODO : COMMENT ME, ONLY FOR DEBUG
     serverState = SERVER_WAITING_FOR_INSTRUCTION;
     
     SetTraceLogLevel(LOG_ERROR);

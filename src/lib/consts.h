@@ -1,6 +1,7 @@
 #pragma once
 #include "raylib.h"
 #include "haptic.h"
+#include "rodsystem.h"
 
 #define UNIT_ROD_HEIGHT 30
 #define TABLET_WIDTH 1024
@@ -14,3 +15,5 @@ extern const char *TABLET_IP;
 extern const char *TABLET_PORT;
 extern const Signal IMPULSE_SIGNAL;
 extern const Signal COLLISION_SIGNAL;
+Rod2 GetRod2ForN(int n);
+char *GetColorName(Color color);

@@ -2,7 +2,7 @@
 cflags := ""
 
 CC := "zig cc"
-CC_ARGS := "-I/usr/include/libsocket -Isrc/lib -Ipretest/lib src/lib/*.c -Isrc/external -lraylib -lsocket -lGL -lm -lpthread -ldl -lrt -lX11 -Wall -std=c23" + " " + cflags
+CC_ARGS := "-I/usr/include/libsocket -Isrc/lib -Isrc/expe/lib src/expe/lib/*.c src/lib/*.c -Isrc/external -lraylib -lsocket -lGL -lm -lpthread -ldl -lrt -lX11 -Wall -std=c23" + " " + cflags
 BUILD_DIR := "build"
 
 build:
@@ -39,5 +39,8 @@ pbs: pb
 pbc: pb
     build/pretest_client
 
-buildv2test:
-    {{CC}} {{CC_ARGS}} src/v2/testv2.c -o {{BUILD_DIR}}/testv2
+build-expe:
+    {{CC}} {{CC_ARGS}} src/expe/expe_test.c -o {{BUILD_DIR}}/expe_test
+    {{CC}} {{CC_ARGS}} src/expe/expe_client.c -o {{BUILD_DIR}}/expe_client
+    {{CC}} {{CC_ARGS}} src/expe/expe_server.c -o {{BUILD_DIR}}/expe_server
+    {{CC}} {{CC_ARGS}} src/expe/expe_generator.c -o {{BUILD_DIR}}/expe_generator

@@ -44,7 +44,6 @@ void Vec_remove(Vec *me, int index) {
     }
 }
 
-// TODO return a pointer to the data itself, instead of a pointer that needs to be de-referenced
 void *IndexVec(const Vec *vec, int index) {
     if ((0 <= index) && (index < vec->size)) {
         return (void*)((uintptr_t)(vec->contents) + index*vec->sizeOfContent);
@@ -151,4 +150,8 @@ VecIteratorSkip NewVecIteratorSkip(const Vec *data, int skip) {
     };
     VecIteratorSkip_Construct(&vecIteratorSkip);
     return vecIteratorSkip;
+}
+
+void FreeVec(Vec *vec) {
+    free(vec->contents);
 }

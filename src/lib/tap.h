@@ -4,7 +4,7 @@
 #include "stdio.h"
 
 typedef struct Tap {
-    float frameTime;
+    float time;
     Vector2 mousePosition;
     bool flipped;
 } Tap;

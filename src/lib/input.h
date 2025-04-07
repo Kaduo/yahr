@@ -34,6 +34,7 @@ typedef struct WriteTapInputService {
     InputService super;
     InputService inner;
     FILE *save;
+    bool isClosed;
 } WriteTapInputService;
 
 typedef struct ReadTapInputService ReadTapInputService;
@@ -47,3 +48,6 @@ struct ReadTapInputService {
 };
 
 WriteTapInputService NewWriteTapInputService(InputService inner, char *filename);
+void WriteTapInputServiceCloseSave(WriteTapInputService *me);
+void WriteTapInputServiceOpenSave(WriteTapInputService *me, char *filename);
+ReadTapInputService NewReadTapInputService(char *filename);

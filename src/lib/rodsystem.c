@@ -18,7 +18,6 @@ void RodSystem_updateSelection(RodSystem *me) {
     me->previousSelectedRodId = me->selectedRodId;
     Vector2 mousePosition = me->inputService->getMousePosition(me->inputService);
     if (me->inputService->isMouseButtonPressed(me->inputService, MOUSE_BUTTON_LEFT)) {
-        printf("wait !\n");
         int closestRodId = -1;
         float smallestDist = 10000;
         me->selectedRodId = -1;
@@ -30,23 +29,18 @@ void RodSystem_updateSelection(RodSystem *me) {
             }
 
             float dist = Vector2Distance(mousePosition, (Vector2){rod.rect.x + rod.rect.width/2, rod.rect.y + rod.rect.height/2});
-            printf("still there?\n");
             if (dist < smallestDist) {
                 smallestDist = dist;
                 closestRodId = i;
             }
         }
-        printf("whooo\n");
         if (me->selectedRodId < 0) {
             me->selectedRodId = closestRodId;
         }
 
-        printf("heree???\n");
 
         Rod2 *selectedRod = RodSystem_getSelectedRod(me);
-        printf("heh\n");
         me->selectionOffset = Vector2Subtract(mousePosition, GetTopLeft(selectedRod->rect));
-        printf("herehre\n");
     } else if (me->inputService->isMouseButtonReleased(me->inputService, MOUSE_BUTTON_LEFT)) {
         me->selectedRodId = -1;
     }
@@ -62,21 +56,19 @@ void RodSystem_updatePosition(RodSystem *me) {
         
         
         
-        CollisionInfo2 collisionInfo = ComputeCollisionInfo2(me, targetRectangle);
+        CollisionInfo2 collisionInfo = ComputeCollisionInfo2(&me->rods, me->selectedRodId, targetRectangle);
 
         me->previousCollided = me->collided;
         if (!collisionInfo.collided) {
             me->collided = false;
             selectedRod->rect = targetRectangle;
         } else {
-            printf("so far \n");
             me->collided = true;
             Rectangle candidateRectangle = selectedRod->rect;
             Rectangle bestRectangle = candidateRectangle;
             float bestDist = Vector2DistanceSqr(GetTopLeft(targetRectangle), GetTopLeft(candidateRectangle));
             for (int ix = 0; ix < collisionInfo.xBounds.nbBounds; ix++)
             {
-                printf("so good?\n");
                 for (int iy = 0; iy < collisionInfo.yBounds.nbBounds; iy++)
                 {
                     Bound2 yBound = collisionInfo.yBounds.bounds[iy];
@@ -161,39 +153,46 @@ void RodSystem_drawRods(RodSystem *me) {
 }
 
 void RodSystem_updateAndDrawRods(RodSystem *me) {
-    printf("huh!\n");
     RodSystem_updateSelection(me);
-    printf("selection update\n");
     RodSystem_updatePosition(me);
-    printf("position update\n");
     RodSystem_updateHaptic(me);
-    printf("haptic update\n");
-
     RodSystem_drawRods(me);
-    printf("draw update\n");
 
 }
 
-void RodSystem_shuffleRods(RodSystem *me, float xMin, float xMax, float yMin, float yMax) {
-    for (int i =0; i < me->rods.size; i ++) {
-        Rod2 *rod = (Rod2*)IndexVec(&me->rods, i);
+void ShuffleRods2(Vec *rods, float xMin, float xMax, float yMin, float yMax) {
+    for (int i =0; i < rods->size; i ++) {
+        Rod2 *rod = (Rod2*)IndexVec(rods, i);
         CollisionInfo2 collisionInfo;
+        int myYMax = yMax - rod->rect.height;
+        int myXMax = xMax - rod->rect.width;
         float x;
         float y;
+        printf("here?sdfsf\n");
 
         Rectangle targetRectangle;
         Rectangle rodRectangle = rod->rect;
+        printf("nonsod\n");
 
         do {
-            x = xMin + (float)rand()/(float)(RAND_MAX/(xMax - xMin));
-            y = yMin + (float)rand()/(float)(RAND_MAX/(yMax - yMin));
+            x = xMin + (float)rand()/(float)(RAND_MAX/(myXMax - xMin));
+            y = yMin + (float)rand()/(float)(RAND_MAX/(myYMax - yMin));
+            printf("slkdflmsjfldmsfAHHA\n");
             targetRectangle = CloneMove2(rodRectangle, (Vector2){x, y});
-            collisionInfo = ComputeCollisionInfo2(me, targetRectangle);
+            printf("hsmljfd\n");
+            collisionInfo = ComputeCollisionInfo2(rods, i, targetRectangle);
         } while (collisionInfo.collided);
         rod->rect.x = x;
         rod->rect.y = y;
     }
 }
+
+
+void RodSystem_shuffleRods(RodSystem *me, float xMin, float xMax, float yMin, float yMax) {
+    ShuffleRods2(&me->rods, xMin, xMax, yMin, yMax);
+}
+
+
 
 void RodSystem_addRod(RodSystem *me, Rod2 rod) {
     PushVec(&me->rods, &rod);
@@ -201,6 +200,7 @@ void RodSystem_addRod(RodSystem *me, Rod2 rod) {
 
 void WriteRod2(FILE *file, Rod2 rod) {
     fprintf(file, "rod\n");
+    fprintf(file, "n %d endn\n", rod.n);
     WriteRect(file, rod.rect);
     WriteColor(file, (rod.color));
     WriteSignal(file, rod.signal);
@@ -209,11 +209,15 @@ void WriteRod2(FILE *file, Rod2 rod) {
 
 Rod2 ReadRod2(FILE *file) {
     fscanf(file, "rod\n");
+    int n;
+    fscanf(file, "n %d endn\n", &n);
     Rectangle rect = ReadRect(file);
     Color color = ReadColor(file);
+    printf("LKJSLMJKFLMSSSSSS %d\n", color.r);
     Signal signal = ReadSignal(file);
     fscanf(file, "endrod\n");
     return (Rod2){
+        .n = n,
         .color = color,
         .signal = signal, 
         .rect = rect,
@@ -224,6 +228,7 @@ Rod2 ReadRod2(FILE *file) {
 
 void SaveRodSystem(RodSystem *me, char *filename) {
     FILE *save = fopen(filename, "w");
+    printf("ouuuuu2 %s\n", filename);
     if (save != NULL) {
         fprintf(save, "nbRods %d\n", me->rods.size);
         for (int i = 0; i<me->rods.size; i++) {
@@ -271,4 +276,21 @@ RodSystem NewRodSystem(InputService *inputService, HapticService *hapticService)
         .previousSelectedRodId = -1,
         .selectionOffset = {0, 0},
     };
+}
+
+void WriteRods2(Vec *rods, char *filename) {
+    printf("%s\n", filename);
+    FILE *save = fopen(filename, "w");
+    if (save != NULL) {
+        fprintf(save, "nbRods %d\n", rods->size);
+        for (int i = 0; i<rods->size; i++) {
+            WriteRod2(save, *(Rod2*)IndexVec(rods, i));
+        }
+
+        fclose(save);
+
+    } else {
+        perror(0);
+        exit(1);
+    }
 }

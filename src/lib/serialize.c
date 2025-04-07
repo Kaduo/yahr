@@ -3,7 +3,7 @@
 #include "string.h"
 #include "stdlib.h"
 
-const int MAXCN = 20;
+const int MAXCN = 40;
 
 void ReadStringTillSpace(FILE *file, char *string) {
     int currChar = 0;
@@ -76,11 +76,12 @@ void WriteColor(FILE *file, Color color) {
 
 Color ReadColor(FILE *file) {
     Color color = {0};
-    fscanf(file, "color %" SCNu8 " %" SCNu8 " %" SCNu8 " %" SCNu8 " endcolor\n", 
+    int res = fscanf(file, "color %" SCNu8 " %" SCNu8 " %" SCNu8 " %" SCNu8 " endcolor\n", 
         &color.r,
         &color.g,
         &color.b,
         &color.a);
+    printf("fscanf??? %d", res);
     return color;
 }
 
@@ -94,11 +95,12 @@ void WriteRect(FILE *file, Rectangle rect) {
 
 Rectangle ReadRect(FILE *file) {
     Rectangle rect = {0};
-    fscanf(file, "rect %f %f %f %f endrect\n",
+    int haha = fscanf(file, "rect %f %f %f %f endrect\n",
         &rect.x,
         &rect.y,
         &rect.height,
         &rect.width);
+    printf("ouagagedou %d\n", haha);
     return rect;
 }
 

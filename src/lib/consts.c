@@ -1,5 +1,6 @@
 #include "consts.h"
-
+#include "rodsystem.h"
+#include "stdlib.h"
 
 const Color ROD_COLOR_FOR_LENGTH[10] = {
                                         WHITE,                  // WHITE
@@ -13,6 +14,55 @@ const Color ROD_COLOR_FOR_LENGTH[10] = {
                                         {50, 144, 202, 255},    // BLUE
                                         {216, 157, 118, 255}    // ORANGE
                                     };
+
+
+bool IsEqualColors(Color color1, Color color2) {
+    printf("%d %d %d %d\n", color1.a, color1.r, color1.g, color1.g);
+    printf("%d %d %d %d\n", color2.a, color2.r, color2.g, color2.g);
+
+    return color1.a == color2.a && color1.g == color2.g && color1.b == color2.b && color1.r == color2.r;
+}
+
+char *GetColorName(Color color) {
+    int i;
+    for (i = 0; i < 10; i++) {
+        if (IsEqualColors(ROD_COLOR_FOR_LENGTH[i], color)) {
+            break;
+        }
+    }
+    printf("HMMMAAAA%d", i);
+    switch (i)
+    {
+    case 0:
+        return "blanche";
+        break;
+    case 1:
+        return "rouge";
+        break;
+    case 2:
+        return "vert clair";
+        break;
+    case 3:
+        return "fuschia";
+    case 4:
+        return "jaune";
+    case 5:
+        return "vert foncé";
+    case 6:
+        return "noire";
+    case 7:
+        return "marron";
+    case 8:
+        return "bleue";
+    case 9:
+        return "orange";
+    default:
+        printf("WTFFFF\n");
+        exit(1);
+        break;
+    }
+}
+
 const float ROD_WIDTH_FOR_LENGTH[NB_ROD_LENGTHS] = {
                                             1 * UNIT_ROD_HEIGHT,
                                             2 * UNIT_ROD_HEIGHT,
@@ -127,7 +177,7 @@ const char *TABLET_IP = "localhost";
 const char *TABLET_IP = "localhost";
 #endif
 
-const char *TABLET_PORT = "37122";
+const char *TABLET_PORT = "56132";
 
 const Signal IMPULSE_SIGNAL = {
     .amplitude = 255,
@@ -151,3 +201,12 @@ const Signal COLLISION_SIGNAL = {
     .pulses = 128,
     .signalShape = SignalShape_STEADY,
 };
+
+Rod2 GetRod2ForN(int n) {
+    return (Rod2){
+        .n = n,
+        .rect = (Rectangle){.height = UNIT_ROD_HEIGHT, .width = UNIT_ROD_HEIGHT*n, .x =0, .y= 0},
+        .signal = RodSignalForLength(n - 1),
+        .color = ROD_COLOR_FOR_LENGTH[n - 1],
+    };
+}

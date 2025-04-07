@@ -5,7 +5,7 @@
 #include "string.h"
 #include "stdlib.h"
 
-const int MAXCNTAP = 20;
+const int MAXCNTAP = 40;
 
 void WriteMousePosition(FILE *file, Vector2 mousePosition) {
     fprintf(file, "mousePosition %f %f endmousePosition\n", mousePosition.x, mousePosition.y);
@@ -17,14 +17,14 @@ Vector2 ReadMousePosition(FILE *file) {
     return mousePosition;
 }
 
-void WriteFrameTime(FILE *file, float frameTime) {
-    fprintf(file, "time %f endtime\n", frameTime);
+void WriteTime(FILE *file, float time) {
+    fprintf(file, "time %f endtime\n", time);
 }
 
-float ReadFrameTime(FILE *file) {
-    float frameTime;
-    fscanf(file, "%f endtime\n", &frameTime);
-    return frameTime;
+float ReadTime(FILE *file) {
+    float time;
+    fscanf(file, "%f endtime\n", &time);
+    return time;
 }
 
 void WriteLeftMouseButttonStateFlipped(FILE *file) {
@@ -33,7 +33,7 @@ void WriteLeftMouseButttonStateFlipped(FILE *file) {
 
 void WriteTap(FILE *file, Tap tap) {
     // printf("hola\n");
-    WriteFrameTime(file, tap.frameTime);
+    WriteTime(file, tap.time);
     if (tap.flipped) {
         WriteLeftMouseButttonStateFlipped(file);
     }
@@ -46,15 +46,16 @@ Tap ReadTap(FILE *file) {
     ReadStringTillSpace(file, string);
     while (strlen(string) > 0) {
 
+
         if (strcmp(string, "time") == 0) {
-            tap.frameTime = ReadFrameTime(file);
-        } else if (strcmp(string, "leftMouseButtonFlipped")) {
+            tap.time = ReadTime(file);
+        } else if (strcmp(string, "leftMouseButtonFlipped") == 0) {
             tap.flipped = true;
-        } else if (strcmp(string, "mousePosition")) {
+        } else if (strcmp(string, "mousePosition") == 0) {
             tap.mousePosition = ReadMousePosition(file);
             break;
         } else {
-            printf("SHOULDN'T HAPPEN !!! UNKNOWN stuff while reading tap : %s\n", string);
+            printf("unknown stuff in tap : %s\n", string);
             abort();
         }
         ReadStringTillSpace(file, string);
