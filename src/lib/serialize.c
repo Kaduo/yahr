@@ -81,7 +81,6 @@ Color ReadColor(FILE *file) {
         &color.g,
         &color.b,
         &color.a);
-    printf("fscanf??? %d", res);
     return color;
 }
 
@@ -100,7 +99,6 @@ Rectangle ReadRect(FILE *file) {
         &rect.y,
         &rect.height,
         &rect.width);
-    printf("ouagagedou %d\n", haha);
     return rect;
 }
 

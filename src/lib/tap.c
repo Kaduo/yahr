@@ -51,6 +51,7 @@ Tap ReadTap(FILE *file) {
             tap.time = ReadTime(file);
         } else if (strcmp(string, "leftMouseButtonFlipped") == 0) {
             tap.flipped = true;
+            // break;
         } else if (strcmp(string, "mousePosition") == 0) {
             tap.mousePosition = ReadMousePosition(file);
             break;

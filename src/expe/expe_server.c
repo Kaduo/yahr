@@ -11,73 +11,10 @@
 #include "problem.h"
 #include "rodsystem.h"
 
-int GetCurrentUserId() {
-    int id;
-    FILE *latestUserIdFile = fopen("latest_user_id_expe", "r");
-    if (latestUserIdFile != NULL) {
-        fscanf(latestUserIdFile, "%d", &id);
-        fclose(latestUserIdFile);
-    } else {
-        perror(0);
-        exit(1);
-    }
-    return id;
-}
-
-
-char *GetUserDirPath(int userId) {
-    char *path = calloc(50, sizeof(char));
-    sprintf(path, "expe_results_user_%d", userId);
-    return path;
-}
-
-char *GetCurrentUserDirPath() {
-    return GetUserDirPath(GetCurrentUserId());
-}
-
-int MakeNewUser() {
-    int id = GetCurrentUserId();
-    FILE *latestUserIdFile = fopen("latest_user_id_expe", "w");
-    if (latestUserIdFile != NULL) {
-        fprintf(latestUserIdFile, "%d", (id+1));
-        fclose(latestUserIdFile);
-    } else {
-        perror(0);
-        exit(1);
-    }
-
-    char *nextUserDirPath = GetUserDirPath(id+1);
-    MakeDirectory(nextUserDirPath);
-    free(nextUserDirPath);
-    return id + 1;
-}
-
-
-// TODO MOVE TO client
-// void SaveCurrentUserSolution(int problemId, char *solution) {
-//     char path[50] = {0};
-//     sprintf(path, "%s/%s%d%s", GetCurrentUserId(), "solution_", problemId, ".sol");
-//     FILE *save = fopen(path, "w");
-//     if (save != NULL) {
-//         fprintf(save, solution);
-//         fclose(save);
-//     } else {
-//         perror(0);
-//         exit(1);
-//     }
-// }
-
 void DrawZones() {
     DrawLine(0, TABLET_HEIGHT/2, TABLET_WIDTH, TABLET_HEIGHT/2, BLACK);
     DrawLine(0, 3*TABLET_HEIGHT/4, TABLET_WIDTH, 3*TABLET_HEIGHT/4, BLACK);
     DrawLine(TABLET_WIDTH/2, TABLET_HEIGHT/2, TABLET_WIDTH/2, TABLET_HEIGHT, BLACK);
-}
-
-void SaveCurrentUser(int problemId, RodSystem *rodSystem, WriteTapInputService *inputService) {
-    char path1[50] = {0};
-    sprintf(path1, "%s/%s%d%s", GetCurrentUserDirPath(), "problem_", problemId, ".rods");
-    SaveRodSystem(rodSystem, path1);
-    WriteTapInputServiceCloseSave(inputService);
 }
 
 // typedef struct App {
@@ -97,19 +34,31 @@ int main() {
     Server server = NewServer();
 
     Server_initAndWaitForConnection(&server, TABLET_IP, TABLET_PORT);
-    
+
+    char userName[100];
+
+    while (true) {
+        Vec *message = ActiveSocket_readMessage((ActiveSocket*)&server);
+        if (message != NULL) {
+            strcpy(userName, (char*)message->contents);
+            break;
+        }
+    }
+
     SetTraceLogLevel(LOG_ERROR);
     InitWindow(GetScreenWidth(), GetScreenHeight(), "layout_name");
     SetTargetFPS(60);
     ToggleFullscreen();
 
     int problemId = 0;
-    int userId = MakeNewUser();
+    // int userId = MakeNewUser();
+    char saveFolderPath[100] = {0};
+    sprintf(saveFolderPath, "data/experiment/results/%s", userName);
+    MakeDirectory(saveFolderPath);
+    char problemSavePath[100] = {0};
+    sprintf(problemSavePath, "data/experiment/results/%s/problem_%d.tap", userName, problemId);
 
-    char path[50] = {0};
-    sprintf(path, "%s/%s%d%s", GetCurrentUserDirPath(), "problem_", problemId, ".tap");
-
-    WriteTapInputServiceOpenSave(&inputService, path);
+    WriteTapInputServiceOpenSave(&inputService, problemSavePath);
 
     char path2[50] = {0};
 
@@ -124,17 +73,26 @@ int main() {
             char *messageStr = (char*)message->contents;
 
             if (strcmp(messageStr, "NEXT") == 0) {
-                SaveCurrentUser(problemId, &rodSystem, &inputService);
-                if (problemId < 20) {
+                printf("current username : %s\n",userName);
+                char path1[100];
+                sprintf(path1, "data/experiment/results/%s/problem_%d.rods", userName, problemId);
+                SaveRodSystem(&rodSystem, path1);
+                WriteTapInputServiceCloseSave(&inputService);
+            
+                if (problemId < 19) {
                     problemId += 1;
                     char path[50] = {0};
-                    sprintf(path, "%s/%s%d%s", GetCurrentUserDirPath(), "problem_", problemId, ".tap");
+                    sprintf(path, "data/experiment/results/%s/problem_%d.tap", userName, problemId);
                     WriteTapInputServiceOpenSave(&inputService, path);
                     char path2[50] = {0};
 
-                    sprintf(path2, "data/experiment/problemes/problem_%d.rods", problemId);
+                    sprintf(path2, "data/experiment/problemes/problem_%d_end.rods", problemId);
 
                     RodSystem_loadRods(&rodSystem, path2);
+
+                    char path3[50] = {0};
+                    sprintf(path3, "data/experiment/results/%s/problem_%d_start.rods", userName, problemId);
+                    SaveRodSystem(&rodSystem, path3);
                 } else {
                     break;
                 }
@@ -153,6 +111,6 @@ int main() {
         RodSystem_updateAndDrawRods(&rodSystem);
         EndDrawing();
     }
-    WriteTapInputServiceCloseSave(&inputService);
+    // WriteTapInputServiceCloseSave(&inputService);
     return 0;
 }

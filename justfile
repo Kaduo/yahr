@@ -40,7 +40,7 @@ pbc: pb
     build/pretest_client
 
 build-expe:
-    {{CC}} {{CC_ARGS}} src/expe/expe_test.c -o {{BUILD_DIR}}/expe_test
+    {{CC}} {{CC_ARGS}} src/expe/expe_replay.c -o {{BUILD_DIR}}/expe_replay
     {{CC}} {{CC_ARGS}} src/expe/expe_client.c -o {{BUILD_DIR}}/expe_client
     {{CC}} {{CC_ARGS}} src/expe/expe_server.c -o {{BUILD_DIR}}/expe_server
     {{CC}} {{CC_ARGS}} src/expe/expe_generator.c -o {{BUILD_DIR}}/expe_generator

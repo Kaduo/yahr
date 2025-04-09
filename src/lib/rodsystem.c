@@ -224,7 +224,6 @@ Rod2 ReadRod2(FILE *file) {
 
 void SaveRodSystem(RodSystem *me, char *filename) {
     FILE *save = fopen(filename, "w");
-    printf("ouuuuu2 %s\n", filename);
     if (save != NULL) {
         fprintf(save, "nbRods %d\n", me->rods.size);
         for (int i = 0; i<me->rods.size; i++) {

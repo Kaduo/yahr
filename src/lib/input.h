@@ -43,8 +43,10 @@ struct ReadTapInputService {
     InputService super;
     FILE *save;
     bool leftMouseButtonDown;
+    Tap futureTap;
     Tap currentTap;
     Tap oldTap;
+    float startTime;
 };
 
 WriteTapInputService NewWriteTapInputService(InputService inner, char *filename);

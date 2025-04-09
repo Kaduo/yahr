@@ -190,12 +190,13 @@ void ReadTapInputService_poll(InputService *_me) {
         printf("FINITO\n");
     }
 
-    if (GetTime() > me->currentTap.time) {
-
+    if (GetTime() + me->startTime > me->futureTap.time) {
         me->oldTap = me->currentTap;
-        me->currentTap = ReadTap(me->save);
+        me->currentTap = me->futureTap;
+        me->futureTap = ReadTap(me->save);
         if (me->currentTap.flipped) {
             me->leftMouseButtonDown = !me->leftMouseButtonDown;
+            printf("flipped!\n");
         }
     }
 }
@@ -264,12 +265,16 @@ ReadTapInputService NewReadTapInputService(char *filename) {
     FILE *save = fopen(filename, "r");
     if (save != NULL) {
         char con[50];
-        ReadStringTillSpace(save, con);
+        ReadStringTillSpace(save, con); // Skip absolute time at start;
+        Tap startTap = ReadTap(save);
+        Tap startFutureTap = ReadTap(save);
         ReadTapInputService readTapInputService = {
-            .currentTap = {0},
-            .leftMouseButtonDown = false,
+            .futureTap = startFutureTap,
+            .leftMouseButtonDown = true,
+            .currentTap = startTap,
             .oldTap = {0},
             .save = save,
+            .startTime = startTap.time,
         };
         ReadTapInputService_Construct(&readTapInputService);
         return  readTapInputService;

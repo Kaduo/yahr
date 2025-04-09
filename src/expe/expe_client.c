@@ -56,9 +56,14 @@ int main(int argc, char *argv[]) {
     //     fprintf(stderr, "Please enter the port number of the server you are trying to connect to!\n");
     // }
 
+    if (argc <= 1) {
+        fprintf(stderr, "Please enter the name of the participant");
+        exit(1);
+    }
 
     ActiveSocket socket = NewActiveSocket();
-    ActiveSocket_connectToServer(&socket, TABLET_IP, TABLET_PORT, SOCK_NONBLOCK); // TODO : UNCOMMENT ME !!!!
+    ActiveSocket_connectToServer(&socket, TABLET_IP, TABLET_PORT, SOCK_NONBLOCK);
+    ActiveSocket_writeStr(&socket, argv[1]);
 
     SetTraceLogLevel(LOG_ERROR);
     InitWindow(GetScreenWidth(), GetScreenHeight(), "Client");
@@ -70,7 +75,14 @@ int main(int argc, char *argv[]) {
     Problem problem;
     char *statement;
 
-    FILE *answers = fopen("deleteme.answers", "w");
+    char saveFolderPath[100] = {0};
+    sprintf(saveFolderPath, "data/experiment/results/%s", argv[1]);
+    MakeDirectory(saveFolderPath);
+    printf("here??\n");
+    char answersSaveName[200];
+    sprintf(answersSaveName, "data/experiment/results/%s/%s.answers", argv[1], argv[1]);
+    printf("save name : %s\n", answersSaveName);
+    FILE *answers = fopen(answersSaveName, "w");
 
     if (answers == NULL) {
         perror(0);
