@@ -148,11 +148,13 @@ def get_scores_for_user(user_id):
     for i in range(0, 10):
         filename = f"data/pre-test/results/haptic/user_{user_id}/session_{i}.rods"
         grouping = get_grouping_from_file(filename)
+
         scores_haptic.append(score_grouping(grouping))
     for i in range(0, 10):
         filename = f"data/pre-test/results/visual/user_{user_id}/session_{i}.rods"
         grouping = get_grouping_from_file(filename)
         scores_visual.append(score_grouping(grouping))
+
     
     return scores_haptic, scores_visual
 
@@ -165,6 +167,14 @@ def get_scores_for_total_user(user_id):
     
     return scores_total
 
+def count_inconsistencies(grouping):
+    res = 0
+    for i in range(1,4):
+        for j in range(i):
+            for rod in grouping[i]:
+                if rod.n in [rod1.n for rod1 in grouping[j]]:
+                    res += 1
+    return res
 
 if __name__ == "__main__":
 
