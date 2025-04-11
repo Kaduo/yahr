@@ -1,0 +1,73 @@
+problem 1 : "ppcm"  ultra basique
+
+r-8 et r-2, mettons
+
+r-2 = 3u
+
+problem 2 : inversé basique
+
+r-1 et r-4
+
+r-4 = 5u
+
+problem 2 : "ppcm" "inversé" ultra basique
+
+r-9 et r-3
+
+et mettons que r-9 = 12u
+
+Donc il me faut : 1 r-9, 3 r-3 au minimum. Le reste libre.
+
+J'en ai 4, il m'en reste 16 à caser. Mettons : j'en met une de chaque autre (+8). Il m'en reste 8 à caser.
+Ok, j'en mets +2 exemplaires de r-4, +2 exemplaires de r-2. M'en reste 4 à caser. +1 exemplaire de r-1,
++1 exemplaire de r-8. Cool
+
+
+
+problem 3 : ppcm un peu moins basique
+
+r-3 et r-2 mettons
+
+r-2 = 4u
+
+problem 4 : ppcm encore un peu moins basique
+
+r-3 et r-2, r-3 = 4u
+
+problem 5 : ppcm qui est plus chiant que la div euclidienne
+
+r-3 et r-4
+
+r-3 = 2u
+
+il me faut 4 r-1, 4 r-3, et 3 r-4, il m'en reste 9 à caser. Une de chaque autre
+
+problem 6 : ppcm impossible, div euclidienne et pgcd tous les deux possibles
+
+r-5 et r-8
+
+r-8 = 6u
+
+3 r-5, 2 r-8, mettons. 4 r-2, 1 r-3 et 3 r-1.
+
+problem 7 : ppcm impossible, pgcd seul possible
+
+r-4 et r-6
+
+r-6 = 5u
+
+problem 8 : ppcm possible mais fastidieux
+
+r-3 et r-5
+
+r-3 = 2u
+
+5 r-3, 3 r-5, des r-1 et des r-2
+
+problem 9 : ppcm fastidieux yet again
+
+r-2 et r-7
+
+7 r-2, 2 r-7
+
+problem 10 : last one !
