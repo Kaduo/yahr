@@ -172,7 +172,7 @@ const char *TABLET_IP = "192.168.43.235";
 const char *TABLET_IP = "localhost";
 #endif
 
-const char *TABLET_PORT = "56123";
+const char *TABLET_PORT = "52123";
 
 const Signal IMPULSE_SIGNAL = {
     .amplitude = 255,
