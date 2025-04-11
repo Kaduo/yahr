@@ -4,11 +4,11 @@
 #include "consts.h"
 #include "raylib.h"
 
-void MakeAndSaveProblem(int knownLength, int knownRod, int mysteryRod, int *nbRodsPerLengths, int problemId) {
+void MakeAndSaveProblem(int knownLength, int knownRodN, int mysteryRodN, int *nbRodsPerLengths, int problemId) {
     Problem prob = (Problem){
         .knownLength = knownLength,
-        .knownRod = knownRod,
-        .mysteryRod = mysteryRod,
+        .knownRod = GetRod2ForN(knownRodN),
+        .mysteryRod = GetRod2ForN(mysteryRodN),
     };
 
     Vec rods = EmptyVec(20, sizeof(Rod2));
@@ -19,6 +19,7 @@ void MakeAndSaveProblem(int knownLength, int knownRod, int mysteryRod, int *nbRo
             PushVec(&rods, &rod);
         }
     }
+    ShuffleRods2(&rods, 0, TABLET_WIDTH, 0, TABLET_HEIGHT);
     char path[200] = {0};
     sprintf(path, "/home/balthazar/job/research/Cuisenaire_rods/Code/yahr/data/experiment/problems/problem_%d.rods", problemId);
     WriteRods2(&rods, path);
@@ -149,7 +150,7 @@ int main(void) {
         4,
         2,
         3,
-        nbRodsPerLengths3,
+        nbRodsPerLengths4,
         8
     );
 
@@ -275,26 +276,6 @@ int main(void) {
         5,
         nbRodsPerLengths10,
         14
-    );
-
-    int nbRodsPerLengths11[10] = {
-        3,
-        7,
-        1,
-        1,
-        2,
-        1,
-        2,
-        1,
-        1,
-        1
-    };
-    MakeAndSaveProblem(
-        2,
-        3,
-        5,
-        nbRodsPerLengths11,
-        15
     );
 
 

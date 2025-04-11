@@ -75,19 +75,18 @@ int main() {
             if (strcmp(messageStr, "NEXT") == 0) {
                 printf("current username : %s\n",userName);
                 char path1[100];
-                sprintf(path1, "data/experiment/results/%s/problem_%d.rods", userName, problemId);
+                sprintf(path1, "data/experiment/results/%s/problem_%d_end.rods", userName, problemId);
                 SaveRodSystem(&rodSystem, path1);
                 WriteTapInputServiceCloseSave(&inputService);
             
                 if (problemId < 19) {
                     problemId += 1;
-                    char path[50] = {0};
+                    char path[100] = {0};
                     sprintf(path, "data/experiment/results/%s/problem_%d.tap", userName, problemId);
                     WriteTapInputServiceOpenSave(&inputService, path);
-                    char path2[50] = {0};
+                    char path2[100] = {0};
 
-                    sprintf(path2, "data/experiment/problems/problem_%d_end.rods", problemId);
-
+                    sprintf(path2, "data/experiment/problems/problem_%d.rods", problemId);
                     RodSystem_loadRods(&rodSystem, path2);
 
                     char path3[50] = {0};

@@ -1,7 +1,7 @@
 nbRods 20
 rod
 n 1 endn
-rect 0.000000 0.000000 30.000000 30.000000 endrect
+rect 822.426819 188.943069 30.000000 30.000000 endrect
 color 255 255 255 255 endcolor
 sig
 amplitude 201
@@ -17,7 +17,7 @@ endsig
 endrod
 rod
 n 1 endn
-rect 0.000000 0.000000 30.000000 30.000000 endrect
+rect 187.071838 248.803284 30.000000 30.000000 endrect
 color 255 255 255 255 endcolor
 sig
 amplitude 201
@@ -33,7 +33,7 @@ endsig
 endrod
 rod
 n 1 endn
-rect 0.000000 0.000000 30.000000 30.000000 endrect
+rect 952.885132 523.790344 30.000000 30.000000 endrect
 color 255 255 255 255 endcolor
 sig
 amplitude 201
@@ -49,7 +49,7 @@ endsig
 endrod
 rod
 n 1 endn
-rect 0.000000 0.000000 30.000000 30.000000 endrect
+rect 760.282227 398.472961 30.000000 30.000000 endrect
 color 255 255 255 255 endcolor
 sig
 amplitude 201
@@ -65,7 +65,7 @@ endsig
 endrod
 rod
 n 2 endn
-rect 0.000000 0.000000 30.000000 60.000000 endrect
+rect 116.782005 390.897888 30.000000 60.000000 endrect
 color 253 46 99 255 endcolor
 sig
 amplitude 201
@@ -81,7 +81,7 @@ endsig
 endrod
 rod
 n 2 endn
-rect 0.000000 0.000000 30.000000 60.000000 endrect
+rect 370.013977 441.335907 30.000000 60.000000 endrect
 color 253 46 99 255 endcolor
 sig
 amplitude 201
@@ -97,7 +97,7 @@ endsig
 endrod
 rod
 n 3 endn
-rect 0.000000 0.000000 30.000000 90.000000 endrect
+rect 805.030640 116.022484 30.000000 90.000000 endrect
 color 41 222 182 255 endcolor
 sig
 amplitude 201
@@ -113,7 +113,7 @@ endsig
 endrod
 rod
 n 3 endn
-rect 0.000000 0.000000 30.000000 90.000000 endrect
+rect 741.275513 312.383972 30.000000 90.000000 endrect
 color 41 222 182 255 endcolor
 sig
 amplitude 201
@@ -129,7 +129,7 @@ endsig
 endrod
 rod
 n 3 endn
-rect 0.000000 0.000000 30.000000 90.000000 endrect
+rect 277.667419 515.811523 30.000000 90.000000 endrect
 color 41 222 182 255 endcolor
 sig
 amplitude 201
@@ -145,7 +145,7 @@ endsig
 endrod
 rod
 n 3 endn
-rect 0.000000 0.000000 30.000000 90.000000 endrect
+rect 849.606506 498.167999 30.000000 90.000000 endrect
 color 41 222 182 255 endcolor
 sig
 amplitude 201
@@ -161,7 +161,7 @@ endsig
 endrod
 rod
 n 4 endn
-rect 0.000000 0.000000 30.000000 120.000000 endrect
+rect 450.322083 328.433716 30.000000 120.000000 endrect
 color 253 74 185 255 endcolor
 sig
 amplitude 201
@@ -177,7 +177,7 @@ endsig
 endrod
 rod
 n 4 endn
-rect 0.000000 0.000000 30.000000 120.000000 endrect
+rect 147.132095 156.129364 30.000000 120.000000 endrect
 color 253 74 185 255 endcolor
 sig
 amplitude 201
@@ -193,7 +193,7 @@ endsig
 endrod
 rod
 n 4 endn
-rect 0.000000 0.000000 30.000000 120.000000 endrect
+rect 781.579407 280.667328 30.000000 120.000000 endrect
 color 253 74 185 255 endcolor
 sig
 amplitude 201
@@ -209,7 +209,7 @@ endsig
 endrod
 rod
 n 5 endn
-rect 0.000000 0.000000 30.000000 150.000000 endrect
+rect 405.240723 483.897034 30.000000 150.000000 endrect
 color 238 211 121 255 endcolor
 sig
 amplitude 201
@@ -225,7 +225,7 @@ endsig
 endrod
 rod
 n 6 endn
-rect 0.000000 0.000000 30.000000 180.000000 endrect
+rect 418.604919 165.900375 30.000000 180.000000 endrect
 color 17 163 155 255 endcolor
 sig
 amplitude 201
@@ -241,7 +241,7 @@ endsig
 endrod
 rod
 n 6 endn
-rect 0.000000 0.000000 30.000000 180.000000 endrect
+rect 614.052429 79.263176 30.000000 180.000000 endrect
 color 17 163 155 255 endcolor
 sig
 amplitude 201
@@ -257,7 +257,7 @@ endsig
 endrod
 rod
 n 7 endn
-rect 0.000000 0.000000 30.000000 210.000000 endrect
+rect 490.930603 280.680359 30.000000 210.000000 endrect
 color 62 64 69 255 endcolor
 sig
 amplitude 201
@@ -273,7 +273,7 @@ endsig
 endrod
 rod
 n 8 endn
-rect 0.000000 0.000000 30.000000 240.000000 endrect
+rect 108.378952 205.452286 30.000000 240.000000 endrect
 color 177 82 75 255 endcolor
 sig
 amplitude 201
@@ -289,7 +289,7 @@ endsig
 endrod
 rod
 n 9 endn
-rect 0.000000 0.000000 30.000000 270.000000 endrect
+rect 684.997437 354.594421 30.000000 270.000000 endrect
 color 50 144 202 255 endcolor
 sig
 amplitude 201
@@ -305,7 +305,7 @@ endsig
 endrod
 rod
 n 10 endn
-rect 0.000000 0.000000 30.000000 300.000000 endrect
+rect 605.863281 466.332733 30.000000 300.000000 endrect
 color 216 157 118 255 endcolor
 sig
 amplitude 201

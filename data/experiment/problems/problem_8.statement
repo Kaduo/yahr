@@ -1,36 +1,36 @@
 begin known rod
 rod
 n 2 endn
-rect 0.000000 0.000000 0.000000 0.000000 endrect
-color 0 0 0 0 endcolor
+rect 0.000000 0.000000 30.000000 60.000000 endrect
+color 253 46 99 255 endcolor
 sig
-amplitude 0
-angle 0
+amplitude 201
+angle 128
 duration 0.000000
 duty 0
-offset 0
-period 0
-phase 0
-pulses 0
-signalShape 0
+offset 54
+period 20
+phase 18
+pulses 128
+signalShape 4
 endsig
 endrod
 end known rod
 begin mystery rod
 rod
 n 3 endn
-rect 0.000000 0.000000 0.000000 0.000000 endrect
-color 0 0 0 0 endcolor
+rect 0.000000 0.000000 30.000000 90.000000 endrect
+color 41 222 182 255 endcolor
 sig
-amplitude 0
-angle 0
+amplitude 201
+angle 128
 duration 0.000000
 duty 0
-offset 0
-period 0
-phase 0
-pulses 0
-signalShape 0
+offset 54
+period 70
+phase 63
+pulses 128
+signalShape 4
 endsig
 endrod
 end mystery rod

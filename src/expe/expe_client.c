@@ -46,7 +46,7 @@ Fraction ParseFractionInput(char *input) {
 
 Problem GetProblemById(int problemId) {
     char path[200];
-    sprintf(path, "data/experiment/problemes/problem_%d.statement", problemId);
+    sprintf(path, "data/experiment/problems/problem_%d.statement", problemId);
     return ReadProblem(path);
 }
 

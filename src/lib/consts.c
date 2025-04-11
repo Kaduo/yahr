@@ -54,7 +54,7 @@ char *GetColorName(Color color) {
     case 9:
         return "orange";
     default:
-        printf("WTFFFF\n");
+        printf("WTFFFF  %d\n", color.g);
         exit(1);
         break;
     }
