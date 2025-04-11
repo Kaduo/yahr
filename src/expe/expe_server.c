@@ -62,7 +62,7 @@ int main() {
 
     char path2[50] = {0};
 
-    sprintf(path2, "data/experiment/problemes/problem_%d.rods", problemId);
+    sprintf(path2, "data/experiment/problems/problem_%d.rods", problemId);
 
     RodSystem_loadRods(&rodSystem, path2);
 
@@ -86,7 +86,7 @@ int main() {
                     WriteTapInputServiceOpenSave(&inputService, path);
                     char path2[50] = {0};
 
-                    sprintf(path2, "data/experiment/problemes/problem_%d_end.rods", problemId);
+                    sprintf(path2, "data/experiment/problems/problem_%d_end.rods", problemId);
 
                     RodSystem_loadRods(&rodSystem, path2);
 
