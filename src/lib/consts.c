@@ -17,7 +17,6 @@ const Color ROD_COLOR_FOR_LENGTH[10] = {
 
 
 bool IsEqualColors(Color color1, Color color2) {
-
     return color1.a == color2.a && color1.g == color2.g && color1.b == color2.b && color1.r == color2.r;
 }
 
