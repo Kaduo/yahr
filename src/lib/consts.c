@@ -165,13 +165,13 @@ Signal RodSignalForLength(int l) {
 
 #ifndef DEBUG
 // const char *TABLET_IP = "192.168.1.18";
-const char *TABLET_IP = "192.168.43.235";
-// const char *TABLET_IP = "localhost";
+// const char *TABLET_IP = "192.168.43.235";
+const char *TABLET_IP = "localhost";
 #else
 const char *TABLET_IP = "localhost";
 #endif
 
-const char *TABLET_PORT = "52123";
+const char *TABLET_PORT = "53123";
 
 const Signal IMPULSE_SIGNAL = {
     .amplitude = 255,

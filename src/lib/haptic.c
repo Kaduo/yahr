@@ -157,6 +157,7 @@ void PrintSignal(Signal sig) {
 // High-level Driver
 
 void HapticDriver_update(HapticDriver *me, float frameTime) {
+    printf("entering haptic update\n");
     Vector2 mouseDelta = me->inputService->getMouseDelta(me->inputService);
     if (frameTime > 0) {
         float floatSpeed = Vector2Length(mouseDelta)/frameTime;
@@ -170,11 +171,13 @@ void HapticDriver_update(HapticDriver *me, float frameTime) {
         float floatAngle = Vector2Angle((Vector2){.x=1, .y=0}, mouseDelta); // Between -pi and pi
         uint8_t intAngle = (uint8_t)((floatAngle + PI)*127/(2*PI)); // normalize so that it falls between 0 and 127
 
+        printf("well..\n");
         if (floatSpeed > EPSILON) {
             me->setDirection(me, intAngle, intSpeed);
         } else {
             me->setDirection(me, 0, 0);
         }
+        printf("leaving\n");
     }
 };
 
@@ -281,7 +284,27 @@ HapticService NewHapticService(HapticDriver *driver) {
     };
 }
 
+
+
 void MockHapticDriver_setSignal(HapticDriver *me, Signal signal) {
 }
 void MockHapticDriver_clearSignal(HapticDriver *me) {
+}
+
+
+void MockHapticDriver_setDirection(HapticDriver *_me, uint8_t angle, uint16_t speed) {
+}
+
+
+void MockHapticDriver_Construct(HapticDriver *me) {
+    me->setSignal = MockHapticDriver_setSignal;
+    me->clearSignal = MockHapticDriver_clearSignal;
+    me->setDirection = MockHapticDriver_setDirection;
+}
+
+HapticDriver NewMockHapticDriver(InputService *inputService) {
+    HapticDriver mockHapticDriver = {.inputService = inputService};
+    MockHapticDriver_Construct(&mockHapticDriver);
+
+    return mockHapticDriver;
 }

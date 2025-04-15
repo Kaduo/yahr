@@ -20,22 +20,27 @@ def get_end_time_of_tap(filename):
             line = line.split()
             if line[0] == "time":
                 rel_end = float(line[1])
-        
-    return start + rel_end - rel_start
-
+    
+    if rel_end is not None:
+        return start + rel_end - rel_start
+    else:
+        return None
 
 
 if __name__ == "__main__":
-    name = "baptiste"
+    name = "ecma1"
 
-    eye_tracking = pl.read_csv(f"data/experiment/results/{name}/{name} eyetracking.csv")
+    eye_tracking = pl.read_csv(f"data/experiment/results/{name}/{name}.csv")
+    print((eye_tracking["Timestamp (ms)"].max() - eye_tracking["Timestamp (ms)"].min())/(1000*60))
+    print(eye_tracking["Timestamp (ms)"].min()/1000)
     fig = px.line(eye_tracking, x="Timestamp (ms)", y="Pitch")
     start = None
     for i in range(0, 20):
         start = get_start_time_of_tap(f"data/experiment/results/{name}/problem_{i}.tap")
-        fig.add_vline(x=start*1000, line={"color": "red"})
         end = get_end_time_of_tap(f"data/experiment/results/{name}/problem_{i}.tap")
-        fig.add_vline(x=end*1000, line={"color": "green"})
-        print(end - start)
+
+        if start is not None and end is not None:
+            fig.add_vline(x=start*1000, line={"color": "red"})
+            fig.add_vline(x=end*1000, line={"color": "green"})
 
     fig.show()

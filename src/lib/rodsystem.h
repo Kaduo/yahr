@@ -30,3 +30,4 @@ void WriteRods2(Vec *rods, char *filename);
 void WriteRod2(FILE *file, Rod2 rod);
 Rod2 ReadRod2(FILE *file);
 void SaveRodSystem(RodSystem *me, char *filename);
+void DrawRod2(Rod2 rod);

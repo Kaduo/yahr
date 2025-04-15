@@ -71,4 +71,6 @@ void PrintSignal(Signal sig);
 void MockHapticDriver_setSignal(HapticDriver *me, Signal signal);
 void MockHapticDriver_clearSignal(HapticDriver *me);
 
+HapticDriver NewMockHapticDriver(InputService *inputService);
+
 HapticService NewHapticService(HapticDriver *driver);

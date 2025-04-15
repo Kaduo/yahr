@@ -144,18 +144,24 @@ void RodSystem_updateHaptic(RodSystem *me) {
     }
 }
 
+void DrawRod2(Rod2 rod) {
+    DrawRectangleRec(rod.rect, rod.color);
+    DrawRectangleLinesEx(rod.rect, 1, BLACK);
+}
+
 void RodSystem_drawRods(RodSystem *me) {
     for (int i =0; i<me->rods.size; i++) {
         Rod2 rod = *(Rod2*)IndexVec(&me->rods, i);
-        DrawRectangleRec(rod.rect, rod.color);
-        DrawRectangleLinesEx(rod.rect, 1, BLACK);
+        DrawRod2(rod);
     }
 }
 
 void RodSystem_updateAndDrawRods(RodSystem *me) {
     RodSystem_updateSelection(me);
     RodSystem_updatePosition(me);
+    printf("hmmm\n");
     RodSystem_updateHaptic(me);
+    printf("tehre is it?\n");
     RodSystem_drawRods(me);
 
 }
@@ -209,7 +215,6 @@ Rod2 ReadRod2(FILE *file) {
     fscanf(file, "n %d endn\n", &n);
     Rectangle rect = ReadRect(file);
     Color color = ReadColor(file);
-    printf("LKJSLMJKFLMSSSSSS %d\n", color.r);
     Signal signal = ReadSignal(file);
     fscanf(file, "endrod\n");
     return (Rod2){
