@@ -8,35 +8,40 @@ TABLET_HEIGHT = 600
 
 UNIT_ROD_HEIGHT = 30
 
+
 class Rod:
     def __init__(self, n=-1):
         self.n = n
 
-ideal_grouping_ns = [[2, 4, 8], [3, 6, 9], [1,7], [5,10]]
-
-def loss(grouping):
+def _dist(grouping1, grouping2):
     res = 0
     for bin in range(4):
-        for rod in grouping[bin]:
-            if rod.n not in ideal_grouping_ns[bin]:
+        for rod in grouping1[bin]:
+            if rod.n not in [rod.n for rod in grouping2[bin]]:
                 res += 1
     return res
 
-def score_grouping(grouping):
-    current_grouping  = deepcopy(grouping)
+def dist(grouping1, grouping2):
+    current_grouping  = deepcopy(grouping1)
 
     # best_perm = deepcopy(current_grouping)
-    best_loss = loss(current_grouping)
+    best_dist = _dist(current_grouping, grouping2)
 
     for bin_permutation in permutations(range(4)):
-        current_grouping = deepcopy(grouping)
+        current_grouping = deepcopy(grouping1)
         current_grouping = [current_grouping[i] for i in bin_permutation]
-        current_loss = loss(current_grouping)
-        if current_loss < best_loss:
-            # best_perm = deepcopy(current_grouping)
-            best_loss = current_loss
+        current_dist = _dist(current_grouping, grouping2)
+        if current_dist < best_dist:
+            best_dist = current_dist
 
-    return best_loss + grouping[4]
+    return best_dist
+
+
+ideal_grouping_ns = [[2, 4, 8], [3, 6, 9], [1,7], [5,10]]
+
+
+def score_grouping(grouping):
+    return dist(grouping, [[Rod(k) for k in group] for group in ideal_grouping_ns])
 
 def which_zone(x, y):
     if y <= TABLET_HEIGHT/2 - UNIT_ROD_HEIGHT:
@@ -135,6 +140,14 @@ def get_grouping_from_file(filename):
     # print("ohwouw : ", filename, len([x for x in grouping[:4] if len(x) > 0]))
     return grouping
 
+def get_groupings_in_folder(folder_path):
+    groupings = []
+    for i in range(0, 10):
+        filename = f"{folder_path}/session_{i}.rods"
+        groupings.append(get_grouping_from_file(filename))
+
+    return groupings
+
 def display_grouping(grouping):
     for i, group in enumerate(grouping):
         if i < 4:
@@ -167,37 +180,107 @@ def get_scores_for_total_user(user_id):
     
     return scores_total
 
-def count_inconsistencies(grouping):
-    res = 0
-    for i in range(1,4):
-        for j in range(i):
-            for rod in grouping[i]:
-                if rod.n in [rod1.n for rod1 in grouping[j]]:
-                    res += 1
+def get_durations_from_files(filename):
+    res = []
+    with open(filename, "r") as f:
+        f.readline()
+        for line in f:
+            res.append(float(line))
     return res
 
+class Grouping:
+    def __init__(self, filename):
+        self.raw_grouping = get_grouping_from_file(filename)
+        self.inner = [[rod.n for rod in group] for group in self.raw_grouping[:4]] + [self.raw_grouping[4]]
+
+    def nb_inconsistencies(self):
+        res = 0
+        seen = self.inner[0]
+        for i in range(1,4):
+            for n in self.inner[i]:
+                if n in seen:
+                    res += 1
+            seen += self.inner[i]
+        return res
+
+    
+    # A grouping is consistent if identical rods are grouped together
+    def is_consistent(self):
+        self.nb_inconsistencies == 0
+
+    def score(self):
+        return score_grouping(self.raw_grouping)
+    
+class User:
+
+    def __init__(self, user_id, mode):
+        self.user_id = user_id
+        self.mode = mode
+        self.groupings = []
+        for i in range(10):
+            self.groupings.append(Grouping(f"data/pre-test/results/{mode}/user_{user_id}/session_{i}.rods"))
+        try:
+            self.durations = get_durations_from_files(f"data/pre-test/results/haptic/user_{user_id}/user{user_id}_durations")
+        except FileNotFoundError:
+            self.durations = [-1 for _ in range(10)]
+
+    def scores(self):
+        res = []
+        for grouping in self.groupings:
+            res.append(grouping.score())
+
+        return res
+    
+    def inconsistency_score(self):
+        res = 0
+        for i in range(10):
+            for j in range(i+1, 10):
+                res += dist(self.groupings[i].raw_grouping, self.groupings[j].raw_grouping)
+        return res/40
+    
+    def score(self):
+        return sum([grouping.score() for grouping in self.groupings])/10
+
+def get_users(mode):
+    users = []
+    if mode == "haptic" or mode == "visual":
+        user_ids = [500, 501, 502, 600, 700, 800, 801, 20, 21, 22]
+    elif mode == "combined":
+        user_ids = [61, 150, 151, 152, 153, 351, 352, 353, 200]
+    else:
+        raise f"Unkown mode : {mode}"
+    
+    for id in user_ids:
+        users.append(User(id, mode))
+    
+    return users
+
 if __name__ == "__main__":
+    for user in get_users("combined"):
+        print("hmm ", user.inconsistency_score(), "ha ", user.score())
 
-    user_ids = [500, 501, 502, 600, 700, 800, 801, 20, 21, 22]
-    total_user_ids = [61, 150, 151, 152, 153, 351, 352, 353, 200]
-    total_user_scores = []
-    haptic_user_scores = []
-    visual_user_scores = []
+# if __name__ == "__main__":
 
-    for user_id in user_ids:
-        user_scores = get_scores_for_user(user_id)
-        haptic_user_scores.append(user_scores[0])
-        visual_user_scores.append(user_scores[1])
-    for user_id in total_user_ids:
-        total_user_scores.append(get_scores_for_total_user(user_id))
+#     user_ids = [500, 501, 502, 600, 700, 800, 801, 20, 21, 22]
+#     total_user_ids = [61, 150, 151, 152, 153, 351, 352, 353, 200]
+#     total_user_scores = []
+#     haptic_user_scores = []
+#     visual_user_scores = []
 
-    haptic_df = pl.DataFrame(haptic_user_scores, schema=[f"user_{user_id}" for user_id in user_ids])
-    visual_df = pl.DataFrame(visual_user_scores, schema=[f"user_{user_id}" for user_id in user_ids])
-    total_df = pl.DataFrame(total_user_scores, schema=[f"user_{user_id}" for user_id in total_user_ids])
-    print(haptic_df.describe())
-    print(visual_df.describe())
-    print(total_df.describe())
+#     for user_id in user_ids:
+#         user_scores = get_scores_for_user(user_id)
+#         haptic_user_scores.append(user_scores[0])
+#         visual_user_scores.append(user_scores[1])
+#     for user_id in total_user_ids:
+#         total_user_scores.append(get_scores_for_total_user(user_id))
 
-    haptic_df.write_csv("haptic_df.csv")
-    visual_df.write_csv("visual_df.csv")
-    total_df.write_csv("total_df.csv")
+#     haptic_df = pl.DataFrame(haptic_user_scores, schema=[f"user_{user_id}" for user_id in user_ids])
+#     visual_df = pl.DataFrame(visual_user_scores, schema=[f"user_{user_id}" for user_id in user_ids])
+#     total_df = pl.DataFrame(total_user_scores, schema=[f"user_{user_id}" for user_id in total_user_ids])
+#     print(haptic_df.describe())
+#     print(visual_df.describe())
+#     print(total_df.describe())
+
+#     haptic_df.write_csv("haptic_df.csv")
+#     visual_df.write_csv("visual_df.csv")
+#     total_df.write_csv("total_df.csv")
