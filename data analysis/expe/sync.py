@@ -26,21 +26,37 @@ def get_end_time_of_tap(filename):
     else:
         return None
 
+def crop_times_to_problem(name, problem_id):
+    eye_tracking = pl.read_csv(f"data/experiment/results/{name}/{name}.csv")
+    eye_tracking = eye_tracking.with_columns((eye_tracking["Timestamp (ms)"]/1000).alias("Timestamp (s)"))
+    start = get_start_time_of_tap(f"data/experiment/results/{name}/problem_{problem_id}.tap")
+    end = get_end_time_of_tap(f"data/experiment/results/{name}/problem_{problem_id}.tap")
+    print(end - start)
+    df = eye_tracking.filter((eye_tracking["Timestamp (s)"] <= end) & (start <= eye_tracking["Timestamp (s)"]))
+    df = df.with_columns((df["Timestamp (s)"] - df["Timestamp (s)"][0]).alias("Elapsed time (s)"))
+    return df
+
 
 if __name__ == "__main__":
-    name = "ecma1"
-
-    eye_tracking = pl.read_csv(f"data/experiment/results/{name}/{name}.csv")
-    print((eye_tracking["Timestamp (ms)"].max() - eye_tracking["Timestamp (ms)"].min())/(1000*60))
-    print(eye_tracking["Timestamp (ms)"].min()/1000)
-    fig = px.line(eye_tracking, x="Timestamp (ms)", y="Pitch")
-    start = None
-    for i in range(0, 20):
-        start = get_start_time_of_tap(f"data/experiment/results/{name}/problem_{i}.tap")
-        end = get_end_time_of_tap(f"data/experiment/results/{name}/problem_{i}.tap")
-
-        if start is not None and end is not None:
-            fig.add_vline(x=start*1000, line={"color": "red"})
-            fig.add_vline(x=end*1000, line={"color": "green"})
-
+    name = "louis"
+    problem_id = 12
+    fig = px.line(crop_times_to_problem(name, problem_id), x="Elapsed time (s)", y="Pitch")
+    print(crop_times_to_problem(name, problem_id))
     fig.show()
+    # eye_tracking = pl.read_csv(f"data/experiment/results/{name}/{name}.csv")
+    # print((eye_tracking["Timestamp (ms)"].max() - eye_tracking["Timestamp (ms)"].min())/(1000*60))
+    # print(eye_tracking["Timestamp (ms)"].min()/1000)
+    # fig = px.line(eye_tracking, x="Timestamp (ms)", y="Pitch")
+    # start = None
+    # for i in range(0, 20):
+    #     start = get_start_time_of_tap(f"data/experiment/results/{name}/problem_{i}.tap")
+    #     end = get_end_time_of_tap(f"data/experiment/results/{name}/problem_{i}.tap")
+
+    #     if start is not None and end is not None:
+    #         color = "red"
+    #         if i % 2 == 0:
+    #             color = "green"
+    #         fig.add_vline(x=start*1000, line={"color": color})
+    #         fig.add_vline(x=end*1000, line={"color": color})
+
+    # fig.show()
