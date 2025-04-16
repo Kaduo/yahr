@@ -8,7 +8,6 @@ TABLET_HEIGHT = 600
 
 UNIT_ROD_HEIGHT = 30
 
-
 class Rod:
     def __init__(self, n=-1):
         self.n = n
@@ -191,7 +190,7 @@ def get_durations_from_files(filename):
 class Grouping:
     def __init__(self, filename):
         self.raw_grouping = get_grouping_from_file(filename)
-        self.inner = [[rod.n for rod in group] for group in self.raw_grouping[:4]] + [self.raw_grouping[4]]
+        self.inner = [[rod.n for rod in group] for group in self.raw_grouping[:4]]
 
     def nb_inconsistencies(self):
         res = 0
@@ -206,7 +205,7 @@ class Grouping:
     
     # A grouping is consistent if identical rods are grouped together
     def is_consistent(self):
-        self.nb_inconsistencies == 0
+        return self.nb_inconsistencies() == 0
 
     def score(self):
         return score_grouping(self.raw_grouping)
@@ -220,9 +219,9 @@ class User:
         for i in range(10):
             self.groupings.append(Grouping(f"data/pre-test/results/{mode}/user_{user_id}/session_{i}.rods"))
         try:
-            self.durations = get_durations_from_files(f"data/pre-test/results/haptic/user_{user_id}/user{user_id}_durations")
+            self.durations = get_durations_from_files(f"data/pre-test/results/{mode}/user_{user_id}/user{user_id}_durations")
         except FileNotFoundError:
-            self.durations = [-1 for _ in range(10)]
+            self.durations = []
 
     def scores(self):
         res = []
@@ -240,6 +239,14 @@ class User:
     
     def score(self):
         return sum([grouping.score() for grouping in self.groupings])/10
+    
+    def nb_inconsistent_groupings(self):
+        res = 0
+        for grouping in self.groupings:
+            if not grouping.is_consistent():
+                res += 1
+
+        return res
 
 def get_users(mode):
     users = []
@@ -256,8 +263,11 @@ def get_users(mode):
     return users
 
 if __name__ == "__main__":
-    for user in get_users("combined"):
-        print("hmm ", user.inconsistency_score(), "ha ", user.score())
+    modes = ["haptic", "visual", "combined"]
+    for mode in modes:
+        print(mode)
+        for user in get_users(mode):
+            print("score : ", user.score(), " | inconsistency score : ", user.inconsistency_score(), " | duration : ", sum(user.durations)/10,  " | nb_inconsistent_groupings : ", user.nb_inconsistent_groupings())
 
 # if __name__ == "__main__":
 
