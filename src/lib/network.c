@@ -115,22 +115,16 @@ void Server_initAndWaitForConnection(Server *me, char *address, char *port) {
         exit(1);
     }
 
-    printf("here!\n");
+    printf("Server waiting for connection.\n");
     me->super.pfd = - 1;
 
 
-    // Block until a connection is made.
     while (me->super.pfd < 0) {
-        printf("hmmm!\n");
         perror(0);
         me->super.pfd = accept_inet_stream_socket(me->sfd, 0, 0, 0, 0, 0, SOCK_NONBLOCK);
     }
-    printf("there (:\n)");
+    printf("Connection accepted!\n)");
 
-    // if (me->super.pfd < 0) {
-    //     perror(0);
-    //     exit(1);
-    // }
 }
 
 void Server_closeConnection(Server *me) {

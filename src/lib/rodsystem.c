@@ -159,9 +159,7 @@ void RodSystem_drawRods(RodSystem *me) {
 void RodSystem_updateAndDrawRods(RodSystem *me) {
     RodSystem_updateSelection(me);
     RodSystem_updatePosition(me);
-    printf("hmmm\n");
     RodSystem_updateHaptic(me);
-    printf("tehre is it?\n");
     RodSystem_drawRods(me);
 
 }

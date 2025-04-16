@@ -37,7 +37,6 @@ def crop_times_to_problem(name, problem_id, haptics):
     df = df.with_columns((df["Timestamp (s)"] - df["Timestamp (s)"][0]).alias("Elapsed time (s)"))
     return df
 
-
 if __name__ == "__main__":
     name = "louis"
     problem_id = 12

@@ -2,6 +2,7 @@ from copy import deepcopy
 from itertools import permutations
 import seaborn as sns
 import polars as pl
+from scipy.stats import ttest_ind
 
 TABLET_WIDTH = 1024
 TABLET_HEIGHT = 600
@@ -12,6 +13,16 @@ class Rod:
     def __init__(self, n=-1):
         self.n = n
 
+
+def is_raw_grouping_consistent(grouping):
+    seen = [rod.n for rod in grouping[0]]
+    for i in range(1,4):
+        for j in [rod.n for rod in grouping[i]]:
+            if j in seen:
+                return False
+        seen += [rod.n for rod in grouping[i]]
+    return True
+
 def _dist(grouping1, grouping2):
     res = 0
     for bin in range(4):
@@ -21,6 +32,10 @@ def _dist(grouping1, grouping2):
     return res
 
 def dist(grouping1, grouping2):
+
+    # if not (is_raw_grouping_consistent(grouping1) and is_raw_grouping_consistent(grouping2)):
+    #     return None
+
     current_grouping  = deepcopy(grouping1)
 
     # best_perm = deepcopy(current_grouping)
@@ -194,12 +209,12 @@ class Grouping:
 
     def nb_inconsistencies(self):
         res = 0
-        seen = self.inner[0]
+        seen = deepcopy(self.inner[0])
         for i in range(1,4):
             for n in self.inner[i]:
                 if n in seen:
                     res += 1
-            seen += self.inner[i]
+            seen += deepcopy(self.inner[i])
         return res
 
     
@@ -221,7 +236,7 @@ class User:
         try:
             self.durations = get_durations_from_files(f"data/pre-test/results/{mode}/user_{user_id}/user{user_id}_durations")
         except FileNotFoundError:
-            self.durations = []
+            self.durations = None
 
     def scores(self):
         res = []
@@ -232,13 +247,18 @@ class User:
     
     def inconsistency_score(self):
         res = 0
+        tot = 0
         for i in range(10):
             for j in range(i+1, 10):
+                tot += 1
                 res += dist(self.groupings[i].raw_grouping, self.groupings[j].raw_grouping)
-        return res/40
+        if tot == 0:
+            None
+        else:
+            return res/tot
     
     def score(self):
-        return sum([grouping.score() for grouping in self.groupings])/10
+        return ma_mean([grouping.score() for grouping in self.groupings])
     
     def nb_inconsistent_groupings(self):
         res = 0
@@ -251,9 +271,13 @@ class User:
 def get_users(mode):
     users = []
     if mode == "haptic" or mode == "visual":
-        user_ids = [500, 501, 502, 600, 700, 800, 801, 20, 21, 22]
+        user_ids = [500, 501, 502, 600, 700, 800, 20, 21, 22]
+        if mode == "visual":
+            user_ids.append(801) # outlier in haptic : every grouping is inconsistent
     elif mode == "combined":
-        user_ids = [61, 150, 151, 152, 153, 351, 352, 353, 200]
+        user_ids = [61, 150, 151, 152,
+                    # 153, # outlier : every grouping is inconsistent
+                    351, 352, 353, 200]
     else:
         raise f"Unkown mode : {mode}"
     
@@ -262,12 +286,40 @@ def get_users(mode):
     
     return users
 
+def ma_sum(l):
+    res = 0
+    for k in l:
+        if k is not None:
+            res += k
+    return res
+
+def ma_len(l):
+    res = 0
+    for k in l:
+        if k is not None:
+            res += 1
+    return res
+
+def ma_mean(l):
+    if l is None:
+        return None
+    if len(l) > 0:
+        return ma_sum(l)/ma_len(l)
+    else:
+        return None
+
 if __name__ == "__main__":
     modes = ["haptic", "visual", "combined"]
     for mode in modes:
         print(mode)
-        for user in get_users(mode):
-            print("score : ", user.score(), " | inconsistency score : ", user.inconsistency_score(), " | duration : ", sum(user.durations)/10,  " | nb_inconsistent_groupings : ", user.nb_inconsistent_groupings())
+        users = get_users(mode)
+        for user in users:
+            print("user_id : ", user.user_id, "| score : ", user.score(), " | inconsistency score : ", user.inconsistency_score(), " | duration : ", ma_mean(user.durations),  " | nb_inconsistent_groupings : ", user.nb_inconsistent_groupings())
+        print("mean score : ", ma_mean([user.score() for user in users]), "| mean inconsistency score : ", ma_mean([user.inconsistency_score() for user in users]),
+              "| mean duration : ", ma_mean([ma_mean(user.durations) for user in users]), "| mean nb_inc_groupings : ", ma_mean([user.nb_inconsistent_groupings() for user in users]))
+        
+    print(ttest_ind([user.score() for user in get_users("combined")], [user.score() for user in get_users("visual")]))
+    print(ttest_ind([user.inconsistency_score() for user in get_users("combined")], [user.inconsistency_score() for user in get_users("haptic")]))
 
 # if __name__ == "__main__":
 
