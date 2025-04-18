@@ -54,5 +54,5 @@ pes: pe
 pesn: pe
     build/expe_server_no_haptics
 
-pec: pe
-    build/expe_client
+pec username: pe
+    build/expe_client {{username}}
