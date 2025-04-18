@@ -60,10 +60,9 @@ def get_touching_boundaries_from_tap(name, problem_id, haptics):
 #     print(crop_times_to_problem(name, problem_id, True))
 #     fig.show()
 
-
 if __name__ == "__main__":
-    name = "ecma2"
-    problem_id = 6
+    name = "jp"
+    problem_id = 8
     haptics = True
     touching_bounds = get_touching_boundaries_from_tap(name, problem_id, haptics)
     fig = px.line(crop_times_to_problem(name, problem_id, haptics), x="Elapsed time (s)", y="Pitch")

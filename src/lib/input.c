@@ -266,15 +266,15 @@ ReadTapInputService NewReadTapInputService(char *filename) {
     if (save != NULL) {
         char con[50];
         ReadStringTillSpace(save, con); // Skip absolute time at start;
-        Tap startTap = ReadTap(save);
+        // Tap startTap = ReadTap(save);
         Tap startFutureTap = ReadTap(save);
         ReadTapInputService readTapInputService = {
             .futureTap = startFutureTap,
-            .leftMouseButtonDown = true,
-            .currentTap = startTap,
+            .leftMouseButtonDown = false,
+            .currentTap = {0},
             .oldTap = {0},
             .save = save,
-            .startTime = startTap.time,
+            .startTime = startFutureTap.time,
         };
         ReadTapInputService_Construct(&readTapInputService);
         return  readTapInputService;
