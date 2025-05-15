@@ -1,0 +1,225 @@
+nbRods 14
+rod
+n 1 endn
+rect 921.615967 332.876495 30.000000 30.000000 endrect
+color 255 255 255 255 endcolor
+sig
+amplitude 201
+angle 128
+duration 0.000000
+duty 0
+offset 54
+period 4
+phase 3
+pulses 128
+signalShape 4
+endsig
+endrod
+rod
+n 2 endn
+rect 659.878174 343.595551 30.000000 60.000000 endrect
+color 253 46 99 255 endcolor
+sig
+amplitude 201
+angle 128
+duration 0.000000
+duty 0
+offset 54
+period 20
+phase 18
+pulses 128
+signalShape 4
+endsig
+endrod
+rod
+n 3 endn
+rect 58.886948 472.901672 30.000000 90.000000 endrect
+color 41 222 182 255 endcolor
+sig
+amplitude 201
+angle 128
+duration 0.000000
+duty 0
+offset 54
+period 70
+phase 63
+pulses 128
+signalShape 4
+endsig
+endrod
+rod
+n 4 endn
+rect 309.878540 408.700500 30.000000 120.000000 endrect
+color 253 74 185 255 endcolor
+sig
+amplitude 201
+angle 128
+duration 0.000000
+duty 0
+offset 27
+period 20
+phase 18
+pulses 128
+signalShape 4
+endsig
+endrod
+rod
+n 5 endn
+rect 290.576935 324.805695 30.000000 150.000000 endrect
+color 238 211 121 255 endcolor
+sig
+amplitude 201
+angle 128
+duration 0.000000
+duty 0
+offset 54
+period 200
+phase 180
+pulses 128
+signalShape 4
+endsig
+endrod
+rod
+n 6 endn
+rect 154.594482 554.317688 30.000000 180.000000 endrect
+color 17 163 155 255 endcolor
+sig
+amplitude 201
+angle 128
+duration 0.000000
+duty 0
+offset 27
+period 70
+phase 63
+pulses 128
+signalShape 4
+endsig
+endrod
+rod
+n 7 endn
+rect 786.303589 463.955719 30.000000 210.000000 endrect
+color 62 64 69 255 endcolor
+sig
+amplitude 201
+angle 128
+duration 0.000000
+duty 0
+offset 27
+period 4
+phase 3
+pulses 128
+signalShape 4
+endsig
+endrod
+rod
+n 8 endn
+rect 530.153442 458.469330 30.000000 240.000000 endrect
+color 177 82 75 255 endcolor
+sig
+amplitude 201
+angle 128
+duration 0.000000
+duty 0
+offset 0
+period 20
+phase 18
+pulses 128
+signalShape 4
+endsig
+endrod
+rod
+n 9 endn
+rect 15.438553 502.901672 30.000000 270.000000 endrect
+color 50 144 202 255 endcolor
+sig
+amplitude 201
+angle 128
+duration 0.000000
+duty 0
+offset 0
+period 70
+phase 63
+pulses 128
+signalShape 4
+endsig
+endrod
+rod
+n 10 endn
+rect 523.727051 493.955719 30.000000 300.000000 endrect
+color 216 157 118 255 endcolor
+sig
+amplitude 201
+angle 128
+duration 0.000000
+duty 0
+offset 27
+period 200
+phase 180
+pulses 128
+signalShape 4
+endsig
+endrod
+rod
+n 5 endn
+rect 304.585327 354.805695 30.000000 150.000000 endrect
+color 238 211 121 255 endcolor
+sig
+amplitude 201
+angle 128
+duration 0.000000
+duty 0
+offset 54
+period 200
+phase 180
+pulses 128
+signalShape 4
+endsig
+endrod
+rod
+n 3 endn
+rect 174.083130 463.906769 30.000000 90.000000 endrect
+color 41 222 182 255 endcolor
+sig
+amplitude 201
+angle 128
+duration 0.000000
+duty 0
+offset 54
+period 70
+phase 63
+pulses 128
+signalShape 4
+endsig
+endrod
+rod
+n 1 endn
+rect 967.557556 328.829041 30.000000 30.000000 endrect
+color 255 255 255 255 endcolor
+sig
+amplitude 201
+angle 128
+duration 0.000000
+duty 0
+offset 54
+period 4
+phase 3
+pulses 128
+signalShape 4
+endsig
+endrod
+rod
+n 10 endn
+rect 535.248779 552.554138 30.000000 300.000000 endrect
+color 216 157 118 255 endcolor
+sig
+amplitude 201
+angle 128
+duration 0.000000
+duty 0
+offset 27
+period 200
+phase 180
+pulses 128
+signalShape 4
+endsig
+endrod

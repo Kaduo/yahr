@@ -1,6 +1,9 @@
 import polars as pl
 import plotly.express as px
 import plotly.graph_objects as go
+import numpy as np
+from scipy.stats import ttest_ind
+
 
 def get_filename_of_tap(name, problem_id, haptics):
     haptics_folder = "haptics" if haptics else "no_haptics"
@@ -60,13 +63,38 @@ def get_touching_boundaries_from_tap(name, problem_id, haptics):
 #     print(crop_times_to_problem(name, problem_id, True))
 #     fig.show()
 
+def problem_durations_haptic():
+    haptic_names = ["ecma1", "ecma2", "hugo", "jp", "louis"]
+    res = []
+    for name in haptic_names:
+        # res.append([])
+        for i in range(5, 15):
+
+            res.append(get_problem_duration(name, i, True))
+    return res
+
+
+def problem_durations_no_haptic():
+    haptic_names = ["cyber1", "ecma3", "emma", "enzo", "mathis"]
+    res = []
+    for name in haptic_names:
+        # res.append([])
+        for i in range(5,15):
+
+            res.append(get_problem_duration(name, i, False))
+    return res
+
+
 if __name__ == "__main__":
-    name = "jp"
-    problem_id = 8
-    haptics = True
-    touching_bounds = get_touching_boundaries_from_tap(name, problem_id, haptics)
-    fig = px.line(crop_times_to_problem(name, problem_id, haptics), x="Elapsed time (s)", y="Pitch")
-    for bounds in touching_bounds:
-        fig.add_vrect(bounds[0], bounds[1], opacity=0.5, fillcolor="LightSalmon", line_width=0, layer="below")
-    # fig = px.
-    fig.show()
+    # name = "jp"
+    # problem_id = 8
+    # haptics = True
+    # touching_bounds = get_touching_boundaries_from_tap(name, problem_id, haptics)
+    # fig = px.line(crop_times_to_problem(name, problem_id, haptics), x="Elapsed time (s)", y="Pitch")
+    # for bounds in touching_bounds:
+    #     fig.add_vrect(bounds[0], bounds[1], opacity=0.5, fillcolor="LightSalmon", line_width=0, layer="below")
+    # # fig = px.
+    # fig.show()
+    print(np.mean(problem_durations_haptic()))
+    print(np.mean(problem_durations_no_haptic()))
+    print(ttest_ind(problem_durations_haptic(), problem_durations_no_haptic()))

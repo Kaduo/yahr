@@ -2,7 +2,11 @@ from copy import deepcopy
 from itertools import permutations
 import seaborn as sns
 import polars as pl
+import matplotlib.pyplot as plt
+import sklearn
 from scipy.stats import ttest_ind
+import sklearn.cluster
+import numpy as np
 
 TABLET_WIDTH = 1024
 TABLET_HEIGHT = 600
@@ -310,16 +314,34 @@ def ma_mean(l):
 
 if __name__ == "__main__":
     modes = ["haptic", "visual", "combined"]
-    for mode in modes:
-        print(mode)
-        users = get_users(mode)
-        for user in users:
-            print("user_id : ", user.user_id, "| score : ", user.score(), " | inconsistency score : ", user.inconsistency_score(), " | duration : ", ma_mean(user.durations),  " | nb_inconsistent_groupings : ", user.nb_inconsistent_groupings())
-        print("mean score : ", ma_mean([user.score() for user in users]), "| mean inconsistency score : ", ma_mean([user.inconsistency_score() for user in users]),
-              "| mean duration : ", ma_mean([ma_mean(user.durations) for user in users]), "| mean nb_inc_groupings : ", ma_mean([user.nb_inconsistent_groupings() for user in users]))
+
+    # df = pl.DataFrame([[user.score(), mode] for mode in modes for user in get_users(mode)], strict=False, orient="row", schema=["Score", "Mode"])
+    # g = sns.boxplot(df, x="Mode", y="Score")
+    # sns.swarmplot(df, x="Mode", y="Score",ax=g)
+
+    # plt.show()
+
+
+    # df = pl.DataFrame([[user.inconsistency_score(), mode] for mode in modes for user in get_users(mode)], strict=False, orient="row", schema=["Score", "Mode"])
+    # g2 = sns.boxplot(df, x="Mode", y="Score")
+    # sns.swarmplot(df, x="Mode", y="Score",ax=g2)
+
+    # plt.show()
+
+    clust = sklearn.cluster.AgglomerativeClustering(n_clusters = 4, metric=dist)
+    print(np.array([grouping.raw_grouping for mode in modes for user in get_users(mode) for grouping in user.groupings]))
+    clust.fit(X=[grouping.raw_grouping for mode in modes for user in get_users(mode) for grouping in user.groupings])
+    clust.labels_
+    # for mode in modes:
+    #     print(mode)
+    #     users = get_users(mode)
+    #     for user in users:
+    #         print("user_id : ", user.user_id, "| score : ", user.score(), " | inconsistency score : ", user.inconsistency_score(), " | duration : ", ma_mean(user.durations),  " | nb_inconsistent_groupings : ", user.nb_inconsistent_groupings())
+    #     print("mean score : ", ma_mean([user.score() for user in users]), "| mean inconsistency score : ", ma_mean([user.inconsistency_score() for user in users]),
+    #           "| mean duration : ", ma_mean([ma_mean(user.durations) for user in users]), "| mean nb_inc_groupings : ", ma_mean([user.nb_inconsistent_groupings() for user in users]))
         
-    print(ttest_ind([user.score() for user in get_users("combined")], [user.score() for user in get_users("visual")]))
-    print(ttest_ind([user.inconsistency_score() for user in get_users("combined")], [user.inconsistency_score() for user in get_users("haptic")]))
+    # print(ttest_ind([user.score() for user in get_users("combined")], [user.score() for user in get_users("visual")]))
+    # print(ttest_ind([user.inconsistency_score() for user in get_users("combined")], [user.inconsistency_score() for user in get_users("haptic")]))
 
 # if __name__ == "__main__":
 
