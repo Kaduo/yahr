@@ -75,9 +75,9 @@ def problem_durations_haptic():
 
 
 def problem_durations_no_haptic():
-    haptic_names = ["cyber1", "ecma3", "emma", "enzo", "mathis"]
+    no_haptic_names = ["cyber1", "ecma3", "emma", "enzo", "mathis"]
     res = []
-    for name in haptic_names:
+    for name in no_haptic_names:
         # res.append([])
         for i in range(5,15):
 

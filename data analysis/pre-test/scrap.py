@@ -1,14 +1,14 @@
-from random import random
+from random import random, choices
+from math import log10, pi
 
-n = 1000000
-k = n
-s = 0
-for _ in range(n):
-    if random() < 0.9:
-        if random() < 0.8:
-            if random() < 0.7:
-                k -= 1
-        else:
-            s += 1
+ev = 0
+for r in range(6, 11):
+    ev += -2*(pi*r**2 - pi*(r-1)**2)/(100*pi)
 
-print(s/k)
+for r in range(1, 6):
+    ev += (11 - r)*(pi*r**2 - pi*(r-1)**2)/(100*pi)
+
+print(ev)
+
+# TODO : Faire la visualisation avec les groupements sur une grande feuille A3 avec des pastilles
+# TODO : 

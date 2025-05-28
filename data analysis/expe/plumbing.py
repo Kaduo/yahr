@@ -179,11 +179,12 @@ def display_grouping(grouping):
 def get_scores_for_user(user_id):
     scores_visual = []
     scores_haptic = []
+
     for i in range(0, 10):
         filename = f"data/pre-test/results/haptic/user_{user_id}/session_{i}.rods"
         grouping = get_grouping_from_file(filename)
-
         scores_haptic.append(score_grouping(grouping))
+    
     for i in range(0, 10):
         filename = f"data/pre-test/results/visual/user_{user_id}/session_{i}.rods"
         grouping = get_grouping_from_file(filename)
